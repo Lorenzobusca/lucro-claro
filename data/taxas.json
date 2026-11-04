@@ -1,0 +1,19 @@
+{
+  "atualizado_em": null,
+  "exemplo": true,
+  "fonte": "Banco Central do Brasil (séries SGS e boletim Focus)",
+  "taxas": {
+    "selic":           { "valor": 15.0,  "data": null, "unidade": "% a.a.",    "serie_sgs": 432 },
+    "cdi":             { "valor": 14.9,  "data": null, "unidade": "% a.a.",    "serie_sgs": 4389 },
+    "ipca_12m":        { "valor": 4.7,   "data": null, "unidade": "%",         "serie_sgs": 13522 },
+    "ipca_focus_12m":  { "valor": 4.3,   "data": null, "unidade": "%",         "fonte": "Focus" },
+    "tr":              { "valor": 0.17,  "data": null, "unidade": "% no mês", "serie_sgs": 226 },
+    "salario_minimo":  { "valor": 1621,  "data": null, "unidade": "R$",        "serie_sgs": 1619 }
+  },
+  "reforma": {
+    "_comentario": "Editado à mão. Alíquotas de referência estimadas; atualize quando o Senado fixar os valores.",
+    "2026": { "cbs": 0.9, "ibs": 0.1, "nota": "Ano de teste: CBS e IBS aparecem na nota, mas são compensados com PIS/Cofins. MEI e Simples ficam de fora." },
+    "2027": { "cbs": 8.7, "ibs": 0.1, "nota": "PIS e Cofins acabam e a CBS entra cheia. IBS segue em 0,1% de teste até 2028. ICMS e ISS continuam sendo pagos à parte." },
+    "2033": { "cbs": 8.8, "ibs": 17.7, "nota": "Sistema completo. Alíquota de referência estimada entre 26,5% e 28%; o valor final será fixado por resolução do Senado." }
+  }
+}

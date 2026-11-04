@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lucro Claro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Calculadoras de impostos da reforma tributária, custeio e margem para MEIs, pequenas empresas e pessoas físicas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><i>R$</i>Lucro Claro</a>
+    <nav class="menu" aria-label="Principal">
+      <a href="#reforma">Reforma</a>
+      <a href="#ferramentas">Empresas</a>
+      <a href="#pessoa-fisica">Pessoa física</a>
+      <a href="#conteudo">Conteúdo</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Para MEIs, pequenas empresas e você</p>
+      <h1 style="margin-top:14px">Imposto e custo <em>sem mistério</em>.</h1>
+      <p class="lead">Calcule quanto sua empresa paga com a reforma tributária, descubra quanto custa de verdade cada produto ou serviço e veja se o seu dinheiro está vencendo a inflação. De graça e sem precisar entender de contabilidade.</p>
+      <div class="cta">
+        <a class="btn primary" href="#ferramentas">Usar as calculadoras</a>
+        <a class="btn" href="#reforma">Entender a reforma</a>
+      </div>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <div class="receipt" id="receipt">
+        <div class="rh">Nota fiscal · venda</div>
+        <div class="row"><span>Produto</span><span>1.000,00</span></div>
+        <div class="row tax"><span>CBS (federal)</span><span>88,00</span></div>
+        <div class="row tax"><span>IBS (est./mun.)</span><span>177,00</span></div>
+        <div class="row t"><span>Total</span><span>1.265,00</span></div>
+      </div>
+      <div class="chip cbs" id="chipCbs">CBS<b>8,8%</b></div>
+      <div class="chip ibs" id="chipIbs">IBS<b>17,7%</b></div>
+      <div class="chip old" id="chipOld">PIS · Cofins · ICMS · ISS · IPI</div>
+    </div>
+  </div>
+</section>
+
+<section class="who">
+  <div class="wrap grid">
+    <div class="card reveal"><span class="tag">MEI</span><h3 style="margin-top:6px">Quanto é meu DAS?</h3><p>Valor fixo do mês e alerta para quando você estiver perto do limite de faturamento.</p></div>
+    <div class="card reveal"><span class="tag">Pequena empresa</span><h3 style="margin-top:6px">Qual produto dá lucro?</h3><p>Custeio por absorção e ABC lado a lado, margem de contribuição e ponto de equilíbrio.</p></div>
+    <div class="card reveal"><span class="tag">Pessoa física</span><h3 style="margin-top:6px">Estou perdendo para a inflação?</h3><p>Compare poupança, CDB e LCI descontando imposto e inflação.</p></div>
+  </div>
+</section>
+
+<section class="band reform" id="reforma">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">Reforma tributária do consumo</p><h2 style="margin-top:12px">Cinco impostos viram dois, aos poucos, até 2033.</h2></div>
+      <p class="lead">PIS, Cofins, IPI, ICMS e ISS dão lugar à CBS (federal) e ao IBS (estados e municípios). O imposto vem destacado na nota, e quem compra de empresa pode descontar o que já foi pago antes. Role a página para ver a transição.</p>
+    </div>
+    <div class="tl" id="tl">
+      <div class="fill" id="tlFill"></div>
+      <div class="step"><div class="yr">2026</div><div><h3>Ano de teste</h3><p>CBS de 0,9% e IBS de 0,1% aparecem na nota, mas podem ser compensados com PIS/Cofins. Serve para empresas e sistemas se adaptarem. MEI e Simples Nacional ficam de fora do teste.</p>
+        <div class="bar"><span class="c-old" style="width:99%"></span><span class="c-cbs" style="width:.9%"></span><span class="c-ibs" style="width:.1%"></span></div></div></div>
+      <div class="step"><div class="yr">2027</div><div><h3>CBS para valer</h3><p>PIS e Cofins acabam e a CBS entra com alíquota cheia. O IPI é zerado (exceto Zona Franca) e começa o Imposto Seletivo sobre produtos como cigarro e bebida. Empresas do Simples podem escolher pagar IBS/CBS fora do DAS para gerar crédito maior ao cliente.</p>
+        <div class="bar"><span class="c-old" style="width:62%"></span><span class="c-cbs" style="width:37%"></span><span class="c-ibs" style="width:1%"></span></div></div></div>
+      <div class="step"><div class="yr">2029–32</div><div><h3>ICMS e ISS diminuem</h3><p>Os impostos de estados e municípios caem para 90%, 80%, 70% e 60% do valor atual, ano a ano, enquanto o IBS sobe na mesma proporção.</p>
+        <div class="bar"><span class="c-old" style="width:35%"></span><span class="c-cbs" style="width:35%"></span><span class="c-ibs" style="width:30%"></span></div></div></div>
+      <div class="step"><div class="yr">2033</div><div><h3>Sistema novo completo</h3><p>ICMS e ISS deixam de existir. Fica o IVA dual (CBS + IBS), com alíquota de referência estimada entre 26,5% e 28%, reduções para saúde, educação e alimentos, e cashback para famílias de baixa renda.</p>
+        <div class="bar"><span class="c-cbs" style="width:33%"></span><span class="c-ibs" style="width:67%"></span></div>
+        <div class="legend"><span><i class="c-old"></i>Tributos atuais</span><span><i class="c-cbs"></i>CBS</span><span><i class="c-ibs"></i>IBS</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="tools" id="ferramentas">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Ferramentas para empresas</p><h2>Faça as contas do seu negócio</h2><p class="lead">Os campos já vêm com um exemplo preenchido. Troque pelos seus números e o resultado muda na hora.</p></div>
+    <div class="tabs" role="tablist" aria-label="Calculadoras">
+      <button class="tab" role="tab" id="t-simples" aria-controls="p-simples" aria-selected="true">MEI e Simples</button>
+      <button class="tab" role="tab" id="t-iva" aria-controls="p-iva" aria-selected="false">IBS/CBS no preço</button>
+      <button class="tab" role="tab" id="t-custeio" aria-controls="p-custeio" aria-selected="false">Absorção × ABC</button>
+      <button class="tab" role="tab" id="t-margem" aria-controls="p-margem" aria-selected="false">Margem e equilíbrio</button>
+    </div>
+
+    <!-- MEI / Simples -->
+    <div class="panel" role="tabpanel" id="p-simples" aria-labelledby="t-simples">
+      <div class="card">
+        <h3>Quanto pago no MEI ou no Simples?</h3>
+        <p class="hint">O Simples usa a receita dos últimos 12 meses para achar sua alíquota efetiva.</p>
+        <div class="fields">
+          <label class="full">Regime e atividade
+            <select id="s-tipo">
+              <option value="mei-com">MEI · comércio ou indústria</option>
+              <option value="mei-serv">MEI · serviços</option>
+              <option value="mei-ambos">MEI · comércio e serviços</option>
+              <option value="I">Simples · Anexo I (comércio)</option>
+              <option value="II">Simples · Anexo II (indústria)</option>
+              <option value="III" selected>Simples · Anexo III (serviços)</option>
+            </select></label>
+          <label>Faturamento deste mês (R$)<input id="s-mes" inputmode="decimal" value="25000"></label>
+          <label>Faturamento dos últimos 12 meses (R$)<input id="s-12" inputmode="decimal" value="280000"></label>
+          <label class="full" id="s-sm-wrap" hidden>Salário mínimo vigente (R$)<input id="s-sm" inputmode="decimal" value="1621"><small class="src" data-src="salario_minimo"></small></label>
+        </div>
+      </div>
+      <div class="card out" aria-live="polite">
+        <span class="eyebrow" id="s-label">Imposto do mês (DAS)</span>
+        <div class="big num" id="s-big">—</div>
+        <div id="s-pill"></div>
+        <div class="kv" id="s-kv"></div>
+        <p class="note">Tabelas da LC 123/2006. MEI: 5% do salário mínimo para o INSS + R$ 1 de ICMS e/ou R$ 5 de ISS. Simulação educativa; confira no Portal do Simples Nacional.</p>
+      </div>
+    </div>
+
+    <!-- IVA -->
+    <div class="panel" role="tabpanel" id="p-iva" aria-labelledby="t-iva" hidden>
+      <div class="card">
+        <h3>IBS e CBS na sua venda</h3>
+        <p class="hint">No sistema novo você paga o imposto da venda e desconta o que já veio nas suas compras com nota.</p>
+        <div class="fields">
+          <label class="full">Ano da simulação
+            <select id="v-ano">
+              <option value="2026">2026 · teste (CBS 0,9% + IBS 0,1%)</option>
+              <option value="2027">2027–2028 · CBS cheia, IBS de teste</option>
+              <option value="2033" selected>2033 · sistema completo</option>
+            </select></label>
+          <label>Vendas do mês sem imposto (R$)<input id="v-venda" inputmode="decimal" value="50000"></label>
+          <label>Compras com nota fiscal (R$)<input id="v-compra" inputmode="decimal" value="18000"></label>
+          <label>Alíquota total CBS + IBS (%)<input id="v-aliq" inputmode="decimal" value="26.5"></label>
+          <label>Seu setor
+            <select id="v-red">
+              <option value="0">Regra geral</option>
+              <option value="30">Profissões regulamentadas (−30%)</option>
+              <option value="60">Saúde, educação, alimentos (−60%)</option>
+              <option value="100">Cesta básica nacional (isento)</option>
+            </select></label>
+        </div>
+      </div>
+      <div class="card out" aria-live="polite">
+        <span class="eyebrow">IBS + CBS a pagar no mês</span>
+        <div class="big num" id="v-big">—</div>
+        <div class="kv" id="v-kv"></div>
+        <p class="note" id="v-note"></p>
+      </div>
+    </div>
+
+    <!-- Custeio -->
+    <div class="panel" role="tabpanel" id="p-custeio" aria-labelledby="t-custeio" hidden style="grid-template-columns:1fr">
+      <div class="card">
+        <h3>Quanto custa cada produto: absorção × ABC</h3>
+        <p class="hint">Na absorção, os custos indiretos da fábrica são divididos por hora de máquina. No ABC, cada atividade (preparar máquina, inspecionar, manter) é cobrada de quem a usa. Exemplo: uma marcenaria com dois produtos.</p>
+        <div class="tbl"><table>
+          <thead><tr><th>Produto</th><th>Qtd. no mês</th><th>Preço (R$)</th><th>Mat. + mão de obra / un.</th><th>Horas-máq. / un.</th><th>Nº de setups</th><th>Nº de inspeções</th></tr></thead>
+          <tbody>
+            <tr><td>Mesa padrão</td><td><input id="a-q" value="400"></td><td><input id="a-p" value="520"></td><td><input id="a-d" value="210"></td><td><input id="a-h" value="1.5"></td><td><input id="a-s" value="4"></td><td><input id="a-i" value="10"></td></tr>
+            <tr><td>Mesa sob medida</td><td><input id="b-q" value="60"></td><td><input id="b-p" value="1150"></td><td><input id="b-d" value="420"></td><td><input id="b-h" value="2.5"></td><td><input id="b-s" value="36"></td><td><input id="b-i" value="50"></td></tr>
+          </tbody></table></div>
+        <div class="fields" style="margin-top:16px;grid-template-columns:repeat(3,1fr)">
+          <label>Custo de preparar máquinas (R$)<input id="c-setup" value="24000"></label>
+          <label>Custo de inspeção (R$)<input id="c-insp" value="12000"></label>
+          <label>Custo de manutenção e energia (R$)<input id="c-maq" value="30000"></label>
+        </div>
+      </div>
+      <div class="card out" aria-live="polite">
+        <span class="eyebrow">Custo e lucro por unidade</span>
+        <div class="tbl"><table id="c-out"></table></div>
+        <p class="note" id="c-insight"></p>
+      </div>
+    </div>
+
+    <!-- Margem -->
+    <div class="panel" role="tabpanel" id="p-margem" aria-labelledby="t-margem" hidden>
+      <div class="card">
+        <h3>Margem de contribuição e ponto de equilíbrio</h3>
+        <p class="hint">Quanto cada venda sobra para pagar as contas fixas, e quantas vendas você precisa para não ter prejuízo.</p>
+        <div class="fields">
+          <label>Preço de venda (R$)<input id="m-preco" inputmode="decimal" value="45"></label>
+          <label>Custo variável por unidade (R$)<input id="m-cv" inputmode="decimal" value="18"></label>
+          <label>Impostos, taxas e comissões (% do preço)<input id="m-dv" inputmode="decimal" value="12"></label>
+          <label>Custos fixos do mês (R$)<input id="m-cf" inputmode="decimal" value="9000"></label>
+          <label class="full">Unidades vendidas no mês<input id="m-q" inputmode="decimal" value="520"></label>
+        </div>
+      </div>
+      <div class="card out" aria-live="polite">
+        <span class="eyebrow">Resultado do mês</span>
+        <div class="big num" id="m-big">—</div>
+        <div id="m-pill"></div>
+        <div class="meter" aria-hidden="true"><span id="m-bar"></span><i id="m-mark"></i></div>
+        <div class="kv" id="m-kv"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pf" id="pessoa-fisica">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Pessoa física</p><h2>Proteja seu dinheiro da inflação</h2><p class="lead">Dinheiro parado perde valor todo ano. Veja quanto e compare onde ele rende de verdade, já descontando imposto de renda e inflação.</p></div>
+    <div class="rates" aria-label="Taxas de hoje">
+      <div class="rate"><span>Selic meta</span><b class="num" data-rate="selic">—</b><small data-date="selic"></small></div>
+      <div class="rate"><span>CDI</span><b class="num" data-rate="cdi">—</b><small data-date="cdi"></small></div>
+      <div class="rate"><span>IPCA 12 meses</span><b class="num" data-rate="ipca_12m">—</b><small data-date="ipca_12m"></small></div>
+      <div class="rate"><span>IPCA esperado (Focus)</span><b class="num" data-rate="ipca_focus_12m">—</b><small data-date="ipca_focus_12m"></small></div>
+      <div class="rate"><span>TR do mês</span><b class="num" data-rate="tr">—</b><small data-date="tr"></small></div>
+      <p class="rates-src" id="rates-src">Fonte: Banco Central do Brasil.</p>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>Investimento × inflação</h3>
+        <div class="fields" style="margin-top:16px">
+          <label class="full">Onde o dinheiro está
+            <select id="i-tipo">
+              <option value="cdb">CDB (rende % do CDI, tem IR)</option>
+              <option value="lci">LCI ou LCA (rende % do CDI, sem IR)</option>
+              <option value="selic">Tesouro Selic (rende a Selic, tem IR)</option>
+              <option value="poup">Poupança (regra oficial, sem IR)</option>
+            </select></label>
+          <label>Valor aplicado (R$)<input id="i-v" inputmode="decimal" value="10000"></label>
+          <label>Prazo (meses)<input id="i-m" inputmode="decimal" value="24"></label>
+          <label id="i-pct-wrap">Quanto do CDI (%)<input id="i-pct" inputmode="decimal" value="100"></label>
+          <label>Inflação esperada ao ano (%)<input id="i-inf" inputmode="decimal" value="4.5"><small class="src" data-src="ipca_focus_12m"></small></label>
+          <label class="full">Rendimento usado no cálculo (% ao ano)<input id="i-t" inputmode="decimal" value="13" readonly><small id="i-t-src" class="src"></small></label>
+        </div>
+        <div class="kv" id="i-kv"></div>
+        <p class="note">IR regressivo: 22,5% até 6 meses, 20% até 1 ano, 17,5% até 2 anos e 15% acima disso. Poupança: 0,5% ao mês + TR quando a Selic passa de 8,5%; senão, 70% da Selic + TR. Projeção supõe que as taxas de hoje se mantêm.</p>
+      </div>
+      <div class="card out" aria-live="polite">
+        <span class="eyebrow">Ganho real, já sem inflação</span>
+        <div class="big num" id="i-big">—</div>
+        <div id="i-pill"></div>
+        <p style="margin-top:20px;font-weight:600">Quanto R$ <span class="num" id="i-v2"></span> parados valerão</p>
+        <div class="meter" aria-hidden="true"><span id="i-bar"></span></div>
+        <div class="kv" id="i-kv2"></div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="card reveal"><h3>IR até R$ 5 mil</h3><p>Desde 2026, quem ganha até R$ 5.000 por mês fica isento, e há desconto parcial até R$ 7.350. Confira seu caso no site da Receita.</p></div>
+      <div class="card reveal"><h3>Reserva de emergência</h3><p>Guarde de 3 a 6 meses do seu custo de vida em algo com liquidez diária, como Tesouro Selic ou CDB de 100% do CDI.</p></div>
+      <div class="card reveal"><h3>Cashback do imposto</h3><p>Famílias do CadÚnico vão receber de volta parte da CBS e do IBS pagos em contas de luz, água, gás e compras.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band social" id="conteudo">
+  <div class="wrap">
+    <p class="eyebrow">Instagram · vídeos curtos</p>
+    <h2 style="margin-top:12px;max-width:20ch">Economia explicada em 60 segundos</h2>
+    <p class="lead" style="margin-top:14px">Notícias da semana, dicas de imposto e finanças pessoais em linguagem simples. Perfil em breve.</p>
+    <div class="reels">
+      <div class="reel"><span class="k">Notícia</span><span class="t">O que muda na sua nota fiscal em 2027</span><span class="play">▶</span></div>
+      <div class="reel"><span class="k">MEI</span><span class="t">Passei do limite do MEI. E agora?</span><span class="play">▶</span></div>
+      <div class="reel"><span class="k">Inflação</span><span class="t">Por que a poupança perde para o Tesouro</span><span class="play">▶</span></div>
+      <div class="reel"><span class="k">Custos</span><span class="t">Seu produto mais vendido pode dar prejuízo</span><span class="play">▶</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="future" style="padding-top:64px">
+  <div class="wrap">
+    <div class="card reveal">
+      <span class="pill warn">Mais à frente</span>
+      <div><h3>Fundo de investimentos Lucro Claro</h3><p style="margin-top:6px">Um plano para o futuro, depois de o site e a comunidade crescerem. Fundos exigem gestora autorizada pela CVM, então ele virá com a estrutura certa.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--ink)">Lucro Claro</strong>
+    <p>As calculadoras são simulações educativas e não substituem a orientação de um contador ou consultor. Valores e regras podem mudar; confira sempre nas fontes oficiais (Receita Federal, Portal do Simples Nacional, Banco Central).</p>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
