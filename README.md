@@ -14,7 +14,6 @@ margem de contribuição e investimentos contra a inflação.
 | `data/taxas.json` | Selic, CDI, IPCA, TR e salário mínimo (atualizado sozinho) e alíquotas da reforma (editadas à mão) |
 | `scripts/atualizar-taxas.mjs` | Programa que busca as taxas no Banco Central |
 | `.github/workflows/atualizar-taxas.yml` | Faz o GitHub rodar o programa acima todo dia útil |
-| `notas/` | Cofre do Obsidian: ideias, roteiros, fontes e tarefas |
 
 ## Taxas em tempo real
 
