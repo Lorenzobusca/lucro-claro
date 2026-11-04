@@ -1,2 +1,6 @@
 .DS_Store
 node_modules/
+# Obsidian: guarda as notas, mas não o estado da sua janela
+.obsidian/workspace*.json
+.obsidian/cache
+.trash/
