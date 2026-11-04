@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Impostos · Lucro Claro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Calcule o DAS do MEI, a alíquota do Simples Nacional e o IBS/CBS da reforma tributária.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html"><i>R$</i>Lucro Claro</a>
+    <nav class="menu" id="menu" aria-label="Principal">
+      <a href="index.html">Início</a>
+      <a href="impostos.html" aria-current="page">Impostos</a>
+      <a href="custeio.html">Custeio</a>
+      <a href="planejamento.html">Planejamento financeiro</a>
+    </nav>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</header>
+
+<main class="page">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Setor 1</p>
+    <h1>Impostos</h1>
+    <p class="lead">Calcule o imposto da sua empresa no MEI e no Simples Nacional, e simule quanto vai pagar de IBS e CBS em cada fase da reforma tributária.</p>
+    <nav class="sector-nav" aria-label="Setores"><a href="impostos.html" aria-current="page">Impostos</a><a href="custeio.html">Custeio</a><a href="planejamento.html">Planejamento financeiro</a></nav>
+  </div>
+</section>
+<section class="tools">
+  <div class="wrap">
+    <div class="tabs" role="tablist" aria-label="Calculadoras">
+      <button class="tab" role="tab" id="t-simples" aria-controls="p-simples" aria-selected="true">MEI e Simples</button>
+      <button class="tab" role="tab" id="t-iva" aria-controls="p-iva" aria-selected="false">IBS/CBS no preço</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-simples" aria-labelledby="t-simples">
+      <div class="card form">
+        <h3>Quanto pago no MEI ou no Simples?</h3>
+        <p class="hint">O Simples usa a receita dos últimos 12 meses para achar sua alíquota efetiva.</p>
+        <div class="fields">
+          <label class="full">Regime e atividade
+            <select id="s-tipo">
+              <option value="mei-com">MEI · comércio ou indústria</option>
+              <option value="mei-serv">MEI · serviços</option>
+              <option value="mei-ambos">MEI · comércio e serviços</option>
+              <option value="I">Simples · Anexo I (comércio)</option>
+              <option value="II">Simples · Anexo II (indústria)</option>
+              <option value="III" selected>Simples · Anexo III (serviços)</option>
+            </select></label>
+          <label>Faturamento deste mês (R$)<input id="s-mes" inputmode="decimal" value="25000"></label>
+          <label>Faturamento dos últimos 12 meses (R$)<input id="s-12" inputmode="decimal" value="280000"></label>
+          <label class="full" id="s-sm-wrap">Salário mínimo vigente (R$)<input id="s-sm" inputmode="decimal" value="1621"><small class="src" data-src="salario_minimo"></small></label>
+        </div>
+      </div>
+      <div class="card out" aria-live="polite">
+        <span class="eyebrow" id="s-label">Imposto do mês (DAS)</span>
+        <div class="big num" id="s-big">—</div>
+        <div id="s-pill"></div>
+        <div class="kv" id="s-kv"></div>
+        <p class="note">Tabelas da LC 123/2006. MEI: 5% do salário mínimo para o INSS + R$ 1 de ICMS e/ou R$ 5 de ISS. Simulação educativa; confira no Portal do Simples Nacional.</p>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-iva" aria-labelledby="t-iva" hidden>
+      <div class="card form">
+        <h3>IBS e CBS na sua venda</h3>
+        <p class="hint">No sistema novo você paga o imposto da venda e desconta o que já veio nas suas compras com nota.</p>
+        <div class="fields">
+          <label class="full">Ano da simulação
+            <select id="v-ano">
+              <option value="2026">2026 · teste (CBS 0,9% + IBS 0,1%)</option>
+              <option value="2027">2027–2028 · CBS cheia, IBS de teste</option>
+              <option value="2033" selected>2033 · sistema completo</option>
+            </select></label>
+          <label>Vendas do mês sem imposto (R$)<input id="v-venda" inputmode="decimal" value="50000"></label>
+          <label>Compras com nota fiscal (R$)<input id="v-compra" inputmode="decimal" value="18000"></label>
+          <label>Alíquota total CBS + IBS (%)<input id="v-aliq" inputmode="decimal" value="26.5"></label>
+          <label>Seu setor
+            <select id="v-red">
+              <option value="0">Regra geral</option>
+              <option value="30">Profissões regulamentadas (−30%)</option>
+              <option value="60">Saúde, educação, alimentos (−60%)</option>
+              <option value="100">Cesta básica nacional (isento)</option>
+            </select></label>
+        </div>
+      </div>
+      <div class="card out" aria-live="polite">
+        <span class="eyebrow">IBS + CBS a pagar no mês</span>
+        <div class="big num" id="v-big">—</div>
+        <div class="kv" id="v-kv"></div>
+        <p class="note" id="v-note"></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="explain">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Como funciona</p><h2>Entenda a conta</h2></div>
+    <div class="explain-grid">
+      <div class="card reveal"><span class="tag">MEI</span><h3>DAS fixo</h3><p>O MEI paga um valor fixo por mês, não importa quanto vendeu: 5% do salário mínimo para o INSS, mais R$ 1 de ICMS (comércio e indústria) e/ou R$ 5 de ISS (serviços). O limite é R$ 81 mil por ano.</p><div class="formula">DAS = 5% × salário mínimo + ICMS + ISS</div></div>
+      <div class="card reveal"><span class="tag">Simples Nacional</span><h3>Alíquota efetiva</h3><p>A tabela tem uma alíquota nominal e uma parcela a deduzir para cada faixa de faturamento dos últimos 12 meses. A alíquota que você paga de verdade é a efetiva, sempre menor que a nominal.</p><div class="formula">efetiva = (RBT12 × nominal − dedução) ÷ RBT12</div></div>
+      <div class="card reveal"><span class="tag">Reforma</span><h3>Débito menos crédito</h3><p>No IBS e na CBS você calcula o imposto sobre a venda e desconta o imposto que já veio destacado nas notas das suas compras. Paga só a diferença.</p><div class="formula">a pagar = vendas × alíquota − compras × alíquota</div></div>
+    </div>
+  </div>
+</section>
+<section class="next">
+  <div class="wrap">
+    <div class="card"><div><h3>Próximo passo: seus custos</h3><p>Depois de saber o imposto, veja quanto custa cada produto e qual dá lucro.</p></div><a class="btn primary" href="custeio.html">Ir para Custeio</a></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-cols">
+      <div class="f-brand">
+        <a class="logo" href="index.html"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect width="32" height="32" rx="9" fill="var(--accent)"/><rect x="8" y="17" width="4" height="7" rx="1" fill="var(--accent-ink)"/><rect x="14" y="12" width="4" height="12" rx="1" fill="var(--accent-ink)"/><rect x="20" y="7" width="4" height="17" rx="1" fill="var(--sun)"/></svg><span>Lucro Claro</span></a>
+        <p>Calculadoras gratuitas de imposto, custo e investimento para quem não tem contador.</p>
+      </div>
+      <div><h4>Setores</h4><a href="impostos.html">Impostos</a><a href="custeio.html">Custeio</a><a href="planejamento.html">Planejamento financeiro</a></div>
+      <div><h4>Impostos</h4><a href="impostos.html">MEI e Simples</a><a href="impostos.html">IBS/CBS no preço</a></div>
+      <div><h4>Aprenda</h4><a href="index.html#reforma">Reforma tributária</a><a href="index.html#conteudo">Vídeos</a><a href="index.html#duvidas">Dúvidas</a></div>
+    </div>
+    <p class="disclaimer">As calculadoras são simulações educativas e não substituem a orientação de um contador ou consultor. Valores e regras podem mudar; confira sempre nas fontes oficiais (Receita Federal, Portal do Simples Nacional, Banco Central).</p>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

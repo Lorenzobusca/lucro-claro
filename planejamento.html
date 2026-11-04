@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Planejamento financeiro · Lucro Claro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Compare poupança, CDB, LCI e Tesouro Selic com as taxas do Banco Central, já descontando imposto e inflação.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html"><i>R$</i>Lucro Claro</a>
+    <nav class="menu" id="menu" aria-label="Principal">
+      <a href="index.html">Início</a>
+      <a href="impostos.html">Impostos</a>
+      <a href="custeio.html">Custeio</a>
+      <a href="planejamento.html" aria-current="page">Planejamento financeiro</a>
+    </nav>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</header>
+
+<main class="page">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Setor 3</p>
+    <h1>Planejamento financeiro</h1>
+    <p class="lead">Dinheiro parado perde valor todo ano. Veja as taxas de hoje e compare onde seu dinheiro rende de verdade, já descontando imposto de renda e inflação.</p>
+    <nav class="sector-nav" aria-label="Setores"><a href="impostos.html">Impostos</a><a href="custeio.html">Custeio</a><a href="planejamento.html" aria-current="page">Planejamento financeiro</a></nav>
+  </div>
+</section>
+<section class="pf">
+  <div class="wrap">
+    <div class="rates" aria-label="Taxas de hoje">
+      <div class="rate"><span>Selic meta</span><b class="num" data-rate="selic">—</b><small data-date="selic"></small></div>
+      <div class="rate"><span>CDI</span><b class="num" data-rate="cdi">—</b><small data-date="cdi"></small></div>
+      <div class="rate"><span>IPCA 12 meses</span><b class="num" data-rate="ipca_12m">—</b><small data-date="ipca_12m"></small></div>
+      <div class="rate"><span>IPCA esperado (Focus)</span><b class="num" data-rate="ipca_focus_12m">—</b><small data-date="ipca_focus_12m"></small></div>
+      <div class="rate"><span>TR do mês</span><b class="num" data-rate="tr">—</b><small data-date="tr"></small></div>
+      <p class="rates-src" id="rates-src">Fonte: Banco Central do Brasil.</p>
+    </div>
+    <div class="panel">
+      <div class="card form">
+        <h3>Investimento × inflação</h3>
+        <div class="fields">
+          <label class="full">Onde o dinheiro está
+            <select id="i-tipo">
+              <option value="cdb">CDB (rende % do CDI, tem IR)</option>
+              <option value="lci">LCI ou LCA (rende % do CDI, sem IR)</option>
+              <option value="selic">Tesouro Selic (rende a Selic, tem IR)</option>
+              <option value="poup">Poupança (regra oficial, sem IR)</option>
+            </select></label>
+          <label>Valor aplicado (R$)<input id="i-v" inputmode="decimal" value="10000"></label>
+          <label>Prazo (meses)<input id="i-m" inputmode="decimal" value="24"></label>
+          <label id="i-pct-wrap">Quanto do CDI (%)<input id="i-pct" inputmode="decimal" value="100"></label>
+          <label>Inflação esperada ao ano (%)<input id="i-inf" inputmode="decimal" value="4.5"><small class="src" data-src="ipca_focus_12m"></small></label>
+          <label class="full">Rendimento usado no cálculo (% ao ano)<input id="i-t" inputmode="decimal" value="13" readonly><small id="i-t-src" class="src"></small></label>
+        </div>
+        <div class="kv" id="i-kv"></div>
+        <p class="note">IR regressivo: 22,5% até 6 meses, 20% até 1 ano, 17,5% até 2 anos e 15% acima disso. Poupança: 0,5% ao mês + TR quando a Selic passa de 8,5%; senão, 70% da Selic + TR. Projeção supõe que as taxas de hoje se mantêm.</p>
+      </div>
+      <div class="card out" aria-live="polite">
+        <span class="eyebrow">Ganho real, já sem inflação</span>
+        <div class="big num" id="i-big">—</div>
+        <div id="i-pill"></div>
+        <p class="out-sub">Quanto R$ <span class="num" id="i-v2"></span> parados valerão</p>
+        <div class="meter" aria-hidden="true"><span id="i-bar"></span></div>
+        <div class="kv" id="i-kv2"></div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="card reveal"><span class="tag">Imposto de renda</span><h3>Isenção até R$ 5 mil</h3><p>Desde 2026, quem ganha até R$ 5.000 por mês fica isento, e há desconto parcial até R$ 7.350. Confira seu caso no site da Receita.</p></div>
+      <div class="card reveal"><span class="tag">Reserva</span><h3>Reserva de emergência</h3><p>Guarde de 3 a 6 meses do seu custo de vida em algo com liquidez diária, como Tesouro Selic ou CDB de 100% do CDI.</p></div>
+      <div class="card reveal"><span class="tag">Reforma</span><h3>Cashback do imposto</h3><p>Famílias do CadÚnico vão receber de volta parte da CBS e do IBS pagos em contas de luz, água, gás e compras.</p></div>
+    </div>
+  </div>
+</section>
+<section class="explain">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Como funciona</p><h2>Entenda a conta</h2></div>
+    <div class="explain-grid">
+      <div class="card reveal"><span class="tag">Inflação</span><h3>Poder de compra</h3><p>Se a inflação é 5% ao ano, R$ 100 compram daqui a um ano o que R$ 95,24 compram hoje. Por isso o que importa é o ganho real: quanto o dinheiro rendeu acima da inflação.</p><div class="formula">ganho real = (1 + rendimento) ÷ (1 + inflação) − 1</div></div>
+      <div class="card reveal"><span class="tag">CDI e Selic</span><h3>De onde vem o rendimento</h3><p>A Selic é a taxa básica de juros, definida pelo Banco Central. O CDI acompanha a Selic de perto, e a maioria dos CDBs e LCIs paga um percentual dele, como 100% do CDI.</p></div>
+      <div class="card reveal"><span class="tag">Imposto de renda</span><h3>Tabela regressiva</h3><p>CDB e Tesouro pagam IR só sobre o rendimento, e a alíquota cai quanto mais tempo o dinheiro fica aplicado. Poupança, LCI e LCA são isentas para pessoa física.</p><div class="formula">22,5% → 20% → 17,5% → 15%</div></div>
+    </div>
+  </div>
+</section>
+<section class="next">
+  <div class="wrap">
+    <div class="card"><div><h3>Tem uma empresa ou é MEI?</h3><p>Calcule o imposto do seu negócio com as regras da reforma tributária.</p></div><a class="btn primary" href="impostos.html">Ir para Impostos</a></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-cols">
+      <div class="f-brand">
+        <a class="logo" href="index.html"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect width="32" height="32" rx="9" fill="var(--accent)"/><rect x="8" y="17" width="4" height="7" rx="1" fill="var(--accent-ink)"/><rect x="14" y="12" width="4" height="12" rx="1" fill="var(--accent-ink)"/><rect x="20" y="7" width="4" height="17" rx="1" fill="var(--sun)"/></svg><span>Lucro Claro</span></a>
+        <p>Calculadoras gratuitas de imposto, custo e investimento para quem não tem contador.</p>
+      </div>
+      <div><h4>Setores</h4><a href="impostos.html">Impostos</a><a href="custeio.html">Custeio</a><a href="planejamento.html">Planejamento financeiro</a></div>
+      <div><h4>Impostos</h4><a href="impostos.html">MEI e Simples</a><a href="impostos.html">IBS/CBS no preço</a></div>
+      <div><h4>Aprenda</h4><a href="index.html#reforma">Reforma tributária</a><a href="index.html#conteudo">Vídeos</a><a href="index.html#duvidas">Dúvidas</a></div>
+    </div>
+    <p class="disclaimer">As calculadoras são simulações educativas e não substituem a orientação de um contador ou consultor. Valores e regras podem mudar; confira sempre nas fontes oficiais (Receita Federal, Portal do Simples Nacional, Banco Central).</p>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

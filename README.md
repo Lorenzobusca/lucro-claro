@@ -8,9 +8,12 @@ margem de contribuição e investimentos contra a inflação.
 
 | Pasta / arquivo | O que tem |
 |---|---|
-| `index.html` | Textos e estrutura da página |
-| `css/estilo.css` | Cores, fontes e visual (as cores ficam no topo, em `:root`) |
-| `js/app.js` | Contas das calculadoras e animações de rolagem |
+| `index.html` | Página inicial: explica o site, a reforma e os três setores |
+| `impostos.html` | Setor 1: MEI, Simples Nacional e IBS/CBS |
+| `custeio.html` | Setor 2: absorção × ABC, margem e ponto de equilíbrio |
+| `planejamento.html` | Setor 3: taxas de hoje e investimento × inflação |
+| `css/estilo.css` | Cores, fontes e visual de todas as páginas (as cores ficam no topo, em `:root`) |
+| `js/app.js` | Contas das calculadoras e animações de rolagem (o mesmo arquivo serve todas as páginas) |
 | `data/taxas.json` | Selic, CDI, IPCA, TR e salário mínimo (atualizado sozinho) e alíquotas da reforma (editadas à mão) |
 | `scripts/atualizar-taxas.mjs` | Programa que busca as taxas no Banco Central |
 | `.github/workflows/atualizar-taxas.yml` | Faz o GitHub rodar o programa acima todo dia útil |

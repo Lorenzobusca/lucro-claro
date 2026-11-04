@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Custeio · Lucro Claro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Custeio por absorção, custeio ABC, margem de contribuição e ponto de equilíbrio para pequenas empresas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html"><i>R$</i>Lucro Claro</a>
+    <nav class="menu" id="menu" aria-label="Principal">
+      <a href="index.html">Início</a>
+      <a href="impostos.html">Impostos</a>
+      <a href="custeio.html" aria-current="page">Custeio</a>
+      <a href="planejamento.html">Planejamento financeiro</a>
+    </nav>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</header>
+
+<main class="page">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Setor 2</p>
+    <h1>Custeio</h1>
+    <p class="lead">Descubra quanto custa de verdade cada produto ou serviço, qual deles gera lucro e quantas vendas você precisa para pagar as contas do mês.</p>
+    <nav class="sector-nav" aria-label="Setores"><a href="impostos.html">Impostos</a><a href="custeio.html" aria-current="page">Custeio</a><a href="planejamento.html">Planejamento financeiro</a></nav>
+  </div>
+</section>
+<section class="tools">
+  <div class="wrap">
+    <div class="tabs" role="tablist" aria-label="Calculadoras">
+      <button class="tab" role="tab" id="t-custeio" aria-controls="p-custeio" aria-selected="true">Absorção × ABC</button>
+      <button class="tab" role="tab" id="t-margem" aria-controls="p-margem" aria-selected="false">Margem e equilíbrio</button>
+    </div>
+
+    <div class="panel wide" role="tabpanel" id="p-custeio" aria-labelledby="t-custeio">
+      <div class="card form">
+        <h3>Quanto custa cada produto: absorção × ABC</h3>
+        <p class="hint">Na absorção, os custos indiretos da fábrica são divididos por hora de máquina. No ABC, cada atividade (preparar máquina, inspecionar, manter) é cobrada de quem a usa. Exemplo: uma marcenaria com dois produtos.</p>
+        <div class="tbl"><table>
+          <thead><tr><th>Produto</th><th>Qtd. no mês</th><th>Preço (R$)</th><th>Mat. + mão de obra / un.</th><th>Horas-máq. / un.</th><th>Nº de setups</th><th>Nº de inspeções</th></tr></thead>
+          <tbody>
+            <tr><td>Mesa padrão</td><td><input id="a-q" value="400" aria-label="Quantidade da mesa padrão"></td><td><input id="a-p" value="520" aria-label="Preço da mesa padrão"></td><td><input id="a-d" value="210" aria-label="Custo direto da mesa padrão"></td><td><input id="a-h" value="1.5" aria-label="Horas-máquina da mesa padrão"></td><td><input id="a-s" value="4" aria-label="Setups da mesa padrão"></td><td><input id="a-i" value="10" aria-label="Inspeções da mesa padrão"></td></tr>
+            <tr><td>Mesa sob medida</td><td><input id="b-q" value="60" aria-label="Quantidade da mesa sob medida"></td><td><input id="b-p" value="1150" aria-label="Preço da mesa sob medida"></td><td><input id="b-d" value="420" aria-label="Custo direto da mesa sob medida"></td><td><input id="b-h" value="2.5" aria-label="Horas-máquina da mesa sob medida"></td><td><input id="b-s" value="36" aria-label="Setups da mesa sob medida"></td><td><input id="b-i" value="50" aria-label="Inspeções da mesa sob medida"></td></tr>
+          </tbody></table></div>
+        <div class="fields three">
+          <label>Custo de preparar máquinas (R$)<input id="c-setup" value="24000"></label>
+          <label>Custo de inspeção (R$)<input id="c-insp" value="12000"></label>
+          <label>Custo de manutenção e energia (R$)<input id="c-maq" value="30000"></label>
+        </div>
+      </div>
+      <div class="card out" aria-live="polite">
+        <span class="eyebrow">Custo e lucro por unidade</span>
+        <div class="tbl"><table id="c-out"></table></div>
+        <p class="note" id="c-insight"></p>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-margem" aria-labelledby="t-margem" hidden>
+      <div class="card form">
+        <h3>Margem de contribuição e ponto de equilíbrio</h3>
+        <p class="hint">Quanto cada venda sobra para pagar as contas fixas, e quantas vendas você precisa para não ter prejuízo.</p>
+        <div class="fields">
+          <label>Preço de venda (R$)<input id="m-preco" inputmode="decimal" value="45"></label>
+          <label>Custo variável por unidade (R$)<input id="m-cv" inputmode="decimal" value="18"></label>
+          <label>Impostos, taxas e comissões (% do preço)<input id="m-dv" inputmode="decimal" value="12"></label>
+          <label>Custos fixos do mês (R$)<input id="m-cf" inputmode="decimal" value="9000"></label>
+          <label class="full">Unidades vendidas no mês<input id="m-q" inputmode="decimal" value="520"></label>
+        </div>
+      </div>
+      <div class="card out" aria-live="polite">
+        <span class="eyebrow">Resultado do mês</span>
+        <div class="big num" id="m-big">—</div>
+        <div id="m-pill"></div>
+        <div class="meter" aria-hidden="true"><span id="m-bar"></span><i id="m-mark"></i></div>
+        <div class="kv" id="m-kv"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="explain">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Como funciona</p><h2>Entenda a conta</h2></div>
+    <div class="explain-grid">
+      <div class="card reveal"><span class="tag">Absorção</span><h3>Rateio por volume</h3><p>Todos os custos da fábrica entram no custo do produto. Os custos indiretos (energia, manutenção, supervisão) são divididos por um único critério, como horas de máquina. É o método aceito pela Receita para o balanço.</p><div class="formula">custo = direto + custos indiretos × (horas do produto ÷ horas totais)</div></div>
+      <div class="card reveal"><span class="tag">ABC</span><h3>Rateio por atividade</h3><p>Cada atividade (preparar máquina, inspecionar, manter) tem seu custo e é cobrada de quem a usa. Produtos feitos em lotes pequenos e sob medida costumam custar mais do que a absorção mostra.</p><div class="formula">custo = direto + Σ (custo da atividade ÷ total do direcionador × uso do produto)</div></div>
+      <div class="card reveal"><span class="tag">Margem de contribuição</span><h3>Quanto sobra de cada venda</h3><p>É o que fica do preço depois de pagar os custos e despesas variáveis. Essa sobra paga os custos fixos; o que passar disso é lucro.</p><div class="formula">equilíbrio = custos fixos ÷ margem por unidade</div></div>
+    </div>
+  </div>
+</section>
+<section class="next">
+  <div class="wrap">
+    <div class="card"><div><h3>Próximo passo: o seu dinheiro</h3><p>Separe as finanças da empresa das suas e veja se suas economias vencem a inflação.</p></div><a class="btn primary" href="planejamento.html">Ir para Planejamento</a></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-cols">
+      <div class="f-brand">
+        <a class="logo" href="index.html"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect width="32" height="32" rx="9" fill="var(--accent)"/><rect x="8" y="17" width="4" height="7" rx="1" fill="var(--accent-ink)"/><rect x="14" y="12" width="4" height="12" rx="1" fill="var(--accent-ink)"/><rect x="20" y="7" width="4" height="17" rx="1" fill="var(--sun)"/></svg><span>Lucro Claro</span></a>
+        <p>Calculadoras gratuitas de imposto, custo e investimento para quem não tem contador.</p>
+      </div>
+      <div><h4>Setores</h4><a href="impostos.html">Impostos</a><a href="custeio.html">Custeio</a><a href="planejamento.html">Planejamento financeiro</a></div>
+      <div><h4>Impostos</h4><a href="impostos.html">MEI e Simples</a><a href="impostos.html">IBS/CBS no preço</a></div>
+      <div><h4>Aprenda</h4><a href="index.html#reforma">Reforma tributária</a><a href="index.html#conteudo">Vídeos</a><a href="index.html#duvidas">Dúvidas</a></div>
+    </div>
+    <p class="disclaimer">As calculadoras são simulações educativas e não substituem a orientação de um contador ou consultor. Valores e regras podem mudar; confira sempre nas fontes oficiais (Receita Federal, Portal do Simples Nacional, Banco Central).</p>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

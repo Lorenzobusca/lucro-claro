@@ -4,6 +4,7 @@ const brl=v=>isFinite(v)?v.toLocaleString('pt-BR',{style:'currency',currency:'BR
 const pct=(v,d=2)=>isFinite(v)?v.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d})+'%':'—';
 const n=id=>{const s=String($(id).value).trim().replace(/\s/g,'');const t=s.includes(',')?s.replace(/\./g,'').replace(',','.'):s;const v=parseFloat(t);return isFinite(v)?v:0};
 const kv=rows=>rows.map(([k,v])=>`<div><span>${k}</span><span>${v}</span></div>`).join('');
+const has=id=>!!$(id);
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* Taxas: valores de reserva, trocados pelos de data/taxas.json assim que ele carrega */
@@ -11,16 +12,16 @@ let T={atualizado_em:null,exemplo:true,taxas:{selic:{valor:15,data:null},cdi:{va
   reforma:{"2026":{cbs:.9,ibs:.1,nota:""},"2027":{cbs:8.7,ibs:.1,nota:""},"2033":{cbs:8.8,ibs:17.7,nota:""}}};
 const tx=k=>T.taxas[k]?.valor;
 const dataBR=d=>{if(!d)return'';const [y,m,dd]=String(d).slice(0,10).split('-');return dd?`${dd}/${m}/${y}`:`${m}/${y}`};
-const setVal=(id,v)=>{if(v!=null&&isFinite(v))$(id).value=String(+v.toFixed(2))};
+const setVal=(id,v)=>{if(has(id)&&v!=null&&isFinite(v))$(id).value=String(+v.toFixed(2))};
 function aplicarTaxas(){
   document.querySelectorAll('[data-rate]').forEach(el=>{const k=el.dataset.rate,t=T.taxas[k];if(t)el.textContent=pct(t.valor,2)});
   document.querySelectorAll('[data-date]').forEach(el=>{const t=T.taxas[el.dataset.date];el.textContent=t?.data?'em '+dataBR(t.data):'exemplo'});
   document.querySelectorAll('.src[data-src]').forEach(el=>{const t=T.taxas[el.dataset.src];el.textContent=t?.data?`Banco Central, ${dataBR(t.data)}`:'valor de exemplo'});
   const src=$('rates-src');
-  if(T.exemplo||!T.atualizado_em){src.textContent='Valores de exemplo: a atualização automática pelo Banco Central ainda não rodou.';src.classList.add('stale')}
+  if(!src);else if(T.exemplo||!T.atualizado_em){src.textContent='Valores de exemplo: a atualização automática pelo Banco Central ainda não rodou.';src.classList.add('stale')}
   else{const dias=(Date.now()-new Date(T.atualizado_em))/864e5;src.textContent=`Fonte: Banco Central do Brasil. Atualizado em ${new Date(T.atualizado_em).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}.`;src.classList.toggle('stale',dias>5)}
   setVal('s-sm',tx('salario_minimo'));setVal('i-inf',tx('ipca_focus_12m'));
-  ivaAno();simples();invest();
+  if(has('v-ano'))ivaAno();if(has('s-tipo'))simples();if(has('i-tipo'))invest();
 }
 
 
@@ -28,7 +29,7 @@ function aplicarTaxas(){
 const tabs=[...document.querySelectorAll('.tab')];
 function sel(t){tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;$(x.getAttribute('aria-controls')).hidden=!on});try{localStorage.setItem('lc-tab',t.id)}catch(e){}}
 tabs.forEach((t,i)=>{t.addEventListener('click',()=>sel(t));t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const j=(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;sel(tabs[j]);tabs[j].focus()}})});
-try{const s=localStorage.getItem('lc-tab');if(s&&$(s))sel($(s));else sel(tabs[0])}catch(e){sel(tabs[0])}
+if(tabs.length){try{const s=localStorage.getItem('lc-tab');if(s&&$(s))sel($(s));else sel(tabs[0])}catch(e){sel(tabs[0])}}
 
 /* Simples / MEI */
 const anexos={
@@ -55,7 +56,7 @@ function simples(){
   $('s-pill').innerHTML=acima?`<span class="pill bad">Acima de R$ 4,8 milhões: fora do Simples</span>`:`<span class="pill ok">Faixa ${f+1} de 6</span>`;
   $('s-kv').innerHTML=kv([['Alíquota nominal da faixa',pct(nom)],['Parcela a deduzir',brl(ded)],['Sua alíquota efetiva',pct(ef)],['Estimativa no ano',brl(r12*ef/100)]]);
 }
-['s-tipo','s-mes','s-12','s-sm'].forEach(id=>$(id).addEventListener('input',simples));
+['s-tipo','s-mes','s-12','s-sm'].forEach(id=>$(id)?.addEventListener('input',simples));
 
 /* IBS/CBS */
 function ivaAno(){const r=T.reforma[$('v-ano').value];if(!r)return;setVal('v-aliq',r.cbs+r.ibs);$('v-note').textContent=(r.nota?r.nota+' ':'')+'Considera alíquota cheia nas compras. Simulação educativa.';iva()}
@@ -66,8 +67,8 @@ function iva(){
   $('v-big').textContent=brl(pagar);
   $('v-kv').innerHTML=kv([['Alíquota do seu setor',pct(efet)],['Imposto sobre as vendas',brl(deb)],['Crédito das compras',`− ${brl(cred)}`],[`CBS (${pct(fc*100,0)} do total)`,brl(pagar*fc)],[`IBS (${pct((1-fc)*100,0)} do total)`,brl(pagar*(1-fc))],['Preço final ao cliente',brl(venda+deb)]].concat(saldo>0?[['Crédito que sobra para o mês seguinte',brl(saldo)]]:[]));
 }
-['v-venda','v-compra','v-aliq','v-red'].forEach(id=>$(id).addEventListener('input',iva));
-$('v-ano').addEventListener('input',ivaAno);
+['v-venda','v-compra','v-aliq','v-red'].forEach(id=>$(id)?.addEventListener('input',iva));
+$('v-ano')?.addEventListener('input',ivaAno);
 
 /* Custeio */
 function custeio(){
@@ -84,8 +85,8 @@ function custeio(){
   $('c-insight').innerHTML=Math.abs(dif)<0.5?'Os dois métodos chegam a custos parecidos com esses números.':
     `O ABC mostra que a <b>${names[j].toLowerCase()}</b> custa ${brl(dif)} a mais por unidade do que a absorção indica, porque usa mais preparações e inspeções. ${res[j].lb<0?'Com esse preço, ela dá prejuízo.':'Vale revisar o preço dela.'} O lucro total do mês é o mesmo nos dois métodos: o que muda é qual produto realmente gera esse lucro.`;
 }
-['a','b'].forEach(k=>['q','p','d','h','s','i'].forEach(f=>$(k+'-'+f).addEventListener('input',custeio)));
-['c-setup','c-insp','c-maq'].forEach(id=>$(id).addEventListener('input',custeio));
+['a','b'].forEach(k=>['q','p','d','h','s','i'].forEach(f=>$(k+'-'+f)?.addEventListener('input',custeio)));
+['c-setup','c-insp','c-maq'].forEach(id=>$(id)?.addEventListener('input',custeio));
 
 /* Margem */
 function margem(){
@@ -97,7 +98,7 @@ function margem(){
   $('m-bar').style.width=Math.min(100,q/max*100)+'%'; $('m-mark').style.left=isFinite(pe)?Math.min(99,pe/max*100)+'%':'99%';
   $('m-kv').innerHTML=kv([['Margem de contribuição / un.',brl(mc)],['Margem de contribuição',pct(mcp,1)],['Ponto de equilíbrio',isFinite(pe)?Math.ceil(pe).toLocaleString('pt-BR')+' un.':'não existe'],['Faturamento de equilíbrio',isFinite(pe)?brl(Math.ceil(pe)*p):'—'],['Margem de segurança',isFinite(pe)&&q?pct((q-pe)/q*100,1):'—']]);
 }
-['m-preco','m-cv','m-dv','m-cf','m-q'].forEach(id=>$(id).addEventListener('input',margem));
+['m-preco','m-cv','m-dv','m-cf','m-q'].forEach(id=>$(id)?.addEventListener('input',margem));
 
 /* Investimento */
 function invest(){
@@ -119,9 +120,9 @@ function invest(){
   $('i-bar').style.width=Math.max(0,Math.min(100,100/fator))+'%';
   $('i-kv2').innerHTML=kv([[`Daqui a ${m} meses, em poder de compra`,brl(v/fator)],['Perda por deixar parado',brl(v-v/fator)]]);
 }
-['i-v','i-m','i-pct','i-inf','i-tipo'].forEach(id=>$(id).addEventListener('input',invest));
+['i-v','i-m','i-pct','i-inf','i-tipo'].forEach(id=>$(id)?.addEventListener('input',invest));
 
-custeio();margem();aplicarTaxas();
+if(has('a-q'))custeio();if(has('m-preco'))margem();aplicarTaxas();
 fetch('data/taxas.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject()).then(j=>{T=j;aplicarTaxas()}).catch(()=>{});
 
 /* Animações ligadas à rolagem */
@@ -131,7 +132,7 @@ let ticking=false;
 function frame(){
   ticking=false;
   const vh=innerHeight;
-  if(!reduce){
+  if(!reduce&&rc){
     const p=Math.min(1,Math.max(0,scrollY/(hero.offsetHeight||1)));
     rc.style.transform=`translateY(${p*70}px) rotate(${-7+9*p}deg)`;
     cb.style.transform=`translate(${p*40}px,${-p*50}px) rotate(${4-8*p}deg)`;
@@ -139,6 +140,7 @@ function frame(){
     old.style.transform=`translate(${-p*60}px,${p*40}px)`; old.style.opacity=1-p*.8;
     reels.forEach((r,i)=>{const b=r.getBoundingClientRect();const c=(b.top+b.height/2-vh/2)/vh;r.style.transform=`translateY(${c*(i%2?-40:40)}px)`});
   }
+  if(!tl)return;
   const b=tl.getBoundingClientRect(), mark=vh*0.6;
   const prog=Math.min(1,Math.max(0,(mark-b.top)/b.height));
   fill.style.height=(prog*(b.height-12))+'px';
@@ -155,8 +157,8 @@ if(!reduce&&'IntersectionObserver'in window){
 
 /* Menu no celular */
 const burger=$('burger'),menu=$('menu');
-burger.addEventListener('click',()=>{const o=!menu.classList.contains('open');menu.classList.toggle('open',o);burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Fechar menu':'Abrir menu')});
-menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');burger.setAttribute('aria-expanded','false')}));
+if(burger)burger.addEventListener('click',()=>{const o=!menu.classList.contains('open');menu.classList.toggle('open',o);burger.setAttribute('aria-expanded',o);burger.textContent=o?'Fechar':'Menu'});
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.textContent='Menu'}));
 
 /* QR code e código de barras decorativos da nota de exemplo */
 let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
