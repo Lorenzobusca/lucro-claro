@@ -1,12 +1,13 @@
 # Tarefas
 
 ## Agora
-- [ ] Criar o repositório `lucro-claro` no GitHub
-- [ ] Ativar o GitHub Pages (Settings → Pages → branch `main`)
+- [x] Criar o repositório `lucro-claro` no GitHub
 - [ ] Rodar "Atualizar taxas" pela primeira vez (aba Actions)
-- [ ] Conectar o Obsidian ao repositório (plugin Obsidian Git)
+- [x] Abrir o projeto no Obsidian
+- [ ] Testar a sincronização: se você está lendo esta linha, funcionou
 
 ## Próximo
+- [ ] Ativar o GitHub Pages para colocar o site no ar (Settings → Pages → branch `main`)
 - [ ] Novo visual, mais realista, mantendo as animações
 - [ ] Escolher o nome definitivo e registrar o domínio `.com.br`
 - [ ] Pedir para um contador revisar as calculadoras
