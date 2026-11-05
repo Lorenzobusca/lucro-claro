@@ -31,7 +31,7 @@
   <div class="wrap">
     <p class="eyebrow">Setor 3</p>
     <h1>Planejamento financeiro</h1>
-    <p class="lead">Dinheiro parado perde valor todo ano. Veja as taxas de hoje e compare onde seu dinheiro rende de verdade, já descontando imposto de renda e inflação.</p>
+    <p class="lead">Simule quanto seu dinheiro pode valer daqui a alguns anos, monte sua carteira e compare onde ele rende de verdade, já descontando imposto de renda e inflação.</p>
     <nav class="sector-nav" aria-label="Setores"><a href="impostos.html">Impostos</a><a href="custeio.html">Custeio</a><a href="planejamento.html" aria-current="page">Planejamento financeiro</a></nav>
   </div>
 </section>
@@ -45,7 +45,61 @@
       <div class="rate"><span>TR do mês</span><b class="num" data-rate="tr">—</b><small data-date="tr"></small></div>
       <p class="rates-src" id="rates-src">Fonte: Banco Central do Brasil.</p>
     </div>
-    <div class="panel">
+    <div class="tabs" role="tablist" aria-label="Calculadoras">
+      <button class="tab" role="tab" id="t-carteira" aria-controls="p-carteira" aria-selected="true">Simulador de carteira</button>
+      <button class="tab" role="tab" id="t-invest" aria-controls="p-invest" aria-selected="false">Investimento × inflação</button>
+    </div>
+    <div class="panel wide" role="tabpanel" id="p-carteira" aria-labelledby="t-carteira">
+      <div class="card form">
+        <h3>Simulador de carteira</h3>
+        <p class="hint">Escolha quanto colocar em cada investimento e veja quanto seu dinheiro pode valer daqui a alguns anos, já descontando o imposto de renda.</p>
+        <div class="fields four">
+          <label>Valor inicial (R$)<input id="w-ini" inputmode="decimal" value="10000"></label>
+          <label>Quanto vai guardar por mês (R$)<input id="w-apt" inputmode="decimal" value="500"></label>
+          <label>Por quantos anos<input id="w-anos" inputmode="decimal" value="10"></label>
+          <label>Inflação esperada ao ano (%)<input id="w-inf" inputmode="decimal" value="4.5"><small class="src" data-src="ipca_focus_12m"></small></label>
+        </div>
+        <div class="presets" role="group" aria-label="Carteiras prontas">
+          <span>Começar com uma carteira pronta:</span>
+          <button class="preset" data-preset="conservadora">Conservadora</button>
+          <button class="preset" data-preset="moderada" aria-pressed="true">Moderada</button>
+          <button class="preset" data-preset="arrojada">Arrojada</button>
+        </div>
+        <div class="tbl"><table class="alloc">
+          <thead><tr><th>Investimento</th><th>% da carteira</th><th>Rende ao ano (%)</th><th>De onde vem a taxa</th><th>Imposto de renda</th></tr></thead>
+          <tbody>
+              <tr><td>Poupança</td><td><input id="w-p-poup" inputmode="decimal" value="0" aria-label="Porcentagem em Poupança"></td><td><input id="w-r-poup" inputmode="decimal" value="0" aria-label="Rendimento ao ano de Poupança"></td><td class="w-o" id="w-o-poup"></td><td class="w-ir" id="w-i-poup"></td></tr>
+              <tr><td>Tesouro Selic</td><td><input id="w-p-selic" inputmode="decimal" value="0" aria-label="Porcentagem em Tesouro Selic"></td><td><input id="w-r-selic" inputmode="decimal" value="0" aria-label="Rendimento ao ano de Tesouro Selic"></td><td class="w-o" id="w-o-selic"></td><td class="w-ir" id="w-i-selic"></td></tr>
+              <tr><td>CDB 100% do CDI</td><td><input id="w-p-cdb" inputmode="decimal" value="0" aria-label="Porcentagem em CDB 100% do CDI"></td><td><input id="w-r-cdb" inputmode="decimal" value="0" aria-label="Rendimento ao ano de CDB 100% do CDI"></td><td class="w-o" id="w-o-cdb"></td><td class="w-ir" id="w-i-cdb"></td></tr>
+              <tr><td>LCI e LCA (90% do CDI)</td><td><input id="w-p-lci" inputmode="decimal" value="0" aria-label="Porcentagem em LCI e LCA (90% do CDI)"></td><td><input id="w-r-lci" inputmode="decimal" value="0" aria-label="Rendimento ao ano de LCI e LCA (90% do CDI)"></td><td class="w-o" id="w-o-lci"></td><td class="w-ir" id="w-i-lci"></td></tr>
+              <tr><td>Tesouro IPCA+</td><td><input id="w-p-ipca" inputmode="decimal" value="0" aria-label="Porcentagem em Tesouro IPCA+"></td><td><input id="w-r-ipca" inputmode="decimal" value="0" aria-label="Rendimento ao ano de Tesouro IPCA+"></td><td class="w-o" id="w-o-ipca"></td><td class="w-ir" id="w-i-ipca"></td></tr>
+              <tr><td>Fundos imobiliários (FIIs)</td><td><input id="w-p-fii" inputmode="decimal" value="0" aria-label="Porcentagem em Fundos imobiliários (FIIs)"></td><td><input id="w-r-fii" inputmode="decimal" value="0" aria-label="Rendimento ao ano de Fundos imobiliários (FIIs)"></td><td class="w-o" id="w-o-fii"></td><td class="w-ir" id="w-i-fii"></td></tr>
+              <tr><td>Ações (bolsa)</td><td><input id="w-p-acoes" inputmode="decimal" value="0" aria-label="Porcentagem em Ações (bolsa)"></td><td><input id="w-r-acoes" inputmode="decimal" value="0" aria-label="Rendimento ao ano de Ações (bolsa)"></td><td class="w-o" id="w-o-acoes"></td><td class="w-ir" id="w-i-acoes"></td></tr>
+          </tbody>
+          <tfoot><tr><td>Total</td><td><span class="num" id="w-sum">100%</span></td><td colspan="3"></td></tr></tfoot>
+        </table></div>
+      </div>
+      <div class="card out" aria-live="polite">
+        <span class="eyebrow" id="w-label">Sua carteira daqui a 10 anos</span>
+        <div class="w-top">
+          <div>
+            <div class="big num" id="w-big">—</div>
+            <p class="w-real" id="w-real"></p>
+            <div id="w-pill"></div>
+          </div>
+          <div class="kv" id="w-kv"></div>
+        </div>
+        <div class="legend-row" aria-hidden="true">
+          <span><i style="background:var(--chart-1)"></i>Sua carteira</span>
+          <span><i style="background:var(--chart-2)"></i>Tudo na poupança</span>
+          <span><i class="dash"></i>Dinheiro que você guardou</span>
+        </div>
+        <div class="chart" id="w-chart" role="img" aria-label="Gráfico da evolução do patrimônio ano a ano"></div>
+        <details class="w-table"><summary>Ver tabela ano a ano</summary><div class="tbl"><table id="w-tab"></table></div></details>
+        <p class="note">Valores líquidos, como se você resgatasse tudo no fim de cada ano. Ações e fundos imobiliários variam muito de um ano para o outro: a linha mostra uma média, não uma garantia. Rendimentos de renda fixa usam as taxas de hoje do Banco Central e supõem que elas se mantêm.</p>
+      </div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-invest" aria-labelledby="t-invest" hidden>
       <div class="card form">
         <h3>Investimento × inflação</h3>
         <div class="fields">

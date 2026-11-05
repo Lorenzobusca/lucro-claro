@@ -21,7 +21,7 @@ function aplicarTaxas(){
   if(!src);else if(T.exemplo||!T.atualizado_em){src.textContent='Valores de exemplo: a atualização automática pelo Banco Central ainda não rodou.';src.classList.add('stale')}
   else{const dias=(Date.now()-new Date(T.atualizado_em))/864e5;src.textContent=`Fonte: Banco Central do Brasil. Atualizado em ${new Date(T.atualizado_em).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}.`;src.classList.toggle('stale',dias>5)}
   setVal('s-sm',tx('salario_minimo'));setVal('i-inf',tx('ipca_focus_12m'));
-  if(has('v-ano'))ivaAno();if(has('s-tipo'))simples();if(has('i-tipo'))invest();
+  if(has('v-ano'))ivaAno();if(has('s-tipo'))simples();if(has('i-tipo'))invest();if(has('w-ini')&&cartPronto){setVal('w-inf',tx('ipca_focus_12m'));carteiraTaxas()}
 }
 
 
@@ -167,4 +167,104 @@ let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
   for(let i=0;i<N;i++)for(let j=0;j<N;j++){const inF=(i<8&&j<8)||(i>N-9&&j<8)||(i<8&&j>N-9);if(!inF&&rnd()>.52)x.fillRect(i*u,j*u,u,u)}
   finder(0,0);finder(N-7,0);finder(0,N-7)})();
 (function(){const s=$('barcode');if(!s)return;let x=0,h='';while(x<236){const w=1+Math.floor(rnd()*3);if(rnd()>.4)h+=`<rect x="${x}" y="0" width="${w}" height="34"/>`;x+=w+1}s.innerHTML=h})();
+
+/* ===== Simulador de carteira ===== */
+var cartPronto=false;
+const ATIVOS=[
+  {k:'poup', ir:'isento'},
+  {k:'selic',ir:'regressivo'},
+  {k:'cdb',  ir:'regressivo'},
+  {k:'lci',  ir:'isento'},
+  {k:'ipca', ir:'regressivo', real:7},     // inflação + 7% ao ano (exemplo, editável)
+  {k:'fii',  ir:'isento', hip:12},         // hipótese editável
+  {k:'acoes',ir:'acoes',  hip:14}];        // hipótese editável
+const CARTEIRAS={
+  conservadora:{poup:0,selic:40,cdb:20,lci:20,ipca:20,fii:0,acoes:0},
+  moderada:    {poup:0,selic:20,cdb:15,lci:15,ipca:25,fii:10,acoes:15},
+  arrojada:    {poup:0,selic:10,cdb:10,lci:0, ipca:20,fii:20,acoes:40}};
+const IR_TXT={isento:'Isento',regressivo:'Tabela regressiva (15% após 2 anos)',acoes:'15% sobre o lucro na venda'};
+const irAliq=(tipo,meses)=>tipo==='isento'?0:tipo==='acoes'?15:(meses*30<=180?22.5:meses*30<=360?20:meses*30<=720?17.5:15);
+const fmtCurto=v=>v>=1e6?'R$ '+(v/1e6).toLocaleString('pt-BR',{maximumFractionDigits:1})+' mi':v>=1e3?'R$ '+Math.round(v/1e3).toLocaleString('pt-BR')+' mil':'R$ '+Math.round(v);
+function poupAno(){const sel=tx('selic'),trA=(Math.pow(1+tx('tr')/100,12)-1)*100;return sel>8.5?(Math.pow(1.005,12)-1)*100+trA:sel*0.7+trA}
+function carteiraTaxas(){
+  const inf=n('w-inf'),cdi=tx('cdi'),sel=tx('selic'),ex=T.exemplo?' (exemplo)':'';
+  const set=(k,v,o,ro)=>{const el=$('w-r-'+k);if(ro||!el.dataset.mexeu)el.value=v.toFixed(2);el.readOnly=!!ro;$('w-o-'+k).textContent=o};
+  set('poup',poupAno(),'Regra oficial da poupança'+ex,true);
+  set('selic',sel,'Selic de hoje'+ex,true);
+  set('cdb',cdi,'CDI de hoje'+ex,true);
+  set('lci',cdi*.9,'90% do CDI de hoje'+ex,true);
+  set('ipca',(1+inf/100)*(1.07)*100-100,'Inflação + 7% ao ano (exemplo, pode editar)');
+  set('fii',12,'Hipótese de média histórica (pode editar)');
+  set('acoes',14,'Hipótese de média histórica (pode editar)');
+  ATIVOS.forEach(a=>$('w-i-'+a.k).textContent=IR_TXT[a.ir]);
+  carteira();
+}
+function aplicarPreset(nome){const c=CARTEIRAS[nome];ATIVOS.forEach(a=>$('w-p-'+a.k).value=c[a.k]);document.querySelectorAll('.preset').forEach(b=>b.setAttribute('aria-pressed',b.dataset.preset===nome));carteira()}
+let serie=[];
+function simular(pesos,taxas,ini,apt,meses){
+  const st=ATIVOS.map((a,i)=>({a,w:pesos[i],rm:Math.pow(1+taxas[i]/100,1/12)-1,bal:ini*pesos[i],inv:ini*pesos[i]}));
+  const out=[];const liq=m=>st.reduce((s,x)=>s+x.bal-Math.max(0,x.bal-x.inv)*irAliq(x.a.ir,m)/100,0);
+  out.push(liq(0));
+  for(let m=1;m<=meses;m++){st.forEach(x=>{x.bal=x.bal*(1+x.rm)+apt*x.w;x.inv+=apt*x.w});if(m%12===0||m===meses)out.push(liq(m))}
+  const bruto=st.reduce((s,x)=>s+x.bal,0),inv=st.reduce((s,x)=>s+x.inv,0);
+  return{out,bruto,inv,liq:liq(meses)};
+}
+function carteira(){
+  const ini=n('w-ini'),apt=n('w-apt'),anos=Math.max(1,Math.min(50,Math.round(n('w-anos')))),inf=n('w-inf'),meses=anos*12;
+  const p=ATIVOS.map(a=>Math.max(0,n('w-p-'+a.k))),soma=p.reduce((a,b)=>a+b,0);
+  const pesos=p.map(v=>soma?v/soma:0),taxas=ATIVOS.map(a=>n('w-r-'+a.k));
+  $('w-sum').textContent=pct(soma,0);$('w-sum').classList.toggle('bad',Math.abs(soma-100)>.01);
+  const c=simular(pesos,taxas,ini,apt,meses);
+  const pp=simular(ATIVOS.map(a=>a.k==='poup'?1:0),taxas,ini,apt,meses);
+  const fator=Math.pow(1+inf/100,anos),taxaMedia=pesos.reduce((s,w,i)=>s+w*taxas[i],0);
+  $('w-label').textContent=`Sua carteira daqui a ${anos} ${anos===1?'ano':'anos'}`;
+  $('w-big').textContent=brl(c.liq);
+  $('w-real').textContent=`Equivale a ${brl(c.liq/fator)} em dinheiro de hoje`;
+  $('w-pill').innerHTML=Math.abs(soma-100)>.01?`<span class="pill warn">A carteira soma ${pct(soma,0)}; ajuste para 100%</span>`:c.liq>pp.liq?`<span class="pill ok">${brl(c.liq-pp.liq)} a mais que a poupança</span>`:`<span class="pill bad">Rende menos que a poupança</span>`;
+  $('w-kv').innerHTML=kv([['Dinheiro que você guardou',brl(c.inv)],['Rendimento bruto',brl(c.bruto-c.inv)],['Imposto de renda estimado',brl(c.bruto-c.liq)],['Rendimento médio da carteira',pct(taxaMedia)+' ao ano'],['Se deixasse tudo na poupança',brl(pp.liq)]]);
+  serie=c.out.map((v,i)=>({ano:Math.min(i,anos),cart:v,poup:pp.out[i],inv:ini+apt*Math.min(i*12,meses)}));
+  $('w-tab').innerHTML='<thead><tr><th>Ano</th><th>Guardado</th><th>Sua carteira</th><th>Poupança</th><th>Carteira em dinheiro de hoje</th></tr></thead><tbody>'+
+    serie.map(r=>`<tr><td>${r.ano}</td><td>${brl(r.inv)}</td><td>${brl(r.cart)}</td><td>${brl(r.poup)}</td><td>${brl(r.cart/Math.pow(1+inf/100,r.ano))}</td></tr>`).join('')+'</tbody>';
+  desenhar();
+}
+function desenhar(){
+  const box=$('w-chart');if(!box||!serie.length)return;
+  const W=Math.max(280,box.clientWidth),H=box.clientHeight||300,pl=66,pr=W<520?16:112,pt=14,pb=28;
+  const maxY=Math.max(...serie.map(r=>Math.max(r.cart,r.poup,r.inv)))*1.06||1,n0=serie.length-1||1;
+  const step=[1,2,5].flatMap(m=>[1,10,100,1e3,1e4,1e5,1e6,1e7].map(e=>m*e)).find(s=>maxY/s<=4.5);
+  const X=i=>pl+(W-pl-pr)*i/n0,Y=v=>pt+(H-pt-pb)*(1-v/maxY);
+  const path=k=>serie.map((r,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(r[k]).toFixed(1)}`).join('');
+  let g='';for(let v=0;v<=maxY;v+=step)g+=`<line class="grid" x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}"/><text class="axis" x="${pl-8}" y="${Y(v)+4}" text-anchor="end">${v?fmtCurto(v):'R$ 0'}</text>`;
+  const xs=Math.ceil(serie.length/(W<520?5:10));
+  serie.forEach((r,i)=>{if((i%xs===0&&n0-i>=xs*0.6)||i===n0)g+=`<text class="axis" x="${X(i)}" y="${H-8}" text-anchor="middle">${r.ano===0?'Hoje':r.ano+'a'}</text>`});
+  const last=serie[n0],lbl=[['cart','Sua carteira','var(--chart-1)'],['poup','Poupança','var(--chart-2)']];
+  let ends='';if(W>=520){let ys=lbl.map(([k])=>Y(last[k]));if(Math.abs(ys[0]-ys[1])<16){const m=(ys[0]+ys[1])/2,s=ys[0]<ys[1]?-1:1;ys=[m+8*s,m-8*s]}lbl.forEach(([k,t],j)=>ends+=`<text class="lbl" x="${X(n0)+12}" y="${ys[j]+4}">${t}</text>`)}
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${g}
+    <path d="${path('inv')}" fill="none" stroke="color-mix(in srgb,var(--band-ink) 55%,transparent)" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <path d="${path('poup')}" fill="none" stroke="var(--chart-2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="${path('cart')}" fill="none" stroke="var(--chart-1)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${X(n0)}" cy="${Y(last.poup)}" r="4.5" fill="var(--chart-2)" stroke="var(--band)" stroke-width="2"/>
+    <circle cx="${X(n0)}" cy="${Y(last.cart)}" r="4.5" fill="var(--chart-1)" stroke="var(--band)" stroke-width="2"/>
+    ${ends}<line class="cross" id="w-x" y1="${pt}" y2="${H-pb}" visibility="hidden"/>
+    <circle id="w-d1" r="4.5" fill="var(--chart-1)" stroke="var(--band)" stroke-width="2" visibility="hidden"/><circle id="w-d2" r="4.5" fill="var(--chart-2)" stroke="var(--band)" stroke-width="2" visibility="hidden"/>
+    <rect x="${pl}" y="0" width="${W-pl-pr}" height="${H}" fill="transparent" id="w-hit"/></svg><div class="tip" id="w-tip" hidden></div>`;
+  const hit=$('w-hit'),tip=$('w-tip'),xl=$('w-x'),d1=$('w-d1'),d2=$('w-d2');
+  const show=e=>{const r=box.getBoundingClientRect(),cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;const i=Math.max(0,Math.min(n0,Math.round((cx-pl)/(W-pl-pr)*n0))),d=serie[i];
+    xl.setAttribute('x1',X(i));xl.setAttribute('x2',X(i));d1.setAttribute('cx',X(i));d1.setAttribute('cy',Y(d.cart));d2.setAttribute('cx',X(i));d2.setAttribute('cy',Y(d.poup));[xl,d1,d2].forEach(el=>el.setAttribute('visibility','visible'));
+    tip.innerHTML=`<b>${d.ano===0?'Hoje':'Daqui a '+d.ano+(d.ano===1?' ano':' anos')}</b><div><span><i style="background:var(--chart-1)"></i>Sua carteira</span><span class="num">${brl(d.cart)}</span></div><div><span><i style="background:var(--chart-2)"></i>Poupança</span><span class="num">${brl(d.poup)}</span></div><div><span><i style="background:var(--muted)"></i>Guardado</span><span class="num">${brl(d.inv)}</span></div>`;
+    tip.hidden=false;const tw=tip.offsetWidth;let left=X(i)+14;if(left+tw>W)left=X(i)-tw-14;tip.style.left=Math.max(0,left)+'px';tip.style.top=Math.max(0,Math.min(Y(d.cart),H-tip.offsetHeight)-10)+'px'};
+  const hide=()=>{tip.hidden=true;[xl,d1,d2].forEach(el=>el.setAttribute('visibility','hidden'))};
+  hit.addEventListener('pointermove',show);hit.addEventListener('pointerdown',show);hit.addEventListener('pointerleave',hide);
+}
+if(has('w-ini')){
+  ['w-ini','w-apt','w-anos'].forEach(id=>$(id).addEventListener('input',carteira));
+  $('w-inf').addEventListener('input',carteiraTaxas);
+  ATIVOS.forEach(a=>{$('w-p-'+a.k).addEventListener('input',()=>{document.querySelectorAll('.preset').forEach(b=>b.setAttribute('aria-pressed','false'));carteira()});
+    $('w-r-'+a.k).addEventListener('input',e=>{e.target.dataset.mexeu='1';carteira()})});
+  document.querySelectorAll('.preset').forEach(b=>b.addEventListener('click',()=>aplicarPreset(b.dataset.preset)));
+  cartPronto=true;setVal('w-inf',tx('ipca_focus_12m'));
+  aplicarPreset('moderada');carteiraTaxas();
+  let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(desenhar,120)});
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>requestAnimationFrame(desenhar)));
+}
 })();
