@@ -1,31 +1,20 @@
-/* Layout: produto financeiro sério. Fundo claro de papel quadriculado no topo, faixas escuras para reforma e vídeos,
-   calculadoras como "formulário + recibo": entrada em cartão branco, resultado em cartão escuro tipo extrato. */
+/* Layout: mesa de investimentos. Site inteiro escuro (verde quase preto), números grandes em destaque,
+   dourado só nos detalhes: rótulos, marcadores, linhas e resultados. Verde para ação e para o que vai bem. */
 :root{
-  --bg:#F6F8F5; --surface:#FFFFFF; --surface-2:#EEF3EF; --ink:#0C1F17; --muted:#5A6B62; --line:#DCE4DE;
-  --accent:#0A7A52; --accent-ink:#FFFFFF; --accent-soft:#E2F1E9;
-  --sun:#D4920F; --sun-soft:#FBF0D6; --bad:#B83A26;
-  --band:#0C1F17; --band-ink:#E8F0EB;
-  --paper:#FFFEFA; --paper-ink:#26302B;
-  --shadow-sm:0 1px 2px rgba(12,31,23,.06),0 2px 8px rgba(12,31,23,.05);
-  --shadow-lg:0 2px 4px rgba(12,31,23,.05),0 24px 60px -24px rgba(12,31,23,.35);
+  color-scheme:dark;
+  --bg:#07100C; --surface:#0E1A15; --surface-2:#13231C; --ink:#E8EFEA; --muted:#93A69C; --line:#1F3229;
+  --accent:#3CC492; --accent-ink:#04110B; --accent-soft:#12301F;
+  --sun:#E0B354; --sun-soft:#2A2310; --bad:#F0806A;
+  --band:#040A07; --band-ink:#E8EFEA;
+  --gold-line:color-mix(in srgb,var(--sun) 28%,transparent);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.5);
+  --shadow-lg:0 24px 60px -24px rgba(0,0,0,.9);
   --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --f-body:"Figtree", "Segoe UI", system-ui, sans-serif;
   --f-num:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   --r:16px;
-  --chart-1:#22A877; --chart-2:#C2801A; /* cores do gráfico, testadas para daltonismo sobre o cartão escuro */
+  --chart-1:#22A877; --chart-2:#C2801A; /* cores do gráfico, testadas para daltonismo sobre fundo escuro */
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0A1410; --surface:#111E18; --surface-2:#16251E; --ink:#E3EDE7; --muted:#95A99E; --line:#23352C;
-  --accent:#3CC492; --accent-ink:#04110B; --accent-soft:#12301F;
-  --sun:#F0B848; --sun-soft:#2C2511; --bad:#F0806A;
-  --band:#050C09; --band-ink:#E3EDE7; --paper:#F4F1E8; --paper-ink:#26302B;
-  --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow-lg:0 24px 60px -24px rgba(0,0,0,.8); color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0A1410; --surface:#111E18; --surface-2:#16251E; --ink:#E3EDE7; --muted:#95A99E; --line:#23352C;
-  --accent:#3CC492; --accent-ink:#04110B; --accent-soft:#12301F;
-  --sun:#F0B848; --sun-soft:#2C2511; --bad:#F0806A;
-  --band:#050C09; --band-ink:#E3EDE7; --paper:#F4F1E8; --paper-ink:#26302B;
-  --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow-lg:0 24px 60px -24px rgba(0,0,0,.8); color-scheme:dark}
 
 /* Base */
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -394,3 +383,56 @@ footer a:not(.logo):hover{color:var(--accent)}
 @media (max-width:480px){.pros-cons{grid-template-columns:1fr}}
 .pros-cons h4{font-family:var(--f-body);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
 .pros-cons ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:.9rem;color:var(--muted)}
+
+/* ===== Tema escuro, estilo investimentos ===== */
+.eyebrow,.tag,.who .card .tag{color:var(--sun)}
+body{background:
+  radial-gradient(900px 500px at 85% -10%,color-mix(in srgb,var(--sun) 9%,transparent),transparent 70%),
+  radial-gradient(700px 500px at 0% 0%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 70%),
+  var(--bg);background-repeat:no-repeat}
+header.top{background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom-color:var(--line)}
+nav.menu a{color:var(--muted)}
+nav.menu a:hover{color:var(--ink);background:var(--surface-2)}
+nav.menu a[aria-current="page"]{background:transparent;color:var(--sun);box-shadow:inset 0 0 0 1.5px var(--gold-line)}
+.btn{border-color:color-mix(in srgb,var(--ink) 35%,transparent)}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{border-color:var(--accent);box-shadow:0 8px 24px -10px color-mix(in srgb,var(--accent) 70%,transparent)}
+.burger{border-color:color-mix(in srgb,var(--ink) 35%,transparent)}
+.hero h1 em{background:linear-gradient(transparent 88%,var(--sun) 88%,var(--sun) 94%,transparent 94%)}
+.receipt{background:var(--surface-2);border-color:var(--gold-line)}
+.chip.old{background:var(--surface-2)}
+.card{background:linear-gradient(180deg,var(--surface-2),var(--surface));border-color:var(--line)}
+.who .card,.sector,.facts .card,.explain-grid .card{border-top:1px solid var(--gold-line)}
+.band{border-block:1px solid var(--line)}
+.out{background:linear-gradient(180deg,#0C1913,#08110D);border-color:var(--gold-line)}
+.out .big,.placar b,.meta-nums .grande{color:var(--sun)}
+.big{font-size:clamp(2.4rem,5vw,3.4rem)}
+.rate b{color:var(--sun)}
+.rates,.rates-src{background:var(--surface)}
+.pf{background:transparent;border-top:none}
+input,select{background:var(--bg);box-shadow:none}
+input[readonly]{background:var(--surface)}
+.tabs{background:var(--surface)}
+.tab[aria-selected="true"]{background:var(--surface-2);color:var(--sun);box-shadow:inset 0 0 0 1px var(--gold-line)}
+.preset{background:var(--bg)}
+.sector .ico{background:var(--sun-soft);color:var(--sun)}
+.sector li::before{background:var(--sun)}
+.sector:hover,.who-link:hover{border-color:var(--sun)}
+.explain-grid .card .formula{background:var(--bg)}
+.next .card{background:linear-gradient(135deg,var(--sun-soft),var(--surface));border-color:var(--gold-line)}
+.future .card{background:var(--sun-soft);border-color:var(--gold-line)}
+.future .pill.warn{background:var(--sun)}
+.plano .pill.warn{color:var(--sun)}
+.plano.destaque{border-color:var(--sun)}
+.feat li::before{color:var(--sun)}
+details{background:var(--surface)}
+summary::after{color:var(--sun)}
+footer{background:var(--band)}
+.tip{background:var(--surface-2)}
+.btn-x:hover{border-color:var(--bad);color:var(--bad)}
+.crumbs{display:flex;gap:8px;align-items:center;font-size:.85rem;color:var(--muted);margin-bottom:14px}
+.crumbs a{color:var(--muted);text-decoration:none}
+.crumbs a:hover{color:var(--sun)}
+.crumbs span[aria-current]{color:var(--ink)}
+.sectors{padding-block:32px 96px}
+.faq{padding-block:96px}

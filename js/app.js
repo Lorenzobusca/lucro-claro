@@ -29,7 +29,9 @@ function aplicarTaxas(){
 const tabs=[...document.querySelectorAll('.tab')];
 function sel(t){tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;$(x.getAttribute('aria-controls')).hidden=!on});try{localStorage.setItem('lc-tab',t.id)}catch(e){}}
 tabs.forEach((t,i)=>{t.addEventListener('click',()=>sel(t));t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const j=(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;sel(tabs[j]);tabs[j].focus()}})});
-if(tabs.length){try{const s=localStorage.getItem('lc-tab');if(s&&$(s))sel($(s));else sel(tabs[0])}catch(e){sel(tabs[0])}}
+const porLink=()=>{const t=$('t-'+location.hash.slice(1));if(t&&tabs.includes(t)){sel(t);return true}return false};
+addEventListener('hashchange',porLink);
+if(tabs.length&&!porLink()){try{const s=localStorage.getItem('lc-tab');if(s&&$(s))sel($(s));else sel(tabs[0])}catch(e){sel(tabs[0])}}
 
 /* Simples / MEI */
 const anexos={
@@ -231,7 +233,7 @@ function desenhar(){
   const box=$('w-chart');if(!box||!serie.length)return;
   const W=Math.max(280,box.clientWidth),H=box.clientHeight||300,pl=66,pr=W<520?16:112,pt=14,pb=28;
   const maxY=Math.max(...serie.map(r=>Math.max(r.cart,r.poup,r.inv)))*1.06||1,n0=serie.length-1||1;
-  const step=[1,2,5].flatMap(m=>[1,10,100,1e3,1e4,1e5,1e6,1e7].map(e=>m*e)).find(s=>maxY/s<=4.5);
+  const step=[1,2,5].flatMap(m=>[1,10,100,1e3,1e4,1e5,1e6,1e7,1e8].map(e=>m*e)).sort((a,b)=>a-b).find(s=>maxY/s<=5);
   const X=i=>pl+(W-pl-pr)*i/n0,Y=v=>pt+(H-pt-pb)*(1-v/maxY);
   const path=k=>serie.map((r,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(r[k]).toFixed(1)}`).join('');
   let g='';for(let v=0;v<=maxY;v+=step)g+=`<line class="grid" x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}"/><text class="axis" x="${pl-8}" y="${Y(v)+4}" text-anchor="end">${v?fmtCurto(v):'R$ 0'}</text>`;
