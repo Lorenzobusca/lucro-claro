@@ -1,6 +1,7 @@
 /* TELA: MEI e Simples Nacional (impostos.html, aba "MEI e Simples").
    Lê os campos, chama js/calculo/simples.js e escreve o resultado. */
 import { $, ler, preencher, brl, pct, linhas, mostrarNumero } from '../ui/numero.js';
+import { mostrarLeitura } from '../ui/apoio.js';
 import { aoMudarTaxas, taxa } from '../ui/taxas.js';
 import { calcularMei, calcularSimples } from '../calculo/simples.js';
 
@@ -28,6 +29,19 @@ function atualizar() {
       ['Você já usou', pct(r.uso, 1)],
       ['Peso do DAS sobre o mês', pct(r.peso)],
     ]);
+    const usado = pct(r.uso, 0);
+    mostrarLeitura('s-leitura', r.situacao === 'dentro' ? {
+      tom: 'ok',
+      texto: `O MEI paga um valor fixo: quanto mais você vende, menos o imposto pesa. Você usou ${usado} do limite de ${brl(r.limite)} por ano.`,
+      passo: { texto: 'Descobrir quanto sobra de cada venda', href: 'custeio.html#margem' },
+    } : r.situacao === 'perto' ? {
+      tom: 'warn',
+      texto: `Você já usou ${usado} do limite anual do MEI. Se passar de ${brl(r.limite)}, o imposto muda. Vale simular o Simples Nacional aqui mesmo, trocando o regime no primeiro campo.`,
+    } : {
+      tom: 'bad',
+      texto: `Com esse faturamento você passa do limite do MEI (${brl(r.limite)} por ano). Troque o regime no primeiro campo para ver quanto pagaria no Simples Nacional.`,
+    });
+
     return;
   }
 
@@ -43,6 +57,15 @@ function atualizar() {
     ['Sua alíquota efetiva', pct(r.efetiva)],
     ['Estimativa no ano', brl(r.noAno)],
   ]);
+  mostrarLeitura('s-leitura', r.acima ? {
+    tom: 'bad',
+    texto: 'Com mais de R$ 4,8 milhões por ano a empresa sai do Simples Nacional. A conta acima deixa de valer: converse com um contador sobre Lucro Presumido ou Lucro Real.',
+  } : {
+    tom: 'ok',
+    texto: `De cada R$ 100 que você fatura, ${brl(r.efetiva)} vão para o imposto. Esse percentual precisa estar dentro do seu preço, junto com a taxa do cartão e as comissões.`,
+    passo: { texto: 'Colocar esse imposto no preço', href: 'custeio.html#preco' },
+  });
+
 }
 
 ['s-tipo', 's-mes', 's-12', 's-sm'].forEach(id => $(id).addEventListener('input', atualizar));

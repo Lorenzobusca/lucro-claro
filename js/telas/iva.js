@@ -1,5 +1,6 @@
 /* TELA: IBS e CBS no preço (impostos.html, aba "IBS/CBS no preço"). */
 import { $, ler, preencher, brl, pct, linhas, mostrarNumero } from '../ui/numero.js';
+import { mostrarLeitura } from '../ui/apoio.js';
 import { aoMudarTaxas, taxas } from '../ui/taxas.js';
 import { calcularIva } from '../calculo/iva.js';
 
@@ -26,6 +27,14 @@ function atualizar() {
     [`IBS (${pct((1 - r.fracaoCbs) * 100, 0)} do total)`, brl(r.ibs)],
     ['Preço final ao cliente', brl(r.precoFinal)],
   ].concat(r.saldo > 0 ? [['Crédito que sobra para o mês seguinte', brl(r.saldo)]] : []));
+  mostrarLeitura('v-leitura', {
+    tom: 'ok',
+    texto: r.saldo > 0
+      ? `O imposto das suas compras (${brl(r.credito)}) é maior que o das vendas (${brl(r.debito)}). Neste mês não há IBS nem CBS a pagar, e ${brl(r.saldo)} ficam de crédito para o mês seguinte.`
+      : `O imposto sobre as vendas é de ${brl(r.debito)}, mas você desconta ${brl(r.credito)} que já vieram nas compras com nota. Quanto mais das suas compras tiver nota fiscal, menos sobra para pagar.`,
+    passo: { texto: 'Rever o preço com esse imposto', href: 'custeio.html#preco' },
+  });
+
 }
 
 ['v-venda', 'v-compra', 'v-aliq', 'v-red'].forEach(id => $(id).addEventListener('input', atualizar));

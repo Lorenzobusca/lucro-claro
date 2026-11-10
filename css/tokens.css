@@ -89,3 +89,15 @@
 [data-theme="dark"][data-setor],
 [data-theme="dark"] [data-setor],
 .bloco-escuro{--acento:var(--setor-claro)}
+
+/* ---------- Identidade do nome "Lastrion" (conceito "base firme") ----------
+   Símbolo: um "L" de base larga dentro de um quadrado. Logotipo: o nome apoiado sobre uma barra.
+   A base e a barra usam a cor do setor da página; fora do site valem as cores abaixo. */
+:root{
+  --marca-fundo:#14151A;     /* quadrado do símbolo */
+  --marca-traco:#F1F2F4;     /* haste do "L" */
+  --marca-cor:#FFD23F;       /* base do "L" e barra do logotipo */
+  --marca-fonte:var(--f-display);
+  --marca-peso:800;
+}
+[data-theme="dark"]{--marca-fundo:#F1F2F4;--marca-traco:#14151A}

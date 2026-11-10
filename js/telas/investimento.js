@@ -1,5 +1,6 @@
 /* TELA: investimento × inflação (planejamento.html, aba "Investimento × inflação"). */
 import { $, ler, preencher, brl, pct, linhas, mostrarNumero } from '../ui/numero.js';
+import { mostrarLeitura } from '../ui/apoio.js';
 import { aoMudarTaxas, taxas, taxa, dataBR } from '../ui/taxas.js';
 import { taxaDoInvestimento, calcularInvestimento, trAoAno } from '../calculo/investimento.js';
 
@@ -36,6 +37,16 @@ function atualizar() {
     [`Daqui a ${meses} meses, em poder de compra`, brl(r.paradoHoje)],
     ['Perda por deixar parado', brl(r.perdaParado)],
   ]);
+  mostrarLeitura('i-leitura', r.ganhoReal >= 0 ? {
+    tom: 'ok',
+    texto: `Depois do imposto e da inflação, esse dinheiro vai comprar ${pct(r.ganhoReal, 1)} a mais no fim do prazo. Parado, ele perderia ${brl(r.perdaParado)} de poder de compra.`,
+    passo: { texto: 'Simular uma carteira com vários investimentos', href: '#carteira' },
+  } : {
+    tom: 'bad',
+    texto: `Mesmo rendendo, esse dinheiro vai comprar ${pct(-r.ganhoReal, 1)} a menos no fim do prazo: o rendimento fica abaixo da alta dos preços.`,
+    passo: { texto: 'Comparar com outros investimentos', href: '#carteira' },
+  });
+
 }
 
 ['i-v', 'i-m', 'i-pct', 'i-inf', 'i-tipo'].forEach(id => $(id).addEventListener('input', atualizar));

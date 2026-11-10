@@ -2,6 +2,7 @@
 import { $, pct, semMovimento } from './numero.js';
 import { aoMudarTaxas, taxasChegaram, dataBR } from './taxas.js';
 import './abas.js';
+import './glossario.js';
 
 /* ---------- Tema claro/escuro ---------- */
 const raiz = document.documentElement, botaoTema = $('tema');

@@ -39,7 +39,12 @@ abas.forEach((aba, i) => {
 
 const abrirPeloLink = () => {
   const aba = document.getElementById('t-' + location.hash.slice(1));
-  if (aba && abas.includes(aba)) { abrir(aba, false); return true; }
+  if (aba && abas.includes(aba)) {
+    abrir(aba, false);
+    /* leva a tela até a ferramenta (o cabeçalho da página é alto) */
+    requestAnimationFrame(() => document.querySelector('.tabs')?.scrollIntoView({ block: 'start' }));
+    return true;
+  }
   return false;
 };
 addEventListener('hashchange', abrirPeloLink);

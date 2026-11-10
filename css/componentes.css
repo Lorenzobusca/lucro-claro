@@ -227,3 +227,52 @@ details p{color:var(--muted);padding-bottom:var(--e5);max-width:65ch;animation:e
 .rodape .marca{font-size:1.5rem}
 .disclaimer{margin-top:var(--e6);padding-top:var(--e5);border-top:1px solid var(--line);font-size:var(--t-sm);max-width:90ch}
 @media (max-width:760px){.rodape-cols{grid-template-columns:1fr 1fr}.rodape-marca{grid-column:1/-1}}
+
+/* ---------- Identidade: símbolo e logotipo ---------- */
+.simbolo{width:38px;height:38px;flex:none;display:block;transition:transform var(--medio) var(--mola)}
+.simbolo-fundo{fill:var(--marca-fundo)}
+.simbolo-haste{fill:var(--marca-traco)}
+.simbolo-base{fill:var(--setor,var(--marca-cor))}
+.marca:hover .simbolo{transform:rotate(-8deg) scale(1.08)}
+.logo{display:block;width:100%;height:auto;overflow:visible}
+.logo text{font-family:var(--marca-fonte);font-weight:var(--marca-peso);font-size:112px;fill:var(--ink)}
+.logo rect{fill:var(--setor,var(--marca-cor))}
+.tagline{font-family:var(--f-display);font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.rodape-logo{margin-top:var(--e6)}
+.rodape .simbolo{width:44px;height:44px}
+
+/* ---------- Glossário ---------- */
+.glossario-btn{flex:none;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:var(--r-pill);border:1px solid var(--line);background:var(--surface);color:var(--ink);font:700 var(--t-sm) var(--f-body);cursor:pointer;transition:border-color var(--rapido),transform var(--rapido)}
+.glossario-btn:hover{border-color:var(--ink);transform:translateY(-1px)}
+.glossario-btn svg{width:18px;height:18px}
+@media (max-width:1120px){.glossario-btn{width:40px;padding:0;justify-content:center}.glossario-btn span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}}
+@media (max-width:860px){.glossario-btn{margin-left:auto}.glossario-btn+.tema{margin-left:0}}
+.glossario{border:1px solid var(--line);border-radius:var(--r3);background:var(--surface);color:var(--ink);padding:var(--e6);width:min(560px,calc(100vw - 32px));max-height:min(82vh,720px);overflow:auto;box-shadow:var(--sombra-2)}
+.glossario::backdrop{background:rgba(14,15,19,.6)}
+.glossario-topo{display:flex;align-items:center;justify-content:space-between;gap:var(--e4)}
+.glossario .hint{margin-bottom:var(--e4)}
+.glossario dl{margin:var(--e4) 0 0}
+.glossario dl div{padding:var(--e4) 0;border-bottom:1px solid var(--line)}
+.glossario dl div:last-child{border-bottom:none}
+.glossario dt{font-weight:800}
+.glossario dd{margin:4px 0 0;color:var(--muted);font-size:.95rem}
+.vazio{color:var(--muted);padding:var(--e4) 0}
+@media (max-width:560px){.glossario{padding:var(--e5)}}
+
+/* ---------- Apoio às ferramentas: exemplo, dica e leitura do resultado ---------- */
+.exemplo-faixa{margin-bottom:var(--e5);padding:var(--e3) var(--e4);border-radius:var(--r2);border:1.5px dashed var(--acento);font-size:var(--t-sm);color:var(--ink)}
+.dica{margin-top:var(--e5);padding:var(--e4) var(--e5);border-radius:var(--r2);background:color-mix(in srgb,var(--setor) 14%,var(--surface));font-size:.94rem;color:var(--ink)}
+.dica b{display:block;margin-bottom:4px;font-family:var(--f-num);font-size:var(--t-xs);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acento)}
+.leitura{margin-top:var(--e5);padding:var(--e4) var(--e5);border-radius:var(--r2);background:var(--surface-2);border-left:5px solid var(--ok)}
+.leitura:empty{display:none}
+.leitura[data-tom="warn"]{border-left-color:var(--warn)}
+.leitura[data-tom="bad"]{border-left-color:var(--bad)}
+.leitura-rotulo{display:block;margin-bottom:6px;font-family:var(--f-num);font-size:var(--t-xs);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.leitura p{font-size:.97rem;line-height:1.55}
+.leitura-passo{display:inline-flex;align-items:center;gap:8px;margin-top:var(--e3);font-weight:800;font-size:.95rem;color:var(--acento);text-decoration:none}
+.leitura-passo:hover{text-decoration:underline}
+.leitura-passo svg{width:17px;height:17px;flex:none;transition:transform var(--medio) var(--mola)}
+.leitura-passo:hover svg{transform:translateX(4px)}
+select:disabled,input:disabled{opacity:.4;cursor:not-allowed}
+td input[type="text"],td input.texto{width:170px;font-family:var(--f-body)}
+td select{width:130px;padding-block:8px;font-size:.9rem}

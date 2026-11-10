@@ -1,5 +1,6 @@
 /* TELA: simulador de carteira (planejamento.html, aba "Simulador de carteira"). */
 import { $, ler, preencher, brl, pct, linhas, mostrarNumero } from '../ui/numero.js';
+import { mostrarLeitura } from '../ui/apoio.js';
 import { aoMudarTaxas, taxas, taxa } from '../ui/taxas.js';
 import { desenharLinhas } from '../ui/grafico.js';
 import { rendimentoPoupanca } from '../calculo/investimento.js';
@@ -59,6 +60,18 @@ function atualizar() {
     ['Rendimento médio da carteira', pct(r.taxaMedia) + ' ao ano'],
     ['Se deixasse tudo na poupança', brl(p.liquido)],
   ]);
+  mostrarLeitura('w-leitura', !r.somaOk ? {
+    tom: 'warn',
+    texto: `Os percentuais somam ${pct(r.soma, 0)}. Ajuste a coluna "% da carteira" até dar 100% para a conta valer.`,
+  } : c.liquido > p.liquido ? {
+    tom: 'ok',
+    texto: `Em ${r.anos} ${r.anos === 1 ? 'ano' : 'anos'}, o que você guardar vira ${brl(c.liquido)}, o que hoje equivale a ${brl(c.liquido / r.fator)}. São ${brl(c.liquido - p.liquido)} a mais do que deixando tudo na poupança.`,
+    passo: { texto: 'Separar sua retirada mensal das contas da empresa', href: 'metas.html#caixa' },
+  } : {
+    tom: 'bad',
+    texto: 'Com essas taxas, a carteira rende menos do que a poupança. Reveja a divisão ou os rendimentos que você supôs para ações e fundos.',
+  });
+
 
   serie = r.serie;
   $('w-tab').innerHTML = '<thead><tr><th>Ano</th><th>Guardado</th><th>Sua carteira</th><th>Poupança</th><th>Carteira em dinheiro de hoje</th></tr></thead><tbody>' +

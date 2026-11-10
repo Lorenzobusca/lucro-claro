@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Lastrion</title>
+  <rect width="64" height="64" rx="16" fill="#14151A"/>
+  <rect x="17" y="13" width="12" height="27" fill="#F1F2F4"/>
+  <rect x="17" y="38" width="31" height="13" rx="2" fill="#FFD23F"/>
+</svg>
