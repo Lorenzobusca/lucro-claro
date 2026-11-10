@@ -59,7 +59,7 @@ function desenhar(){
   const cont=c=>sit.filter(x=>x.s.cl===c).length;
   $('g-placar').innerHTML=D.metas.length?`<div><b>${cont('ok')}</b><span>no caminho certo</span></div><div><b>${cont('warn')}</b><span>pedem atenção</span></div><div><b>${cont('bad')}</b><span>com problema</span></div>`:'';
   $('g-lista').innerHTML=sit.length?sit.map(({m,s})=>{
-    const larg=Math.min(100,s.p*100), marca=Math.min(100,s.r*100), cor=s.cl==='bad'?'#FF9B86':s.cl==='warn'?'#F7C766':'';
+    const larg=Math.min(100,s.p*100), marca=Math.min(100,s.r*100), cor=s.cl==='bad'?'var(--bad)':s.cl==='warn'?'var(--sun)':'';
     const proj=s.proj!=null&&s.real>0?`<span>Nesse ritmo, fecha o mês em <b>${fmt(s.proj,m.un)}</b></span>`:'';
     return `<article class="meta" data-id="${m.id}">
       <div class="meta-head"><h3>${esc(m.nome)}</h3><span class="pill ${s.cl}">${s.st}</span></div>

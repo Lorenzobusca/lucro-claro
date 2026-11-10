@@ -8,7 +8,7 @@
 <meta name="description" content="Calculadoras gratuitas de impostos da reforma tributária, custeio e planejamento financeiro para MEIs, pequenas empresas e pessoas físicas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@600&display=swap">
 <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
@@ -17,13 +17,12 @@
   <div class="wrap">
     <a class="logo" href="index.html"><i>R$</i>Lucro Claro</a>
     <nav class="menu" id="menu" aria-label="Principal">
-      <a href="index.html" aria-current="page">Início</a>
-      <a href="impostos.html">Impostos</a>
-      <a href="custeio.html">Custeio</a>
-      <a href="metas.html">Metas</a>
-      <a href="planejamento.html">Planejamento</a>
+      <a href="index.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>Início</a>
+      <a href="impostos.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg>Impostos</a>
+      <a href="custeio.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13"/></svg>Custeio</a>
+      <a href="metas.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg>Metas</a>
+      <a href="planejamento.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>Planejamento</a>
     </nav>
-    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
   </div>
 </header>
 
@@ -50,28 +49,22 @@
       <div class="chip cbs" id="chipCbs">CBS<b>8,8%</b></div>
       <div class="chip ibs" id="chipIbs">IBS<b>17,7%</b></div>
       <div class="chip old" id="chipOld">PIS · Cofins · ICMS · ISS · IPI</div>
+      <span class="lapis">saem de cena até 2033</span>
     </div>
-  </div>
-</section>
-<section class="who">
-  <div class="wrap grid">
-    <a class="card reveal who-link" href="impostos.html"><span class="tag">MEI</span><h3 style="margin-top:6px">Quanto é meu DAS?</h3><p>Valor fixo do mês e alerta para quando você estiver perto do limite de faturamento.</p></a>
-    <a class="card reveal who-link" href="custeio.html"><span class="tag">Pequena empresa</span><h3 style="margin-top:6px">Qual produto dá lucro?</h3><p>Custeio por absorção e ABC lado a lado, margem de contribuição e ponto de equilíbrio.</p></a>
-    <a class="card reveal who-link" href="planejamento.html"><span class="tag">Pessoa física</span><h3 style="margin-top:6px">Estou perdendo para a inflação?</h3><p>Compare poupança, CDB e LCI descontando imposto e inflação.</p></a>
   </div>
 </section>
 
 <section class="sectors" id="setores">
   <div class="wrap">
-    <div class="sec-head"><p class="eyebrow">Setores do site</p><h2>Escolha o que você quer calcular</h2><p class="lead">O site é dividido em quatro setores. Cada um tem calculadoras com exemplos já preenchidos e uma explicação simples de como a conta funciona.</p></div>
+    <div class="sec-head"><p class="eyebrow">Quatro setores</p><h2>O que você quer calcular?</h2><p class="lead">Cada setor tem calculadoras com exemplos já preenchidos e uma explicação simples de como a conta funciona.</p><span class="lapis" aria-hidden="true">comece pelo que mais dói ↓</span></div>
     <div class="sector-grid">
-      <a class="card sector reveal" href="impostos.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4M10 16h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tag">Setor 1</span><h3>Impostos</h3><p>Descubra quanto sua empresa paga hoje e quanto vai pagar com a reforma.</p>
+      <a class="card sector reveal" href="impostos.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4M10 16h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tag">Setor 1 · MEI e empresas</span><h3>Impostos</h3><p>Descubra quanto sua empresa paga hoje e quanto vai pagar com a reforma.</p>
         <ul><li>DAS do MEI e limite de faturamento</li><li>Alíquota efetiva do Simples Nacional</li><li>IBS e CBS no preço, de 2026 a 2033</li></ul><span class="more">Calcular impostos →</span></a>
-      <a class="card sector reveal" href="custeio.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span class="tag">Setor 2</span><h3>Custeio</h3><p>Veja quanto custa de verdade cada produto ou serviço e qual deles dá lucro.</p>
+      <a class="card sector reveal" href="custeio.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span class="tag">Setor 2 · Quem produz</span><h3>Custeio</h3><p>Veja quanto custa de verdade cada produto ou serviço e qual deles dá lucro.</p>
         <ul><li>Custeio por absorção</li><li>Custeio ABC, por atividade</li><li>Margem de contribuição e ponto de equilíbrio</li></ul><span class="more">Calcular custos →</span></a>
-      <a class="card sector reveal" href="metas.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span><span class="tag">Setor 3</span><h3>Orçamento e metas</h3><p>Defina as metas do mês e acompanhe se a empresa está no ritmo para atingi-las.</p>
+      <a class="card sector reveal" href="metas.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span><span class="tag">Setor 3 · Quem tem equipe</span><h3>Orçamento e metas</h3><p>Defina as metas do mês e acompanhe se a empresa está no ritmo para atingi-las.</p>
         <ul><li>Metas de vendas, produção e custos</li><li>Orçado × realizado, com projeção do mês</li><li>Aviso de meta atrasada ou estourada</li></ul><span class="more">Acompanhar metas →</span></a>
-      <a class="card sector reveal" href="planejamento.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tag">Setor 4</span><h3>Planejamento financeiro</h3><p>Para pessoa física: proteja seu dinheiro da inflação e compare investimentos.</p>
+      <a class="card sector reveal" href="planejamento.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tag">Setor 4 · Para você</span><h3>Planejamento financeiro</h3><p>Para pessoa física: proteja seu dinheiro da inflação e compare investimentos.</p>
         <ul><li>Simulador de carteira: quanto seu dinheiro vai valer em X anos</li><li>Poupança, CDB, LCI, Tesouro, FIIs e ações</li><li>Ganho real, já sem imposto e inflação</li></ul><span class="more">Planejar →</span></a>
     </div>
   </div>

@@ -79,7 +79,7 @@ function custeio(){
   const H=P.reduce((a,x)=>a+x.q*x.h,0),S=P.reduce((a,x)=>a+x.s,0),I=P.reduce((a,x)=>a+x.i,0);
   const names=['Mesa padrão','Mesa sob medida'];
   const res=P.map(x=>{const abs=x.d+(H?cif*x.h/H:0);const abc=x.d+(x.q?((S?cs*x.s/S:0)+(I?ci*x.i/I:0)+(H?cm*x.q*x.h/H:0))/x.q:0);return{abs,abc,la:x.p-abs,lb:x.p-abc}});
-  const cell=v=>`<span style="color:${v<0?'#FF9B86':'inherit'}">${brl(v)}</span>`;
+  const cell=v=>`<span style="color:${v<0?'var(--bad)':'inherit'}">${brl(v)}</span>`;
   $('c-out').innerHTML=`<thead><tr><th>Produto</th><th>Custo absorção</th><th>Lucro absorção</th><th>Custo ABC</th><th>Lucro ABC</th></tr></thead><tbody>`+
     res.map((r,j)=>`<tr><td>${names[j]}</td><td>${brl(r.abs)}</td><td>${cell(r.la)}</td><td>${brl(r.abc)}</td><td>${cell(r.lb)}</td></tr>`).join('')+
     `<tr><td><b>Total no mês</b></td><td></td><td>${cell(res.reduce((a,r,j)=>a+r.la*P[j].q,0))}</td><td></td><td>${cell(res.reduce((a,r,j)=>a+r.lb*P[j].q,0))}</td></tr></tbody>`;
@@ -94,7 +94,7 @@ function custeio(){
 function margem(){
   const p=n('m-preco'),cv=n('m-cv'),dv=n('m-dv'),cf=n('m-cf'),q=n('m-q');
   const mc=p-cv-p*dv/100, mcp=p?mc/p*100:NaN, pe=mc>0?cf/mc:Infinity, lucro=mc*q-cf;
-  $('m-big').textContent=brl(lucro); $('m-big').style.color=lucro<0?'#FF9B86':'';
+  $('m-big').textContent=brl(lucro); $('m-big').style.color=lucro<0?'var(--bad)':'';
   $('m-pill').innerHTML=mc<=0?`<span class="pill bad">Cada venda dá prejuízo</span>`:lucro>=0?`<span class="pill ok">Acima do ponto de equilíbrio</span>`:`<span class="pill warn">Abaixo do ponto de equilíbrio</span>`;
   const max=Math.max(q,isFinite(pe)?pe:0)*1.15||1;
   $('m-bar').style.width=Math.min(100,q/max*100)+'%'; $('m-mark').style.left=isFinite(pe)?Math.min(99,pe/max*100)+'%':'99%';
@@ -115,7 +115,7 @@ function invest(){
   const bruto=v*Math.pow(1+t/100,m/12), rend=bruto-v, d=m*30;
   const ir=tipo==='cdb'?(d<=180?22.5:d<=360?20:d<=720?17.5:15):0;
   const liq=v+rend*(1-ir/100), fator=Math.pow(1+inf/100,m/12), real=(liq/fator/v-1)*100;
-  $('i-big').textContent=pct(real); $('i-big').style.color=real<0?'#FF9B86':'';
+  $('i-big').textContent=pct(real); $('i-big').style.color=real<0?'var(--bad)':'';
   $('i-pill').innerHTML=real>=0?`<span class="pill ok">Vence a inflação</span>`:`<span class="pill bad">Perde para a inflação</span>`;
   $('i-kv').innerHTML=kv([['Valor bruto no fim',brl(bruto)],['Imposto de renda'+(ir?` (${pct(ir,1)})`:''),brl(rend*ir/100)],['Valor líquido',brl(liq)],['Valor líquido em dinheiro de hoje',brl(liq/fator)]]);
   $('i-v2').textContent=v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -157,10 +157,6 @@ if(!reduce&&'IntersectionObserver'in window){
   document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('pre');io.observe(el)}});
 }
 
-/* Menu no celular */
-const burger=$('burger'),menu=$('menu');
-if(burger)burger.addEventListener('click',()=>{const o=!menu.classList.contains('open');menu.classList.toggle('open',o);burger.setAttribute('aria-expanded',o);burger.textContent=o?'Fechar':'Menu'});
-menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.textContent='Menu'}));
 
 /* QR code e código de barras decorativos da nota de exemplo */
 let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
