@@ -6,9 +6,13 @@
 .hero-grade{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--e7);align-items:center}
 .hero-grade>div{min-width:0}
 .hero h1{font-size:clamp(2rem,5.4vw,3.6rem);margin-top:var(--e4);line-height:1.08}
-.hero h1 em{font-style:normal;display:inline-block;background:var(--setor);color:var(--setor-ink);padding:.02em .22em .08em;border-radius:.22em;transform:rotate(-1.5deg);animation:marca .8s var(--curva) .25s both}
-@keyframes marca{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.hero h1 em{font-style:normal;display:inline-block;background:linear-gradient(var(--setor),var(--setor)) no-repeat left/100% 100%;color:var(--setor-ink);padding:.02em .22em .08em;border-radius:.22em;transform:rotate(-1.5deg);animation:marca .8s var(--curva) .25s both}
+/* O texto nunca some: começa na cor normal e o marca-texto corre por baixo dele */
+@keyframes marca{from{background-size:0% 100%;color:var(--ink)}to{background-size:100% 100%;color:var(--setor-ink)}}
 .hero .lead{margin-top:var(--e5)}
+/* Nome do site logo acima do título */
+.hero-selo{display:flex;align-items:center;gap:var(--e3);flex-wrap:wrap}
+.hero-selo b{font-family:var(--f-display);font-weight:800;font-size:1.05rem;letter-spacing:-.02em;text-transform:none;background:var(--ink);color:var(--bg);padding:7px 16px 8px;border-radius:var(--r-pill)}
 .cta{display:flex;gap:var(--e3);flex-wrap:wrap;margin-top:var(--e6)}
 
 .stage{position:relative;height:420px;min-width:0}
@@ -143,6 +147,8 @@
 .placar div:nth-child(2) b{color:var(--warn)}
 .placar div:nth-child(3) b{color:var(--bad)}
 .placar span{font-size:var(--t-xs);color:var(--muted);margin-top:4px}
+/* No celular os três números ficam lado a lado, em vez de quebrar em duas linhas */
+@media (max-width:560px){.placar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--e4);width:100%}}
 .aviso{margin-top:var(--e4);padding:10px 14px;border-radius:var(--r1);background:color-mix(in srgb,var(--warn) 14%,transparent);font-size:.9rem}
 .metas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:var(--e4);margin-top:var(--e5)}
 .meta{border:1px solid var(--line);border-radius:var(--r2);padding:var(--e5);background:var(--bg);min-width:0;animation:entra var(--medio) var(--curva) both}

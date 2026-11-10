@@ -4,7 +4,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 
 const ARQUIVO = new URL("../data/taxas.json", import.meta.url);
-const HEADERS = { "Accept": "application/json", "User-Agent": "lucro-claro-taxas/1.0" };
+const HEADERS = { "Accept": "application/json", "User-Agent": "lastrion-taxas/1.0" };
 
 async function getJson(url, tentativas = 3) {
   for (let i = 1; i <= tentativas; i++) {

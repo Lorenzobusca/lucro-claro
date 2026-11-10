@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Impostos · Lucro Claro</title>
+<title>Impostos · Lastrion</title>
 <meta name="description" content="Calcule o DAS do MEI, a alíquota do Simples Nacional e o IBS/CBS da reforma tributária.">
 <!-- Aplica o tema (claro ou escuro) antes de a página aparecer, para não piscar -->
 <script>(function(){var t;try{t=localStorage.getItem('lc-tema')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})()</script>
@@ -21,7 +21,7 @@
 <!-- TOPO (igual em todas as páginas) -->
 <header class="topo">
   <div class="topo-barra">
-    <a class="marca" href="index.html"><span class="marca-simbolo" aria-hidden="true">R$</span>Lucro Claro</a>
+    <a class="marca" href="index.html"><span class="marca-simbolo" aria-hidden="true">L</span><span class="marca-nome">Lastrion</span></a>
     <nav class="nav" aria-label="Principal">
       <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span>Início</span></a>
       <a href="impostos.html" aria-current="page"><i class="nav-ind" aria-hidden="true"></i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg><span>Impostos</span></a>
@@ -137,11 +137,11 @@
 </main>
 
 <!-- RODAPÉ (igual em todas as páginas) -->
-<footer class="rodape">
+<footer class="rodape" id="rodape">
   <div class="wrap">
     <div class="rodape-cols">
       <div class="rodape-marca">
-        <a class="marca" href="index.html"><span class="marca-simbolo" aria-hidden="true">R$</span>Lucro Claro</a>
+        <a class="marca" href="index.html"><span class="marca-simbolo" aria-hidden="true">L</span><span class="marca-nome">Lastrion</span></a>
         <p>Calculadoras gratuitas de imposto, custo e investimento para quem não tem contador.</p>
       </div>
       <div><h4>Para a empresa</h4><a href="impostos.html">MEI e Simples</a><a href="impostos.html#iva">IBS/CBS no preço</a><a href="custeio.html">Absorção × ABC</a><a href="custeio.html#margem">Margem e equilíbrio</a><a href="metas.html">Orçamento e metas</a></div>
@@ -149,6 +149,7 @@
       <div><h4>Aprenda</h4><a href="index.html#reforma">Reforma tributária</a><a href="index.html#duvidas">Dúvidas</a><a href="index.html#conteudo">Vídeos</a></div>
     </div>
     <p class="disclaimer">As calculadoras são simulações educativas e não substituem a orientação de um contador ou consultor. Valores e regras podem mudar; confira sempre nas fontes oficiais (Receita Federal, Portal do Simples Nacional, Banco Central).</p>
+    <p class="rodape-nome" aria-hidden="true">Lastrion</p>
   </div>
 </footer>
 

@@ -1,4 +1,4 @@
-# Lucro Claro
+# Lastrion
 
 Cofre do projeto. Estas notas ficam no mesmo repositório do site, então o Claude também consegue ler e editar.
 

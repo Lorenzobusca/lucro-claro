@@ -1,17 +1,23 @@
 # Tarefas
 
-## Agora
+## Feito
 - [x] Criar o repositório `lucro-claro` no GitHub
-- [ ] Rodar "Atualizar taxas" pela primeira vez (aba Actions)
-- [x] Abrir o projeto no Obsidian
-- [ ] Testar a sincronização: se você está lendo esta linha, funcionou
+- [x] Rodar "Atualizar taxas" pela primeira vez (as taxas do Banco Central já chegam sozinhas)
+- [x] Abrir o projeto no Obsidian e testar a sincronização
+- [x] Novo visual, mantendo as animações
+- [x] Escolher o nome: Lastrion
+
+## Agora
+- [ ] Conferir se "Lastrion" está livre no INPI (busca.inpi.gov.br)
+- [ ] Registrar o domínio `lastrion.com.br` no registro.br
+- [ ] Garantir o @lastrion no Instagram
+- [ ] Colocar o site no ar pelo Vercel
 
 ## Próximo
-- [ ] Ativar o GitHub Pages para colocar o site no ar (Settings → Pages → branch `main`)
-- [ ] Novo visual, mais realista, mantendo as animações
-- [ ] Escolher o nome definitivo e registrar o domínio `.com.br`
 - [ ] Pedir para um contador revisar as calculadoras
-- [ ] Criar o perfil no Instagram
+- [ ] Conversar com 5 a 10 donos de pequenas fábricas sobre custos e metas
+- [ ] Publicar os primeiros vídeos no Instagram
 
 ## Futuro
+- [ ] Versão paga "Fábrica ao vivo" (equipe lança pelo celular)
 - [ ] Fundo de investimentos (exige gestora autorizada pela CVM)
