@@ -1,40 +1,52 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-setor="inicio">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lucro Claro</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Calculadoras gratuitas de impostos da reforma tributária, custeio e planejamento financeiro para MEIs, pequenas empresas e pessoas físicas.">
+<!-- Aplica o tema (claro ou escuro) antes de a página aparecer, para não piscar -->
+<script>(function(){var t;try{t=localStorage.getItem('lc-tema')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@600&display=swap">
-<link rel="stylesheet" href="css/estilo.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/componentes.css">
+<link rel="stylesheet" href="css/paginas.css">
 </head>
 <body>
+<a class="pular" href="#principal">Pular para o conteúdo</a>
 
-<header class="top">
-  <div class="wrap">
-    <a class="logo" href="index.html"><i>R$</i>Lucro Claro</a>
-    <nav class="menu" id="menu" aria-label="Principal">
-      <a href="index.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>Início</a>
-      <a href="impostos.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg>Impostos</a>
-      <a href="custeio.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13"/></svg>Custeio</a>
-      <a href="metas.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg>Metas</a>
-      <a href="planejamento.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>Planejamento</a>
+<!-- TOPO (igual em todas as páginas) -->
+<header class="topo">
+  <div class="topo-barra">
+    <a class="marca" href="index.html"><span class="marca-simbolo" aria-hidden="true">R$</span>Lucro Claro</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html" aria-current="page"><i class="nav-ind" aria-hidden="true"></i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span>Início</span></a>
+      <a href="impostos.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg><span>Impostos</span></a>
+      <a href="custeio.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13"/></svg><span>Custeio</span></a>
+      <a href="metas.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg><span>Metas</span></a>
+      <a href="planejamento.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg><span>Planejamento</span></a>
     </nav>
+    <button class="tema" id="tema" type="button" aria-label="Mudar para o tema escuro">
+      <svg class="sol" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg>
+      <svg class="lua" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    </button>
   </div>
 </header>
 
-<main id="inicio">
+<main id="principal">
+
+<!-- APRESENTAÇÃO -->
 <section class="hero">
-  <div class="wrap">
+  <div class="wrap hero-grade">
     <div>
       <p class="eyebrow">Para MEIs, pequenas empresas e você</p>
-      <h1 style="margin-top:14px">Imposto e custo <em>sem mistério</em>.</h1>
+      <h1>Imposto e custo <em>sem mistério</em>.</h1>
       <p class="lead">Calcule quanto sua empresa paga com a reforma tributária, descubra quanto custa de verdade cada produto ou serviço e veja se o seu dinheiro está vencendo a inflação. De graça e sem precisar entender de contabilidade.</p>
       <div class="cta">
-        <a class="btn primary" href="#setores">Ver as calculadoras</a>
+        <a class="btn primary" href="#setores">Ver as calculadoras<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="btn" href="#reforma">Entender a reforma</a>
       </div>
     </div>
@@ -49,37 +61,59 @@
       <div class="chip cbs" id="chipCbs">CBS<b>8,8%</b></div>
       <div class="chip ibs" id="chipIbs">IBS<b>17,7%</b></div>
       <div class="chip old" id="chipOld">PIS · Cofins · ICMS · ISS · IPI</div>
-      <span class="lapis">saem de cena até 2033</span>
     </div>
   </div>
 </section>
 
-<section class="sectors" id="setores">
+<!-- TAXAS DE HOJE (faixa que corre) -->
+<div class="ticker" aria-label="Taxas de hoje, do Banco Central">
+  <div class="ticker-faixa"><div class="ticker-grupo"><span class="ticker-item">Selic <b data-rate="selic">—</b></span><span class="ticker-item">CDI <b data-rate="cdi">—</b></span><span class="ticker-item">IPCA 12 meses <b data-rate="ipca_12m">—</b></span><span class="ticker-item">IPCA esperado <b data-rate="ipca_focus_12m">—</b></span><span class="ticker-item">TR do mês <b data-rate="tr">—</b></span></div><div class="ticker-grupo" aria-hidden="true"><span class="ticker-item">Selic <b data-rate="selic">—</b></span><span class="ticker-item">CDI <b data-rate="cdi">—</b></span><span class="ticker-item">IPCA 12 meses <b data-rate="ipca_12m">—</b></span><span class="ticker-item">IPCA esperado <b data-rate="ipca_focus_12m">—</b></span><span class="ticker-item">TR do mês <b data-rate="tr">—</b></span></div><div class="ticker-grupo" aria-hidden="true"><span class="ticker-item">Selic <b data-rate="selic">—</b></span><span class="ticker-item">CDI <b data-rate="cdi">—</b></span><span class="ticker-item">IPCA 12 meses <b data-rate="ipca_12m">—</b></span><span class="ticker-item">IPCA esperado <b data-rate="ipca_focus_12m">—</b></span><span class="ticker-item">TR do mês <b data-rate="tr">—</b></span></div><div class="ticker-grupo" aria-hidden="true"><span class="ticker-item">Selic <b data-rate="selic">—</b></span><span class="ticker-item">CDI <b data-rate="cdi">—</b></span><span class="ticker-item">IPCA 12 meses <b data-rate="ipca_12m">—</b></span><span class="ticker-item">IPCA esperado <b data-rate="ipca_focus_12m">—</b></span><span class="ticker-item">TR do mês <b data-rate="tr">—</b></span></div></div>
+</div>
+
+<!-- SETORES -->
+<section class="secao" id="setores">
   <div class="wrap">
-    <div class="sec-head"><p class="eyebrow">Quatro setores</p><h2>O que você quer calcular?</h2><p class="lead">Cada setor tem calculadoras com exemplos já preenchidos e uma explicação simples de como a conta funciona.</p><span class="lapis" aria-hidden="true">comece pelo que mais dói ↓</span></div>
-    <div class="sector-grid">
-      <a class="card sector reveal" href="impostos.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4M10 16h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tag">Setor 1 · MEI e empresas</span><h3>Impostos</h3><p>Descubra quanto sua empresa paga hoje e quanto vai pagar com a reforma.</p>
-        <ul><li>DAS do MEI e limite de faturamento</li><li>Alíquota efetiva do Simples Nacional</li><li>IBS e CBS no preço, de 2026 a 2033</li></ul><span class="more">Calcular impostos →</span></a>
-      <a class="card sector reveal" href="custeio.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span class="tag">Setor 2 · Quem produz</span><h3>Custeio</h3><p>Veja quanto custa de verdade cada produto ou serviço e qual deles dá lucro.</p>
-        <ul><li>Custeio por absorção</li><li>Custeio ABC, por atividade</li><li>Margem de contribuição e ponto de equilíbrio</li></ul><span class="more">Calcular custos →</span></a>
-      <a class="card sector reveal" href="metas.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span><span class="tag">Setor 3 · Quem tem equipe</span><h3>Orçamento e metas</h3><p>Defina as metas do mês e acompanhe se a empresa está no ritmo para atingi-las.</p>
-        <ul><li>Metas de vendas, produção e custos</li><li>Orçado × realizado, com projeção do mês</li><li>Aviso de meta atrasada ou estourada</li></ul><span class="more">Acompanhar metas →</span></a>
-      <a class="card sector reveal" href="planejamento.html"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tag">Setor 4 · Para você</span><h3>Planejamento financeiro</h3><p>Para pessoa física: proteja seu dinheiro da inflação e compare investimentos.</p>
-        <ul><li>Simulador de carteira: quanto seu dinheiro vai valer em X anos</li><li>Poupança, CDB, LCI, Tesouro, FIIs e ações</li><li>Ganho real, já sem imposto e inflação</li></ul><span class="more">Planejar →</span></a>
+    <div class="sec-head"><p class="eyebrow">Quatro setores</p><h2>O que você quer calcular?</h2><p class="lead">Cada setor tem calculadoras com exemplos já preenchidos e uma explicação simples de como a conta funciona.</p></div>
+    <div class="bento">
+      <a class="setor-card revelar" data-setor="impostos" href="impostos.html">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg></span>
+        <span class="tag">Setor 1 · MEI e empresas</span><h3>Impostos</h3><p>Descubra quanto sua empresa paga hoje e quanto vai pagar com a reforma.</p>
+        <ul><li>DAS do MEI e limite de faturamento</li><li>Alíquota efetiva do Simples Nacional</li><li>IBS e CBS no preço, de 2026 a 2033</li></ul>
+        <span class="more">Calcular impostos<i><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
+      </a>
+      <a class="setor-card revelar" data-setor="custeio" href="custeio.html">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13"/></svg></span>
+        <span class="tag">Setor 2 · Quem produz</span><h3>Custeio</h3><p>Veja quanto custa de verdade cada produto ou serviço e qual deles dá lucro.</p>
+        <ul><li>Custeio por absorção</li><li>Custeio ABC, por atividade</li><li>Margem de contribuição e ponto de equilíbrio</li></ul>
+        <span class="more">Calcular custos<i><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
+      </a>
+      <a class="setor-card revelar" data-setor="metas" href="metas.html">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg></span>
+        <span class="tag">Setor 3 · Quem tem equipe</span><h3>Orçamento e metas</h3><p>Defina as metas do mês e acompanhe se a empresa está no ritmo para atingi-las.</p>
+        <ul><li>Metas de vendas, produção e custos</li><li>Orçado × realizado, com projeção do mês</li><li>Aviso de meta atrasada ou estourada</li></ul>
+        <span class="more">Acompanhar metas<i><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
+      </a>
+      <a class="setor-card revelar" data-setor="planejamento" href="planejamento.html">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span>
+        <span class="tag">Setor 4 · Para você</span><h3>Planejamento financeiro</h3><p>Para pessoa física: proteja seu dinheiro da inflação e compare investimentos.</p>
+        <ul><li>Simulador de carteira: quanto seu dinheiro vai valer em X anos</li><li>Poupança, CDB, LCI, Tesouro, FIIs e ações</li><li>Ganho real, já sem imposto e inflação</li></ul>
+        <span class="more">Planejar<i><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
+      </a>
     </div>
   </div>
 </section>
 
-<section class="band reform" id="reforma">
+<!-- REFORMA TRIBUTÁRIA (linha do tempo) -->
+<section class="secao" id="reforma">
   <div class="wrap">
-    <div class="head">
+    <div class="reforma-head">
       <div><p class="eyebrow">Reforma tributária do consumo</p><h2>Cinco impostos viram dois, aos poucos, até 2033.</h2></div>
       <p class="lead">PIS, Cofins, IPI, ICMS e ISS dão lugar à CBS (federal) e ao IBS (estados e municípios). O imposto vem destacado na nota, e quem compra de empresa pode descontar o que já foi pago antes.</p>
     </div>
     <div class="tl" id="tl">
       <div class="fill" id="tlFill"></div>
       <div class="step"><div class="yr">2026</div><div class="step-body"><h3>Ano de teste</h3><p>CBS de 0,9% e IBS de 0,1% aparecem na nota, mas podem ser compensados com PIS/Cofins. Serve para empresas e sistemas se adaptarem. MEI e Simples Nacional ficam de fora do teste.</p>
-        <div class="bar"><span class="c-old" style="width:99%"></span><span class="c-cbs" style="width:.9%"></span><span class="c-ibs" style="width:.1%"></span></div></div></div>
+        <div class="bar"><span class="c-old" style="width:99%"></span><span class="c-cbs" style="width:0.9%"></span><span class="c-ibs" style="width:0.1%"></span></div></div></div>
       <div class="step"><div class="yr">2027</div><div class="step-body"><h3>CBS para valer</h3><p>PIS e Cofins acabam e a CBS entra com alíquota cheia. O IPI é zerado (exceto Zona Franca) e começa o Imposto Seletivo sobre produtos como cigarro e bebida. Empresas do Simples podem escolher pagar IBS/CBS fora do DAS para gerar crédito maior ao cliente.</p>
         <div class="bar"><span class="c-old" style="width:62%"></span><span class="c-cbs" style="width:37%"></span><span class="c-ibs" style="width:1%"></span></div></div></div>
       <div class="step"><div class="yr">2029–32</div><div class="step-body"><h3>ICMS e ISS diminuem</h3><p>Os impostos de estados e municípios caem para 90%, 80%, 70% e 60% do valor atual, ano a ano, enquanto o IBS sobe na mesma proporção.</p>
@@ -91,36 +125,39 @@
   </div>
 </section>
 
-<section class="faq" id="duvidas">
+<!-- DÚVIDAS -->
+<section class="secao" id="duvidas">
   <div class="wrap">
     <div class="sec-head"><p class="eyebrow">Dúvidas frequentes</p><h2>Antes de usar</h2></div>
     <div class="faq-list">
-      <details class="reveal"><summary>As calculadoras substituem um contador?</summary><p>Não. Elas servem para você entender seus números e chegar mais preparado a uma conversa com um contador. Para declarar e pagar impostos, siga sempre as orientações oficiais.</p></details>
-      <details class="reveal"><summary>De onde vêm as taxas?</summary><p>Selic, CDI, IPCA, TR e salário mínimo vêm das séries públicas do Banco Central, atualizadas automaticamente todo dia útil. A expectativa de inflação vem do boletim Focus.</p></details>
-      <details class="reveal"><summary>O MEI muda com a reforma tributária?</summary><p>O MEI continua pagando um valor fixo mensal pelo DAS. Ele não participa do ano de teste de 2026 e segue com regras próprias na transição.</p></details>
-      <details class="reveal"><summary>Meus dados ficam salvos?</summary><p>Não. Tudo é calculado no seu próprio navegador e nada é enviado para nós.</p></details>
+      <details class="revelar"><summary>As calculadoras substituem um contador?</summary><p>Não. Elas servem para você entender seus números e chegar mais preparado a uma conversa com um contador. Para declarar e pagar impostos, siga sempre as orientações oficiais.</p></details>
+      <details class="revelar"><summary>De onde vêm as taxas?</summary><p>Selic, CDI, IPCA, TR e salário mínimo vêm das séries públicas do Banco Central, atualizadas automaticamente todo dia útil. A expectativa de inflação vem do boletim Focus.</p></details>
+      <details class="revelar"><summary>O MEI muda com a reforma tributária?</summary><p>O MEI continua pagando um valor fixo mensal pelo DAS. Ele não participa do ano de teste de 2026 e segue com regras próprias na transição.</p></details>
+      <details class="revelar"><summary>Meus dados ficam salvos?</summary><p>Não. Tudo é calculado no seu próprio navegador e nada é enviado para nós.</p></details>
     </div>
   </div>
 </section>
 
-<section class="band social" id="conteudo">
-  <div class="wrap">
+<!-- VÍDEOS -->
+<div class="wrap" id="conteudo">
+  <section class="social bloco-escuro">
     <div class="social-head">
       <div><p class="eyebrow">Instagram · vídeos curtos</p><h2>Economia explicada em 60 segundos</h2></div>
       <p class="lead">Notícias da semana, dicas de imposto e finanças pessoais em linguagem simples. Perfil em breve.</p>
     </div>
     <div class="reels">
-      <div class="reel"><div class="screen s1"><div class="r-top"><span class="av">LC</span><span>lucroclaro</span></div><span class="k">Notícia</span><span class="t">O que muda na sua nota fiscal em 2027</span><div class="r-ui"><span class="prog"><i style="width:35%"></i></span></div></div></div>
-      <div class="reel"><div class="screen s2"><div class="r-top"><span class="av">LC</span><span>lucroclaro</span></div><span class="k">MEI</span><span class="t">Passei do limite do MEI. E agora?</span><div class="r-ui"><span class="prog"><i style="width:60%"></i></span></div></div></div>
-      <div class="reel"><div class="screen s3"><div class="r-top"><span class="av">LC</span><span>lucroclaro</span></div><span class="k">Inflação</span><span class="t">Por que a poupança perde para o Tesouro</span><div class="r-ui"><span class="prog"><i style="width:20%"></i></span></div></div></div>
-      <div class="reel"><div class="screen s4"><div class="r-top"><span class="av">LC</span><span>lucroclaro</span></div><span class="k">Custos</span><span class="t">Seu produto mais vendido pode dar prejuízo</span><div class="r-ui"><span class="prog"><i style="width:80%"></i></span></div></div></div>
+      <div class="reel"><div class="screen s1"><div class="r-top"><span class="av">LC</span><span>lucroclaro</span></div><span class="k">Notícia</span><span class="t">O que muda na sua nota fiscal em 2027</span><span class="prog"><i style="width:35%"></i></span></div></div>
+      <div class="reel"><div class="screen s2"><div class="r-top"><span class="av">LC</span><span>lucroclaro</span></div><span class="k">MEI</span><span class="t">Passei do limite do MEI. E agora?</span><span class="prog"><i style="width:60%"></i></span></div></div>
+      <div class="reel"><div class="screen s3"><div class="r-top"><span class="av">LC</span><span>lucroclaro</span></div><span class="k">Inflação</span><span class="t">Por que a poupança perde para o Tesouro</span><span class="prog"><i style="width:20%"></i></span></div></div>
+      <div class="reel"><div class="screen s4"><div class="r-top"><span class="av">LC</span><span>lucroclaro</span></div><span class="k">Custos</span><span class="t">Seu produto mais vendido pode dar prejuízo</span><span class="prog"><i style="width:80%"></i></span></div></div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<section class="future">
+<!-- FUTURO -->
+<section class="secao">
   <div class="wrap">
-    <div class="card reveal">
+    <div class="card futuro revelar">
       <span class="pill warn">Mais à frente</span>
       <div><h3>Fundo de investimentos Lucro Claro</h3><p>Um plano para o futuro, depois de o site e a comunidade crescerem. Fundos exigem gestora autorizada pela CVM, então ele virá com a estrutura certa.</p></div>
     </div>
@@ -128,11 +165,12 @@
 </section>
 </main>
 
-<footer>
+<!-- RODAPÉ (igual em todas as páginas) -->
+<footer class="rodape">
   <div class="wrap">
-    <div class="f-cols">
-      <div class="f-brand">
-        <a class="logo" href="index.html"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect width="32" height="32" rx="9" fill="var(--accent)"/><rect x="8" y="17" width="4" height="7" rx="1" fill="var(--accent-ink)"/><rect x="14" y="12" width="4" height="12" rx="1" fill="var(--accent-ink)"/><rect x="20" y="7" width="4" height="17" rx="1" fill="var(--sun)"/></svg><span>Lucro Claro</span></a>
+    <div class="rodape-cols">
+      <div class="rodape-marca">
+        <a class="marca" href="index.html"><span class="marca-simbolo" aria-hidden="true">R$</span>Lucro Claro</a>
         <p>Calculadoras gratuitas de imposto, custo e investimento para quem não tem contador.</p>
       </div>
       <div><h4>Para a empresa</h4><a href="impostos.html">MEI e Simples</a><a href="impostos.html#iva">IBS/CBS no preço</a><a href="custeio.html">Absorção × ABC</a><a href="custeio.html#margem">Margem e equilíbrio</a><a href="metas.html">Orçamento e metas</a></div>
@@ -143,6 +181,7 @@
   </div>
 </footer>
 
-<script src="js/app.js"></script>
+<script type="module" src="js/ui/base.js"></script>
+<script type="module" src="js/telas/inicio.js"></script>
 </body>
 </html>

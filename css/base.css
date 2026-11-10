@@ -1,0 +1,53 @@
+/* BASE: reset, tipografia e utilitários usados em todas as páginas. */
+
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:var(--t-md);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background-color var(--medio),color var(--medio)}
+img,svg{max-width:100%}
+[hidden]{display:none!important}
+
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:700;line-height:1.12;letter-spacing:-.02em;text-wrap:balance;overflow-wrap:anywhere;margin:0}
+h1{font-size:var(--t-h1);font-weight:800}
+h2{font-size:var(--t-h2)}
+h3{font-size:var(--t-h3);letter-spacing:-.01em}
+h4{font-family:var(--f-body);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.08em}
+p{margin:0}
+a{color:var(--acento)}
+ul{margin:0}
+button{font-family:inherit}
+
+:focus-visible{outline:3px solid var(--acento);outline-offset:3px;border-radius:6px}
+
+.wrap{max-width:var(--largura);margin:0 auto;padding-left:max(var(--borda-lateral),env(safe-area-inset-left,0px));padding-right:max(var(--borda-lateral),env(safe-area-inset-right,0px))}
+.secao{padding-block:var(--e8)}
+.sec-head{display:grid;gap:var(--e3);margin-bottom:var(--e6)}
+.eyebrow{font-family:var(--f-num);font-size:var(--t-xs);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acento)}
+.lead{color:var(--muted);font-size:var(--t-lg);max-width:60ch}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.pular{position:absolute;left:var(--e4);top:-60px;z-index:50;background:var(--ink);color:var(--bg);padding:var(--e2) var(--e4);border-radius:var(--r1);transition:top var(--rapido)}
+.pular:focus{top:var(--e4)}
+
+/* Entrada de elementos na rolagem. Sem JavaScript, tudo já aparece no lugar. */
+.revelar{transition:opacity var(--lento) var(--curva),transform var(--lento) var(--curva);transition-delay:calc(var(--i,0)*70ms)}
+.revelar.pre{opacity:0;transform:translateY(26px) scale(.98)}
+
+/* Transição entre páginas (navegadores que suportam; nos outros a troca é normal) */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:sai var(--medio) var(--curva) both}
+::view-transition-new(root){animation:entra var(--medio) var(--curva) both}
+::view-transition-group(nav-ativo),
+::view-transition-group(cabecalho),
+::view-transition-group(aba-ativa){animation-duration:var(--medio);animation-timing-function:var(--curva)}
+/* Troca de aba na mesma página: só o indicador desliza, o resto troca na hora */
+.vt-aba::view-transition-old(root),.vt-aba::view-transition-new(root){animation:none}
+@keyframes sai{to{opacity:0;transform:translateY(-10px)}}
+@keyframes entra{from{opacity:0;transform:translateY(14px)}}
+
+@media (prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .revelar.pre{opacity:1;transform:none}
+}

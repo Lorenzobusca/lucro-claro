@@ -1,47 +1,60 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-setor="impostos">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Impostos · Lucro Claro</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Calcule o DAS do MEI, a alíquota do Simples Nacional e o IBS/CBS da reforma tributária.">
+<!-- Aplica o tema (claro ou escuro) antes de a página aparecer, para não piscar -->
+<script>(function(){var t;try{t=localStorage.getItem('lc-tema')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@600&display=swap">
-<link rel="stylesheet" href="css/estilo.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/componentes.css">
+<link rel="stylesheet" href="css/paginas.css">
 </head>
 <body>
+<a class="pular" href="#principal">Pular para o conteúdo</a>
 
-<header class="top">
-  <div class="wrap">
-    <a class="logo" href="index.html"><i>R$</i>Lucro Claro</a>
-    <nav class="menu" id="menu" aria-label="Principal">
-      <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>Início</a>
-      <a href="impostos.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg>Impostos</a>
-      <a href="custeio.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13"/></svg>Custeio</a>
-      <a href="metas.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg>Metas</a>
-      <a href="planejamento.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>Planejamento</a>
+<!-- TOPO (igual em todas as páginas) -->
+<header class="topo">
+  <div class="topo-barra">
+    <a class="marca" href="index.html"><span class="marca-simbolo" aria-hidden="true">R$</span>Lucro Claro</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span>Início</span></a>
+      <a href="impostos.html" aria-current="page"><i class="nav-ind" aria-hidden="true"></i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg><span>Impostos</span></a>
+      <a href="custeio.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13"/></svg><span>Custeio</span></a>
+      <a href="metas.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg><span>Metas</span></a>
+      <a href="planejamento.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg><span>Planejamento</span></a>
     </nav>
+    <button class="tema" id="tema" type="button" aria-label="Mudar para o tema escuro">
+      <svg class="sol" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg>
+      <svg class="lua" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    </button>
   </div>
 </header>
 
-<main class="page">
-<section class="page-head">
-  <div class="wrap">
+<main id="principal">
+<div class="wrap cabecalho-wrap">
+  <section class="cabecalho">
     <nav class="crumbs" aria-label="Você está em"><a href="index.html">Início</a><span aria-hidden="true">›</span><span aria-current="page">Impostos</span></nav>
     <p class="eyebrow">Setor 1 de 4</p>
     <h1>Impostos</h1>
     <p class="lead">Calcule o imposto da sua empresa no MEI e no Simples Nacional, e simule quanto vai pagar de IBS e CBS em cada fase da reforma tributária.</p>
-  </div>
-</section>
-<section class="tools">
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="cabecalho-icone"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg>
+  </section>
+</div>
+
+<section class="ferramentas">
   <div class="wrap">
     <div class="tabs" role="tablist" aria-label="Calculadoras">
       <button class="tab" role="tab" id="t-simples" aria-controls="p-simples" aria-selected="true">MEI e Simples</button>
       <button class="tab" role="tab" id="t-iva" aria-controls="p-iva" aria-selected="false">IBS/CBS no preço</button>
     </div>
 
+    <!-- FERRAMENTA: MEI e Simples · tela em js/telas/simples.js · conta em js/calculo/simples.js -->
     <div class="panel" role="tabpanel" id="p-simples" aria-labelledby="t-simples">
       <div class="card form">
         <h3>Quanto pago no MEI ou no Simples?</h3>
@@ -58,18 +71,19 @@
             </select></label>
           <label>Faturamento deste mês (R$)<input id="s-mes" inputmode="decimal" value="25000"></label>
           <label>Faturamento dos últimos 12 meses (R$)<input id="s-12" inputmode="decimal" value="280000"></label>
-          <label class="full" id="s-sm-wrap">Salário mínimo vigente (R$)<input id="s-sm" inputmode="decimal" value="1621"><small class="src" data-src="salario_minimo"></small></label>
+          <label class="full" id="s-sm-wrap" hidden>Salário mínimo vigente (R$)<input id="s-sm" inputmode="decimal" value="1621"><small class="src" data-src="salario_minimo"></small></label>
         </div>
       </div>
-      <div class="card out" aria-live="polite">
+      <div class="card out bloco-escuro" aria-live="polite">
         <span class="eyebrow" id="s-label">Imposto do mês (DAS)</span>
-        <div class="big num" id="s-big">—</div>
+        <div class="big" id="s-big">—</div>
         <div id="s-pill"></div>
         <div class="kv" id="s-kv"></div>
         <p class="note">Tabelas da LC 123/2006. MEI: 5% do salário mínimo para o INSS + R$ 1 de ICMS e/ou R$ 5 de ISS. Simulação educativa; confira no Portal do Simples Nacional.</p>
       </div>
     </div>
 
+    <!-- FERRAMENTA: IBS/CBS no preço · tela em js/telas/iva.js · conta em js/calculo/iva.js -->
     <div class="panel" role="tabpanel" id="p-iva" aria-labelledby="t-iva" hidden>
       <div class="card form">
         <h3>IBS e CBS na sua venda</h3>
@@ -93,37 +107,41 @@
             </select></label>
         </div>
       </div>
-      <div class="card out" aria-live="polite">
+      <div class="card out bloco-escuro" aria-live="polite">
         <span class="eyebrow">IBS + CBS a pagar no mês</span>
-        <div class="big num" id="v-big">—</div>
+        <div class="big" id="v-big">—</div>
         <div class="kv" id="v-kv"></div>
         <p class="note" id="v-note"></p>
       </div>
     </div>
   </div>
 </section>
-<section class="explain">
+
+<section class="entenda">
   <div class="wrap">
     <div class="sec-head"><p class="eyebrow">Como funciona</p><h2>Entenda a conta</h2></div>
-    <div class="explain-grid">
-      <div class="card reveal"><span class="tag">MEI</span><h3>DAS fixo</h3><p>O MEI paga um valor fixo por mês, não importa quanto vendeu: 5% do salário mínimo para o INSS, mais R$ 1 de ICMS (comércio e indústria) e/ou R$ 5 de ISS (serviços). O limite é R$ 81 mil por ano.</p><div class="formula">DAS = 5% × salário mínimo + ICMS + ISS</div></div>
-      <div class="card reveal"><span class="tag">Simples Nacional</span><h3>Alíquota efetiva</h3><p>A tabela tem uma alíquota nominal e uma parcela a deduzir para cada faixa de faturamento dos últimos 12 meses. A alíquota que você paga de verdade é a efetiva, sempre menor que a nominal.</p><div class="formula">efetiva = (RBT12 × nominal − dedução) ÷ RBT12</div></div>
-      <div class="card reveal"><span class="tag">Reforma</span><h3>Débito menos crédito</h3><p>No IBS e na CBS você calcula o imposto sobre a venda e desconta o imposto que já veio destacado nas notas das suas compras. Paga só a diferença.</p><div class="formula">a pagar = vendas × alíquota − compras × alíquota</div></div>
+    <div class="grade-3">
+      <div class="card card-info revelar"><span class="tag">MEI</span><h3>DAS fixo</h3><p>O MEI paga um valor fixo por mês, não importa quanto vendeu: 5% do salário mínimo para o INSS, mais R$ 1 de ICMS (comércio e indústria) e/ou R$ 5 de ISS (serviços). O limite é R$ 81 mil por ano.</p><div class="formula">DAS = 5% × salário mínimo + ICMS + ISS</div></div>
+      <div class="card card-info revelar"><span class="tag">Simples Nacional</span><h3>Alíquota efetiva</h3><p>A tabela tem uma alíquota nominal e uma parcela a deduzir para cada faixa de faturamento dos últimos 12 meses. A alíquota que você paga de verdade é a efetiva, sempre menor que a nominal.</p><div class="formula">efetiva = (RBT12 × nominal − dedução) ÷ RBT12</div></div>
+      <div class="card card-info revelar"><span class="tag">Reforma</span><h3>Débito menos crédito</h3><p>No IBS e na CBS você calcula o imposto sobre a venda e desconta o imposto que já veio destacado nas notas das suas compras. Paga só a diferença.</p><div class="formula">a pagar = vendas × alíquota − compras × alíquota</div></div>
     </div>
   </div>
 </section>
-<section class="next">
-  <div class="wrap">
-    <div class="card"><div><h3>Próximo passo: seus custos</h3><p>Depois de saber o imposto, veja quanto custa cada produto e qual dá lucro.</p></div><a class="btn primary" href="custeio.html">Ir para Custeio</a></div>
-  </div>
-</section>
+
+<div class="wrap">
+  <section class="proximo revelar" data-setor="custeio">
+    <div><h3>Próximo passo: seus custos</h3><p>Depois de saber o imposto, veja quanto custa cada produto e qual dá lucro.</p></div>
+    <a class="btn" href="custeio.html">Ir para Custeio<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </section>
+</div>
 </main>
 
-<footer>
+<!-- RODAPÉ (igual em todas as páginas) -->
+<footer class="rodape">
   <div class="wrap">
-    <div class="f-cols">
-      <div class="f-brand">
-        <a class="logo" href="index.html"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect width="32" height="32" rx="9" fill="var(--accent)"/><rect x="8" y="17" width="4" height="7" rx="1" fill="var(--accent-ink)"/><rect x="14" y="12" width="4" height="12" rx="1" fill="var(--accent-ink)"/><rect x="20" y="7" width="4" height="17" rx="1" fill="var(--sun)"/></svg><span>Lucro Claro</span></a>
+    <div class="rodape-cols">
+      <div class="rodape-marca">
+        <a class="marca" href="index.html"><span class="marca-simbolo" aria-hidden="true">R$</span>Lucro Claro</a>
         <p>Calculadoras gratuitas de imposto, custo e investimento para quem não tem contador.</p>
       </div>
       <div><h4>Para a empresa</h4><a href="impostos.html">MEI e Simples</a><a href="impostos.html#iva">IBS/CBS no preço</a><a href="custeio.html">Absorção × ABC</a><a href="custeio.html#margem">Margem e equilíbrio</a><a href="metas.html">Orçamento e metas</a></div>
@@ -134,6 +152,8 @@
   </div>
 </footer>
 
-<script src="js/app.js"></script>
+<script type="module" src="js/ui/base.js"></script>
+<script type="module" src="js/telas/simples.js"></script>
+<script type="module" src="js/telas/iva.js"></script>
 </body>
 </html>

@@ -1,0 +1,91 @@
+/* TOKENS: todas as cores, fontes, espaçamentos e tempos de animação do site.
+   Para mudar a identidade visual, mexa só neste arquivo.
+   Conceito "painel vivo": fundo neutro, tinta grafite e uma cor forte por setor em blocos grandes. */
+
+:root{
+  color-scheme:light;
+
+  /* Neutros (tema claro) */
+  --bg:#F1F2F4;          /* fundo da página */
+  --surface:#FFFFFF;     /* cartões */
+  --surface-2:#E6E8EC;   /* campos, faixas discretas */
+  --ink:#14151A;         /* texto */
+  --muted:#5A5E6A;       /* texto secundário */
+  --line:#D3D6DD;        /* bordas */
+  --out-bg:#14151A;      /* cartão de resultado (sempre escuro) */
+
+  /* Estados (sempre acompanhados de texto, nunca só cor) */
+  --ok:#0B7443;
+  --warn:#8A5A00;
+  --bad:#C2301C;
+
+  /* Gráfico: par testado para daltonismo sobre o cartão de resultado */
+  --chart-1:#22A877;
+  --chart-2:#C2801A;
+
+  /* Reforma tributária */
+  --cbs:#2F5BFF;
+  --ibs:#FF6B4A;
+  --antigo:#9A9FAD;
+
+  /* Tipografia */
+  --f-display:"Unbounded","Arial Black","Segoe UI",system-ui,sans-serif;
+  --f-body:"Manrope","Segoe UI",system-ui,sans-serif;
+  --f-num:"JetBrains Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --t-xs:.76rem; --t-sm:.88rem; --t-md:1rem; --t-lg:1.15rem;
+  --t-h3:1.12rem;
+  --t-h2:clamp(1.5rem,3.2vw,2.3rem);
+  --t-h1:clamp(1.8rem,5.4vw,3.6rem);
+  --t-hero:clamp(2rem,6vw,4.2rem);
+  --t-num:clamp(1.9rem,4.4vw,3rem);
+
+  /* Espaçamento (múltiplos de 4px) */
+  --e1:4px; --e2:8px; --e3:12px; --e4:16px; --e5:24px; --e6:32px; --e7:48px; --e8:72px; --e9:104px;
+  --largura:1180px;
+  --borda-lateral:20px;
+
+  /* Cantos */
+  --r1:10px; --r2:18px; --r3:28px; --r4:40px; --r-pill:999px;
+
+  /* Sombras */
+  --sombra-1:0 1px 2px rgba(20,21,26,.06),0 4px 14px rgba(20,21,26,.05);
+  --sombra-2:0 2px 4px rgba(20,21,26,.06),0 22px 48px -20px rgba(20,21,26,.3);
+
+  /* Movimento */
+  --rapido:.16s; --medio:.32s; --lento:.7s;
+  --curva:cubic-bezier(.2,.7,.2,1);
+  --mola:cubic-bezier(.34,1.56,.64,1);
+}
+
+/* Tema escuro, e também qualquer bloco escuro dentro do tema claro (cartão de resultado, faixa de vídeos) */
+[data-theme="dark"],
+.bloco-escuro{
+  --bg:#0E0F13;
+  --surface:#191B21;
+  --surface-2:#23262E;
+  --ink:#F1F2F4;
+  --muted:#A3A8B5;
+  --line:#30343E;
+  --ok:#4BE39A;
+  --warn:#FFC857;
+  --bad:#FF8A75;
+  --antigo:#6F7482;
+  --sombra-1:0 1px 2px rgba(0,0,0,.5);
+  --sombra-2:0 22px 48px -20px rgba(0,0,0,.9);
+}
+[data-theme="dark"]{color-scheme:dark;--out-bg:#191B21}
+.bloco-escuro{color-scheme:dark}
+
+/* Cor de cada setor: --setor (bloco), --setor-ink (texto sobre o bloco),
+   --setor-claro (texto colorido sobre fundo escuro), --setor-escuro (texto colorido sobre fundo claro) */
+[data-setor="inicio"]      {--setor:#FFD23F;--setor-ink:#1C1500;--setor-claro:#FFDC66;--setor-escuro:#7A5C00}
+[data-setor="impostos"]    {--setor:#FF6B4A;--setor-ink:#1F0A04;--setor-claro:#FF967D;--setor-escuro:#B8320F}
+[data-setor="custeio"]     {--setor:#2F5BFF;--setor-ink:#FFFFFF;--setor-claro:#93ABFF;--setor-escuro:#2247D9}
+[data-setor="metas"]       {--setor:#1FC977;--setor-ink:#04200F;--setor-claro:#4BE39A;--setor-escuro:#0A7040}
+[data-setor="planejamento"]{--setor:#7A4DFF;--setor-ink:#FFFFFF;--setor-claro:#B8A1FF;--setor-escuro:#5B2FD6}
+
+/* --acento: a cor do setor em versão legível como texto no fundo atual */
+[data-setor]{--acento:var(--setor-escuro)}
+[data-theme="dark"][data-setor],
+[data-theme="dark"] [data-setor],
+.bloco-escuro{--acento:var(--setor-claro)}
