@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Orçamento e metas · Lucro Claro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Crie metas de vendas, produção e custos e acompanhe o orçado × realizado da sua empresa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html"><i>R$</i>Lucro Claro</a>
+    <nav class="menu" id="menu" aria-label="Principal">
+      <a href="index.html">Início</a>
+      <a href="impostos.html">Impostos</a>
+      <a href="custeio.html">Custeio</a>
+      <a href="planejamento.html">Planejamento financeiro</a>
+      <a href="metas.html" aria-current="page">Metas</a>
+    </nav>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</header>
+
+<main class="page">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Setor 4</p>
+    <h1>Orçamento e metas</h1>
+    <p class="lead">Defina quanto quer vender, produzir e gastar no mês. Lance os números conforme eles acontecem e veja na hora se a empresa está no ritmo para bater cada meta.</p>
+    <nav class="sector-nav" aria-label="Setores"><a href="impostos.html">Impostos</a><a href="custeio.html">Custeio</a><a href="planejamento.html">Planejamento financeiro</a><a href="metas.html" aria-current="page">Orçamento e metas</a></nav>
+  </div>
+</section>
+
+<section class="tools">
+  <div class="wrap">
+    <div class="card out painel" aria-live="polite">
+      <div class="painel-top">
+        <div>
+          <span class="eyebrow">Painel de metas</span>
+          <div class="mes-nav">
+            <button class="mes-btn" id="g-prev" aria-label="Mês anterior">←</button>
+            <h2 id="g-mes">—</h2>
+            <button class="mes-btn" id="g-next" aria-label="Próximo mês">→</button>
+          </div>
+        </div>
+        <div class="placar" id="g-placar"></div>
+      </div>
+      <p class="aviso" id="g-aviso" hidden></p>
+      <div class="metas" id="g-lista"></div>
+      <p class="note">Versão grátis: os dados ficam salvos só neste navegador, neste aparelho. Se você limpar os dados do navegador, eles se perdem.</p>
+    </div>
+
+    <div class="panel" style="margin-top:20px">
+      <div class="card form">
+        <h3>Nova meta</h3>
+        <p class="hint">Uma meta vale para todos os meses. Você pode ter até 5 metas na versão grátis.</p>
+        <form id="g-form" class="fields" novalidate>
+          <label class="full">Nome da meta<input id="g-nome" maxlength="40" placeholder="Ex.: Faturamento do mês"></label>
+          <label class="full">Tipo
+            <select id="g-tipo">
+              <option value="min">Chegar a um valor (vendas, produção, economia)</option>
+              <option value="max">Não passar de um valor (custos, despesas, refugo)</option>
+            </select></label>
+          <label>Meta por mês<input id="g-alvo" inputmode="decimal" placeholder="60000"></label>
+          <label>Medida
+            <select id="g-un">
+              <option value="R$">Reais (R$)</option>
+              <option value="un">Unidades</option>
+              <option value="h">Horas</option>
+              <option value="kg">Quilos (kg)</option>
+            </select></label>
+          <div class="full form-acoes"><button class="btn primary" type="submit">Criar meta</button><span class="form-msg" id="g-msg" role="status"></span></div>
+        </form>
+      </div>
+      <div class="card form">
+        <h3>Últimos lançamentos</h3>
+        <p class="hint">Errou um número? Apague o lançamento aqui.</p>
+        <div class="lancs" id="g-lancs"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="planos">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Planos</p><h2>Comece à mão, automatize quando crescer</h2><p class="lead">A versão grátis já funciona nesta página. A versão para a fábrica mandar os números ao vivo está em desenvolvimento.</p></div>
+    <div class="plano-grid">
+      <div class="card plano">
+        <span class="pill ok">Disponível agora</span>
+        <h3>Grátis</h3>
+        <p class="plano-sub">Você digita os números. Ideal para MEI e para quem está começando a controlar metas.</p>
+        <ul class="feat"><li>Até 5 metas</li><li>Lançamento manual, quando você quiser</li><li>Painel com ritmo e projeção do mês</li><li>Histórico mês a mês</li><li>Sem cadastro</li></ul>
+        <div class="pros-cons">
+          <div><h4>Vantagens</h4><ul><li>Não custa nada</li><li>Funciona na hora, sem instalar nem treinar ninguém</li><li>Seus números não saem do seu aparelho</li></ul></div>
+          <div><h4>Desvantagens</h4><ul><li>Alguém precisa lembrar de digitar</li><li>Os dados ficam em um aparelho só</li><li>Só uma pessoa usa; a equipe não lança</li><li>Se limpar o navegador, perde o histórico</li></ul></div>
+        </div>
+      </div>
+      <div class="card plano destaque">
+        <span class="pill warn">Em breve</span>
+        <h3>Fábrica ao vivo</h3>
+        <p class="plano-sub">A equipe lança pelo celular e o painel se atualiza sozinho. Para empresas com produção e mais de uma pessoa.</p>
+        <ul class="feat"><li>Metas sem limite</li><li>Cada pessoa da fábrica lança do próprio celular</li><li>Painel atualizado ao vivo, de qualquer lugar</li><li>Dados guardados na nuvem, com backup</li><li>Avisos quando uma meta atrasa ou estoura</li></ul>
+        <div class="pros-cons">
+          <div><h4>Vantagens</h4><ul><li>Ninguém redigita nada no fim do dia</li><li>Você vê o problema no dia em que ele acontece</li><li>Acessa do celular, de casa ou da fábrica</li><li>O histórico não se perde</li></ul></div>
+          <div><h4>Desvantagens</h4><ul><li>Tem mensalidade</li><li>Precisa de internet na fábrica</li><li>A equipe precisa se acostumar a lançar</li><li>Seus dados ficam em um servidor, não só com você</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="explain">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Como funciona</p><h2>Entenda o painel</h2></div>
+    <div class="explain-grid">
+      <div class="card reveal"><span class="tag">Orçamento</span><h3>Orçado × realizado</h3><p>O orçado é o que você planejou para o mês. O realizado é o que de fato aconteceu. Comparar os dois todo mês é o controle mais básico de qualquer empresa.</p><div class="formula">% da meta = realizado ÷ orçado</div></div>
+      <div class="card reveal"><span class="tag">Ritmo</span><h3>No ritmo ou atrasada</h3><p>Se já passou metade do mês, o esperado é ter feito metade da meta. O risquinho amarelo na barra mostra onde você deveria estar hoje.</p><div class="formula">esperado hoje = meta × dias passados ÷ dias do mês</div></div>
+      <div class="card reveal"><span class="tag">Projeção</span><h3>Como o mês vai fechar</h3><p>Mantendo o ritmo atual, o painel estima o resultado no último dia. Assim dá tempo de reagir antes de o mês acabar.</p><div class="formula">projeção = realizado ÷ dias passados × dias do mês</div></div>
+    </div>
+  </div>
+</section>
+<section class="next">
+  <div class="wrap">
+    <div class="card"><div><h3>De onde tirar os números das metas?</h3><p>Use o ponto de equilíbrio do setor de Custeio para definir quanto precisa vender por mês.</p></div><a class="btn primary" href="custeio.html">Ir para Custeio</a></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-cols">
+      <div class="f-brand">
+        <a class="logo" href="index.html"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect width="32" height="32" rx="9" fill="var(--accent)"/><rect x="8" y="17" width="4" height="7" rx="1" fill="var(--accent-ink)"/><rect x="14" y="12" width="4" height="12" rx="1" fill="var(--accent-ink)"/><rect x="20" y="7" width="4" height="17" rx="1" fill="var(--sun)"/></svg><span>Lucro Claro</span></a>
+        <p>Calculadoras gratuitas de imposto, custo e investimento para quem não tem contador.</p>
+      </div>
+      <div><h4>Setores</h4><a href="impostos.html">Impostos</a><a href="custeio.html">Custeio</a><a href="planejamento.html">Planejamento financeiro</a><a href="metas.html">Orçamento e metas</a></div>
+      <div><h4>Impostos</h4><a href="impostos.html">MEI e Simples</a><a href="impostos.html">IBS/CBS no preço</a></div>
+      <div><h4>Aprenda</h4><a href="index.html#reforma">Reforma tributária</a><a href="index.html#conteudo">Vídeos</a><a href="index.html#duvidas">Dúvidas</a></div>
+    </div>
+    <p class="disclaimer">As calculadoras são simulações educativas e não substituem a orientação de um contador ou consultor. Valores e regras podem mudar; confira sempre nas fontes oficiais (Receita Federal, Portal do Simples Nacional, Banco Central).</p>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/metas.js"></script>
+</body>
+</html>

@@ -11,9 +11,11 @@ margem de contribuição e investimentos contra a inflação.
 | `index.html` | Página inicial: explica o site, a reforma e os três setores |
 | `impostos.html` | Setor 1: MEI, Simples Nacional e IBS/CBS |
 | `custeio.html` | Setor 2: absorção × ABC, margem e ponto de equilíbrio |
-| `planejamento.html` | Setor 3: taxas de hoje e investimento × inflação |
+| `planejamento.html` | Setor 3: simulador de carteira, taxas de hoje e investimento × inflação |
+| `metas.html` | Setor 4: orçamento e metas (versão grátis, salva no navegador) |
 | `css/estilo.css` | Cores, fontes e visual de todas as páginas (as cores ficam no topo, em `:root`) |
 | `js/app.js` | Contas das calculadoras e animações de rolagem (o mesmo arquivo serve todas as páginas) |
+| `js/metas.js` | Painel de metas: cria metas, lança valores, calcula ritmo e projeção |
 | `data/taxas.json` | Selic, CDI, IPCA, TR e salário mínimo (atualizado sozinho) e alíquotas da reforma (editadas à mão) |
 | `scripts/atualizar-taxas.mjs` | Programa que busca as taxas no Banco Central |
 | `.github/workflows/atualizar-taxas.yml` | Faz o GitHub rodar o programa acima todo dia útil |

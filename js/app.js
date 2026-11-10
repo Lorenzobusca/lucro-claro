@@ -11,7 +11,7 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let T={atualizado_em:null,exemplo:true,taxas:{selic:{valor:15,data:null},cdi:{valor:14.9,data:null},ipca_12m:{valor:4.7,data:null},ipca_focus_12m:{valor:4.3,data:null},tr:{valor:0.17,data:null},salario_minimo:{valor:1621,data:null}},
   reforma:{"2026":{cbs:.9,ibs:.1,nota:""},"2027":{cbs:8.7,ibs:.1,nota:""},"2033":{cbs:8.8,ibs:17.7,nota:""}}};
 const tx=k=>T.taxas[k]?.valor;
-const dataBR=d=>{if(!d)return'';const [y,m,dd]=String(d).slice(0,10).split('-');return dd?`${dd}/${m}/${y}`:`${m}/${y}`};
+const dataBR=d=>{if(!d)return'';if(T.atualizado_em&&String(d).slice(0,10)>T.atualizado_em.slice(0,10))d=T.atualizado_em;const [y,m,dd]=String(d).slice(0,10).split('-');return dd?`${dd}/${m}/${y}`:`${m}/${y}`};
 const setVal=(id,v)=>{if(has(id)&&v!=null&&isFinite(v))$(id).value=String(+v.toFixed(2))};
 function aplicarTaxas(){
   document.querySelectorAll('[data-rate]').forEach(el=>{const k=el.dataset.rate,t=T.taxas[k];if(t)el.textContent=pct(t.valor,2)});
