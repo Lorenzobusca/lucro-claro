@@ -1,5 +1,6 @@
 /* TELA: margem por produto (custeio.html, aba "Margem por produto"). */
-import { $, ler, brl, pct, mostrarNumero } from '../ui/numero.js';
+import { $, ler, brl, pct, linhas, mostrarNumero } from '../ui/numero.js';
+import { registrarTour } from '../ui/tour.js';
 import { aplicarExemplo, mostrarLeitura } from '../ui/apoio.js';
 import { calcularProdutos } from '../calculo/produtos.js';
 
@@ -10,7 +11,7 @@ const valor = v => `<span class="${v < 0 ? 'negativo' : ''}">${brl(v)}</span>`;
 
 const EXEMPLOS = {
   padaria: {
-    nome: 'uma padaria com três produtos',
+    nome: 'a Padaria Pão da Esquina, com três produtos',
     campos: {
       'pr1-nome': 'Pão francês (kg)', 'pr1-p': '18', 'pr1-cv': '11', 'pr1-dv': '5', 'pr1-q': '1500',
       'pr2-nome': 'Bolo de pote', 'pr2-p': '12', 'pr2-cv': '4', 'pr2-dv': '5', 'pr2-q': '400',
@@ -29,6 +30,12 @@ function atualizar() {
 
   mostrarNumero($('pr-big'), r.lucro, brl);
   $('pr-big').classList.toggle('negativo', r.lucro < 0);
+  $('pr-kv').innerHTML = !r.itens.length ? '' : linhas([
+    ['Vendas do mês', brl(r.faturamento)],
+    ['O que sobra para pagar as contas fixas', brl(r.contribuicao)],
+    ['Margem média da loja', pct(r.margemMediaPct, 1)],
+    ['Faturamento de equilíbrio (quanto vender no mês para pagar as contas)', isFinite(r.faturamentoEquilibrio) ? brl(r.faturamentoEquilibrio) : '—'],
+  ]);
 
   $('pr-out').innerHTML = !r.itens.length ? '' :
     '<thead><tr><th>Produto</th><th>Sobra por unidade</th><th>Margem</th><th>Parte das vendas</th><th>Deixa no mês</th><th>Parte do que sobra</th></tr></thead><tbody>' +
@@ -66,3 +73,13 @@ aplicarExemplo(EXEMPLOS, 'pr-ex');
 LINHAS.forEach(n => ['nome', 'p', 'cv', 'dv', 'q'].forEach(c => $(`pr${n}-${c}`).addEventListener('input', atualizar)));
 $('pr-cf').addEventListener('input', atualizar);
 atualizar();
+
+registrarTour('produtos', { painel: 'p-produtos', etapa: 3, passos: [
+  { alvo: 'pr1-nome', titulo: 'Um produto por linha', texto: 'Comece pelos três ou quatro que mais vendem. Dá para incluir mais depois.', exemplo: 'pão francês, bolo de pote, refrigerante.' },
+  { alvo: 'pr1-p', titulo: 'Preço', texto: 'Quanto você cobra por uma unidade (ou por quilo, por porção).', exemplo: 'R$ 18 o quilo do pão.' },
+  { alvo: 'pr1-cv', titulo: 'Custo por unidade', termo: 'Custo variável', texto: 'O que essa unidade custa para você: mercadoria ou matéria-prima. Está nas notas dos fornecedores.', exemplo: 'R$ 11 por quilo de pão.' },
+  { alvo: 'pr1-dv', titulo: 'Impostos e taxas', termo: 'Despesa variável', texto: 'A parte do preço que some em cada venda: maquininha, imposto sobre a venda, comissão.', exemplo: '5% da maquininha.' },
+  { alvo: 'pr1-q', titulo: 'Vendas no mês', texto: 'Quantas unidades saíram no último mês. Caderno de vendas, sistema ou relatório da maquininha.', exemplo: '1.500 kg.' },
+  { alvo: 'pr-cf', titulo: 'Custos fixos do mês', termo: 'Custo fixo', texto: 'Tudo o que você paga todo mês mesmo sem vender, incluindo a sua retirada.', exemplo: 'R$ 10.000.' },
+  { alvo: 'pr-big', titulo: 'Como ler o resultado', termo: 'Margem de contribuição', texto: 'Na tabela, a coluna "Margem" diz quanto sobra de cada R$ 100 vendidos de cada produto. Quanto maior, mais vale a pena vender. O número grande é o lucro do mês depois das contas fixas.' },
+]});

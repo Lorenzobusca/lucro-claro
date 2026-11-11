@@ -1,5 +1,6 @@
 /* TELA: simulador de carteira (planejamento.html, aba "Simulador de carteira"). */
 import { $, ler, preencher, brl, pct, linhas, mostrarNumero } from '../ui/numero.js';
+import { registrarTour } from '../ui/tour.js';
 import { mostrarLeitura } from '../ui/apoio.js';
 import { aoMudarTaxas, taxas, taxa } from '../ui/taxas.js';
 import { desenharLinhas } from '../ui/grafico.js';
@@ -96,3 +97,12 @@ $('p-carteira').addEventListener('aba-aberta', () => requestAnimationFrame(desen
 
 usarPreset('moderada');
 aoMudarTaxas(() => { preencher('w-inf', taxa('ipca_focus_12m')); preencherTaxas(); });
+
+registrarTour('carteira', { painel: 'p-carteira', passos: [
+  { alvo: 'w-ini', titulo: 'Valor inicial', texto: 'Quanto você tem hoje para investir.' },
+  { alvo: 'w-apt', titulo: 'Quanto vai guardar por mês', texto: 'O aporte mensal. Pode ser zero.' },
+  { alvo: 'w-anos', titulo: 'Por quantos anos', texto: 'O prazo da simulação. Juros compostos fazem mais diferença em prazos longos.' },
+  { alvo: 'w-inf', titulo: 'Inflação esperada', texto: 'Vem preenchida com a expectativa do mercado (boletim Focus). Serve para mostrar quanto o dinheiro vai valer em poder de compra.' },
+  { alvo: 'w-p-poup', titulo: 'A sua carteira', texto: 'Divida 100% entre os investimentos. Os botões acima preenchem carteiras prontas; a coluna "Rende ao ano" usa as taxas de hoje do Banco Central.' },
+  { alvo: 'w-big', titulo: 'Como ler o resultado', texto: 'O número grande é quanto você teria no fim, já sem imposto de renda. O gráfico compara com deixar tudo na poupança.' },
+]});

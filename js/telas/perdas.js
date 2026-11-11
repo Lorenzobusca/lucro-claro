@@ -1,9 +1,14 @@
 /* TELA: perdas e desperdício (custeio.html, aba "Perdas"). */
 import { $, ler, brl, pct, linhas, mostrarNumero } from '../ui/numero.js';
+import { registrarTour } from '../ui/tour.js';
 import { aplicarExemplo, mostrarLeitura } from '../ui/apoio.js';
 import { calcularPerdas } from '../calculo/perdas.js';
 
 const EXEMPLOS = {
+  padaria: {
+    nome: 'a Padaria Pão da Esquina, que joga fora pão e bolo que sobram no fim do dia',
+    campos: { 'pe-perda': '600', 'pe-margem': '35', 'pe-fat': '37200', 'pe-red': '50' },
+  },
   floricultura: {
     nome: 'uma floricultura que perde flores que murcham antes de vender',
     campos: { 'pe-perda': '800', 'pe-margem': '40', 'pe-fat': '20000', 'pe-red': '50' },
@@ -39,3 +44,11 @@ function atualizar() {
 aplicarExemplo(EXEMPLOS, 'pe-ex');
 ['pe-perda', 'pe-margem', 'pe-fat', 'pe-red'].forEach(id => $(id).addEventListener('input', atualizar));
 atualizar();
+
+registrarTour('perdas', { painel: 'p-perdas', etapa: 8, passos: [
+  { alvo: 'pe-perda', titulo: 'Quanto se perde por mês', texto: 'Some, pelo custo, tudo o que estragou, venceu, quebrou ou sumiu no mês. Anote por 30 dias se nunca mediu.', exemplo: 'R$ 600 de pão e bolo jogados fora.' },
+  { alvo: 'pe-margem', titulo: 'Sua margem média', termo: 'Margem de contribuição', texto: 'Quanto sobra de cada R$ 100 vendidos. A ferramenta "Margem por produto" mostra esse número na linha "Margem média da loja".', exemplo: '35%.' },
+  { alvo: 'pe-fat', titulo: 'Vendas do mês', termo: 'Faturamento', texto: 'Tudo o que entrou de vendas no mês.', exemplo: 'R$ 37.200.' },
+  { alvo: 'pe-red', titulo: 'Quanto dá para evitar', texto: 'Um chute honesto: que parte dessa perda some com mais cuidado (produzir menos no fim do dia, girar o estoque, conferir entregas).', exemplo: 'metade, 50%.' },
+  { alvo: 'pe-big', titulo: 'Como ler o resultado', texto: 'O número grande é quanto você precisa vender a mais só para repor o que se perde. Logo abaixo, quanto vai direto para o lucro se evitar a parte que você indicou.' },
+]});

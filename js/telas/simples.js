@@ -1,6 +1,7 @@
 /* TELA: MEI e Simples Nacional (impostos.html, aba "MEI e Simples").
    Lê os campos, chama js/calculo/simples.js e escreve o resultado. */
 import { $, ler, preencher, brl, pct, linhas, mostrarNumero } from '../ui/numero.js';
+import { registrarTour } from '../ui/tour.js';
 import { mostrarLeitura } from '../ui/apoio.js';
 import { aoMudarTaxas, taxa } from '../ui/taxas.js';
 import { calcularMei, calcularSimples } from '../calculo/simples.js';
@@ -70,3 +71,10 @@ function atualizar() {
 
 ['s-tipo', 's-mes', 's-12', 's-sm'].forEach(id => $(id).addEventListener('input', atualizar));
 aoMudarTaxas(() => { preencher('s-sm', taxa('salario_minimo')); atualizar(); });
+
+registrarTour('simples', { painel: 'p-simples', passos: [
+  { alvo: 's-tipo', titulo: 'Seu regime', texto: 'MEI é quem fatura até R$ 81 mil por ano. Acima disso, Simples Nacional, com um anexo por tipo de atividade. Na dúvida, olhe o seu CNPJ no site da Receita.' },
+  { alvo: 's-mes', titulo: 'Faturamento deste mês', termo: 'Faturamento', texto: 'Tudo o que entrou de vendas no mês.' },
+  { alvo: 's-12', titulo: 'Últimos 12 meses', texto: 'A soma das vendas dos últimos doze meses. É ela que define a sua faixa do Simples.' },
+  { alvo: 's-big', titulo: 'Como ler o resultado', texto: 'O número grande é a guia do mês. Logo abaixo, a alíquota efetiva: de cada R$ 100 vendidos, quanto vai para o imposto.' },
+]});

@@ -276,3 +276,43 @@ details p{color:var(--muted);padding-bottom:var(--e5);max-width:65ch;animation:e
 select:disabled,input:disabled{opacity:.4;cursor:not-allowed}
 td input[type="text"],td input.texto{width:170px;font-family:var(--f-body)}
 td select{width:130px;padding-block:8px;font-size:.9rem}
+
+
+/* ---------- "Comece por aqui": item do menu e botão do hero ---------- */
+.nav a.nav-comece{color:var(--ink);background:color-mix(in srgb,#FFD23F 55%,var(--surface))}
+.nav a.nav-comece:hover{background:#FFD23F;color:#1C1500}
+.nav a.nav-comece[aria-current="page"]{color:#1C1500}
+.nav a.nav-comece[aria-current="page"] .nav-ind{background:#FFD23F}
+@media (max-width:860px){.nav a.nav-inicio{display:none}}
+
+/* ---------- Ajuda dentro das ferramentas: faixa, tour e "?" ---------- */
+.primeira-vez{display:flex;align-items:center;gap:var(--e3);flex-wrap:wrap;margin-bottom:var(--e5);padding:10px 14px;border-radius:var(--r2);background:color-mix(in srgb,var(--setor) 16%,var(--surface));font-size:var(--t-sm);font-weight:600}
+.primeira-vez a{display:inline-flex;align-items:center;gap:6px;color:var(--acento);text-decoration:none;font-weight:800}
+.primeira-vez a svg{width:15px;height:15px}
+.primeira-vez a:hover{text-decoration:underline}
+.ajuda{display:inline-grid;place-items:center;width:18px;height:18px;margin-left:6px;border-radius:50%;border:1.5px solid var(--muted);background:transparent;color:var(--muted);font:800 .7rem var(--f-body);line-height:1;cursor:pointer;vertical-align:middle;justify-self:start;transition:background-color var(--rapido),color var(--rapido),border-color var(--rapido)}
+.ajuda:hover,.ajuda[aria-expanded="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+label>.ajuda{position:absolute;right:0;top:0}
+label>.ajuda+.ajuda-pop{top:24px}
+.ajuda-pop{position:absolute;z-index:15;left:0;max-width:300px;margin-top:6px;padding:var(--e3) var(--e4);border-radius:var(--r1);background:var(--ink);color:var(--bg);font-size:var(--t-sm);font-weight:400;box-shadow:var(--sombra-2);animation:entra var(--rapido) var(--curva)}
+.ajuda-pop b{display:block;margin-bottom:2px}
+.ajuda-pop .link{color:inherit;margin-top:6px;display:inline-block}
+label{position:relative;padding-right:0}
+label:has(>.ajuda){padding-right:26px}
+.tour-capa{position:fixed;inset:0;z-index:40;background:rgba(14,15,19,.45)}
+.tour-alvo{position:relative;z-index:41;outline:3px solid #FFD23F;outline-offset:6px;border-radius:var(--r1);background:var(--surface)}
+.tour-balao{position:absolute;z-index:42;width:min(340px,calc(100vw - 24px));padding:var(--e4) var(--e5);border-radius:var(--r2);background:var(--surface);color:var(--ink);box-shadow:var(--sombra-2);border:1px solid var(--line);animation:entra var(--medio) var(--curva)}
+.tour-balao::before{content:"";position:absolute;top:-8px;left:28px;width:16px;height:16px;background:var(--surface);border-left:1px solid var(--line);border-top:1px solid var(--line);transform:rotate(45deg)}
+.tour-balao.acima::before{top:auto;bottom:-8px;transform:rotate(225deg)}
+.tour-contagem{font-family:var(--f-num);font-size:var(--t-xs);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tour-balao h3{margin-top:4px;font-size:1rem}
+.tour-balao p{margin-top:6px;font-size:.93rem;line-height:1.5}
+.tour-exemplo{color:var(--muted)}
+.tour-botoes{display:flex;gap:var(--e2);flex-wrap:wrap;margin-top:var(--e4)}
+.tour-botoes .btn-mini{display:inline-flex;align-items:center;gap:6px}
+.tour-botoes .btn-mini svg{width:14px;height:14px}
+.tour-botoes [data-tour="proximo"]{margin-left:auto}
+@media (max-width:640px){
+  .tour-balao{position:fixed!important;left:12px!important;right:12px;top:auto!important;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:auto}
+  .tour-balao::before{display:none}
+}

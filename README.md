@@ -15,8 +15,10 @@ O repositório e a pasta ainda se chamam `lucro-claro`, que era o nome provisór
 | `index.html` | Página inicial: apresentação, taxas do dia, os quatro setores, reforma, dúvidas e vídeos |
 | `impostos.html` | Setor 1: MEI, Simples Nacional e IBS/CBS |
 | `custeio.html` | Setor 2: absorção × ABC, margem e ponto de equilíbrio |
-| `metas.html` | Setor 3: orçamento e metas (versão grátis, salva no navegador) |
+| `metas.html` | Setor 3: metas do mês, fluxo de caixa e orçamento base zero |
 | `planejamento.html` | Setor 4: simulador de carteira, taxas de hoje e investimento × inflação |
+| `comece.html` | Trilha "Comece por aqui": diagnóstico, 7 etapas com um negócio de exemplo e progresso salvo no navegador |
+| `logo-preview.html` | Temporária: as 3 propostas de logo para escolher |
 
 O topo (menu) e o rodapé são iguais nas cinco páginas. Ao mudar um deles, mude nas cinco.
 

@@ -1,9 +1,14 @@
 /* TELA: formação de preço por markup (custeio.html, aba "Formação de preço"). */
 import { $, ler, brl, pct, linhas, mostrarNumero } from '../ui/numero.js';
+import { registrarTour } from '../ui/tour.js';
 import { aplicarExemplo, mostrarLeitura } from '../ui/apoio.js';
 import { calcularPreco } from '../calculo/preco.js';
 
 const EXEMPLOS = {
+  padaria: {
+    nome: 'a Padaria Pão da Esquina revendo o preço do refrigerante',
+    campos: { 'pc-custo': '4.5', 'pc-dv': '5', 'pc-cf': '27', 'pc-lucro': '10', 'pc-conc': '7' },
+  },
   floricultura: {
     nome: 'uma floricultura formando o preço de um buquê',
     campos: { 'pc-custo': '30', 'pc-dv': '12', 'pc-cf': '25', 'pc-lucro': '13', 'pc-conc': '45' },
@@ -64,3 +69,12 @@ function atualizar() {
 aplicarExemplo(EXEMPLOS, 'pc-ex');
 ['pc-custo', 'pc-dv', 'pc-cf', 'pc-lucro', 'pc-conc'].forEach(id => $(id).addEventListener('input', atualizar));
 atualizar();
+
+registrarTour('preco', { painel: 'p-preco', etapa: 5, passos: [
+  { alvo: 'pc-custo', titulo: 'Custo do produto', texto: 'Quanto você paga por uma unidade, ou quanto gasta para produzir uma. Está na nota do fornecedor.', exemplo: 'a lata de refrigerante custa R$ 4,50.' },
+  { alvo: 'pc-dv', titulo: 'Despesas da venda', termo: 'Despesa variável', texto: 'A parte do preço que vai embora em cada venda: maquininha, imposto sobre a venda, comissão. Em %.', exemplo: '5%.' },
+  { alvo: 'pc-cf', titulo: 'Parte dos custos fixos', termo: 'Custo fixo', texto: 'Que fatia de cada venda precisa pagar as contas fixas. Divida os custos fixos do mês pelas vendas do mês.', exemplo: 'R$ 10.000 ÷ R$ 37.200 = 27%.' },
+  { alvo: 'pc-lucro', titulo: 'Lucro que você quer', texto: 'Quanto de cada venda deve sobrar como lucro de verdade, depois de tudo pago. Entre 10% e 20% é um começo comum.', exemplo: '10%.' },
+  { alvo: 'pc-conc', titulo: 'Preço do concorrente', texto: 'Opcional. Se souber quanto a loja ao lado cobra, a ferramenta mostra quanto sobra se você copiar esse preço.', exemplo: 'R$ 7,00.' },
+  { alvo: 'pc-big', titulo: 'Como ler o resultado', termo: 'Markup', texto: 'O número grande é o preço que paga o produto, as despesas, a parte das contas fixas e ainda deixa o lucro pedido. Se o concorrente cobra menos, a leitura diz quanto você perde copiando.' },
+]});

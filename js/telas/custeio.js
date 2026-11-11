@@ -1,5 +1,6 @@
 /* TELA: custeio por absorção × ABC (custeio.html, aba "Absorção × ABC"). */
 import { $, ler, brl } from '../ui/numero.js';
+import { registrarTour } from '../ui/tour.js';
 import { aplicarExemplo, mostrarLeitura } from '../ui/apoio.js';
 import { calcularCusteio } from '../calculo/custeio.js';
 
@@ -49,3 +50,12 @@ aplicarExemplo(EXEMPLOS, 'c-ex');
 PRODUTOS.forEach(p => Object.values(CAMPOS).forEach(sufixo => $(`${p.id}-${sufixo}`).addEventListener('input', atualizar)));
 ['c-setup', 'c-insp', 'c-maq'].forEach(id => $(id).addEventListener('input', atualizar));
 atualizar();
+
+registrarTour('custeio', { painel: 'p-custeio', passos: [
+  { alvo: 'a-q', titulo: 'Quantidade no mês', texto: 'Quantas unidades de cada produto você fez no mês.' },
+  { alvo: 'a-d', titulo: 'Material e mão de obra', termo: 'Custo direto', texto: 'O que dá para ligar direto a uma unidade: matéria-prima e as horas de quem a fez.' },
+  { alvo: 'a-h', titulo: 'Horas de máquina', termo: 'Custo indireto', texto: 'Quanto tempo de máquina (ou de forno, ou de bancada) cada unidade usa. É por aqui que a conta comum divide os custos indiretos.' },
+  { alvo: 'a-s', titulo: 'Preparações e inspeções', termo: 'Custeio ABC', texto: 'Quantas vezes por mês a máquina é preparada para esse produto e quantas conferências ele exige. Produtos sob medida consomem muito mais dessas atividades.' },
+  { alvo: 'c-setup', titulo: 'Custos indiretos do mês', texto: 'O total gasto com cada atividade no mês. A conta comum rateia tudo por hora de máquina; o ABC cobra cada atividade de quem a usou.' },
+  { alvo: 'c-out', titulo: 'Como ler o resultado', texto: 'Compare o lucro de cada produto nos dois métodos. Quando o ABC mostra um lucro bem menor, aquele produto está sendo subsidiado pelos outros.' },
+]});

@@ -1,5 +1,6 @@
 /* TELA: IBS e CBS no preço (impostos.html, aba "IBS/CBS no preço"). */
 import { $, ler, preencher, brl, pct, linhas, mostrarNumero } from '../ui/numero.js';
+import { registrarTour } from '../ui/tour.js';
 import { mostrarLeitura } from '../ui/apoio.js';
 import { aoMudarTaxas, taxas } from '../ui/taxas.js';
 import { calcularIva } from '../calculo/iva.js';
@@ -40,3 +41,11 @@ function atualizar() {
 ['v-venda', 'v-compra', 'v-aliq', 'v-red'].forEach(id => $(id).addEventListener('input', atualizar));
 $('v-ano').addEventListener('input', trocarAno);
 aoMudarTaxas(trocarAno);
+
+registrarTour('iva', { painel: 'p-iva', passos: [
+  { alvo: 'v-ano', titulo: 'Ano da simulação', texto: 'A reforma entra aos poucos. Escolha o ano para ver a alíquota daquela fase.' },
+  { alvo: 'v-venda', titulo: 'Vendas sem imposto', texto: 'O valor das suas vendas antes de somar o imposto.' },
+  { alvo: 'v-compra', titulo: 'Compras com nota', texto: 'O que você comprou com nota fiscal. O imposto que veio nessas notas vira crédito e é descontado do que você deve.' },
+  { alvo: 'v-red', titulo: 'Seu setor', texto: 'Alguns setores têm alíquota reduzida. Escolha o que mais se parece com a sua atividade.' },
+  { alvo: 'v-big', titulo: 'Como ler o resultado', texto: 'O número grande é o que sobra para pagar depois de descontar o crédito das compras.' },
+]});

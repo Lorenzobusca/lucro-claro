@@ -1,5 +1,6 @@
 /* TELA: investimento × inflação (planejamento.html, aba "Investimento × inflação"). */
 import { $, ler, preencher, brl, pct, linhas, mostrarNumero } from '../ui/numero.js';
+import { registrarTour } from '../ui/tour.js';
 import { mostrarLeitura } from '../ui/apoio.js';
 import { aoMudarTaxas, taxas, taxa, dataBR } from '../ui/taxas.js';
 import { taxaDoInvestimento, calcularInvestimento, trAoAno } from '../calculo/investimento.js';
@@ -51,3 +52,11 @@ function atualizar() {
 
 ['i-v', 'i-m', 'i-pct', 'i-inf', 'i-tipo'].forEach(id => $(id).addEventListener('input', atualizar));
 aoMudarTaxas(() => { preencher('i-inf', taxa('ipca_focus_12m')); atualizar(); });
+
+registrarTour('investimento', { painel: 'p-invest', passos: [
+  { alvo: 'i-tipo', titulo: 'Onde o dinheiro está', texto: 'Cada opção rende de um jeito e paga (ou não) imposto de renda.' },
+  { alvo: 'i-v', titulo: 'Valor aplicado', texto: 'Quanto você vai investir de uma vez.' },
+  { alvo: 'i-m', titulo: 'Prazo em meses', texto: 'Quanto tempo o dinheiro fica parado. O imposto de renda cai com o prazo.' },
+  { alvo: 'i-inf', titulo: 'Inflação esperada', texto: 'Vem preenchida com a expectativa do mercado. É o que o seu rendimento precisa vencer.' },
+  { alvo: 'i-big', titulo: 'Como ler o resultado', texto: 'O número grande é o ganho real: quanto o dinheiro vai comprar a mais (ou a menos) no fim, depois do imposto e da inflação.' },
+]});

@@ -20,6 +20,10 @@ export function calcularProdutos(produtos, custosFixos) {
     x.parteDaContribuicao = contribuicao > 0 ? x.contribuicao / contribuicao * 100 : NaN;
   });
 
+  /* Margem média da loja e quanto precisa vender no mês (em reais) para pagar os custos fixos */
+  const margemMediaPct = faturamento ? contribuicao / faturamento * 100 : NaN;
+  const faturamentoEquilibrio = contribuicao > 0 ? custosFixos / (contribuicao / faturamento) : NaN;
+
   const validos = itens.filter(x => x.faturamento > 0);
   const porMargem = [...validos].sort((a, b) => b.margemPct - a.margemPct);
   return {
@@ -27,6 +31,8 @@ export function calcularProdutos(produtos, custosFixos) {
     faturamento,
     contribuicao,
     lucro: contribuicao - custosFixos,
+    margemMediaPct,
+    faturamentoEquilibrio,
     melhor: porMargem[0] || null,                       /* maior margem por real vendido */
     pior: porMargem.length > 1 ? porMargem[porMargem.length - 1] : null,
     negativos: validos.filter(x => x.margem < 0),

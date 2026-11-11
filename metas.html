@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Orçamento e metas · Lastrion</title>
-<meta name="description" content="Crie metas de vendas, produção e custos e acompanhe o orçado × realizado da sua empresa.">
+<meta name="description" content="Metas do mês, fluxo de caixa e orçamento base zero: planeje o mês da sua empresa e acompanhe se está no ritmo.">
 <!-- Aplica o tema (claro ou escuro) antes de a página aparecer, para não piscar -->
 <script>(function(){var t;try{t=localStorage.getItem('lc-tema')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,8 @@
   <div class="topo-barra">
     <a class="marca" href="index.html"><svg class="simbolo" viewBox="0 0 64 64" aria-hidden="true"><rect class="simbolo-fundo" width="64" height="64" rx="16"/><rect class="simbolo-haste" x="17" y="13" width="12" height="27"/><rect class="simbolo-base" x="17" y="38" width="31" height="13" rx="2"/></svg><span class="marca-nome">Lastrion</span></a>
     <nav class="nav" aria-label="Principal">
-      <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span>Início</span></a>
+      <a href="index.html" class="nav-inicio"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span>Início</span></a>
+      <a href="comece.html" class="nav-comece"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Comece</span></a>
       <a href="impostos.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg><span>Impostos</span></a>
       <a href="custeio.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13"/></svg><span>Custos</span></a>
       <a href="metas.html" aria-current="page"><i class="nav-ind" aria-hidden="true"></i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg><span>Orçamento</span></a>
@@ -49,9 +50,17 @@
   </section>
 </div>
 
-<!-- FERRAMENTA: Orçamento e metas · tela em js/telas/metas.js · conta em js/calculo/metas.js -->
 <section class="ferramentas">
   <div class="wrap">
+    <div class="tabs" role="tablist" aria-label="Ferramentas de orçamento">
+      <button class="tab" role="tab" id="t-metas" aria-controls="p-metas" aria-selected="true">Metas do mês</button>
+      <button class="tab" role="tab" id="t-caixa" aria-controls="p-caixa" aria-selected="false">Fluxo de caixa</button>
+      <button class="tab" role="tab" id="t-zero" aria-controls="p-zero" aria-selected="false">Base zero</button>
+    </div>
+
+    <!-- FERRAMENTA: Orçamento e metas · tela em js/telas/metas.js · conta em js/calculo/metas.js -->
+    <div class="panel wide" role="tabpanel" id="p-metas" aria-labelledby="t-metas">
+      <div>
     <div class="card out solto bloco-escuro" aria-live="polite">
       <div class="painel-top">
         <div>
@@ -95,6 +104,66 @@
         <h3>Últimos lançamentos</h3>
         <p class="hint">Errou um número? Apague o lançamento aqui.</p>
         <div class="lancs" id="g-lancs"></div>
+      </div>
+    </div>
+  
+      </div>
+    </div>
+
+    <!-- FERRAMENTA: Fluxo de caixa · tela em js/telas/caixa.js · conta em js/calculo/caixa.js -->
+    <div class="panel" role="tabpanel" id="p-caixa" aria-labelledby="t-caixa" hidden>
+      <div class="card form">
+        <p class="exemplo-faixa" id="cx-ex" hidden></p>
+        <h3>Vai faltar dinheiro em algum mês?</h3>
+        <p class="hint">Anote quanto você espera que entre e saia em cada um dos próximos seis meses. O caixa pode ficar negativo num mês mesmo que o semestre inteiro feche no azul: é isso que esta conta mostra.</p>
+        <div class="fields">
+          <label>Dinheiro em caixa hoje (R$)<input id="cx-saldo" inputmode="decimal" value="1000"></label>
+          <label>Sua retirada por mês (R$)<input id="cx-retirada" inputmode="decimal" value="2000"></label>
+        </div>
+        <div class="tbl tbl-cartoes"><table>
+          <thead><tr><th>Mês</th><th>Entra (R$)</th><th>Sai, sem a sua retirada (R$)</th></tr></thead>
+          <tbody>
+            <tr><td>Mês 1</td><td data-label="Entra (R$)"><input id="cx1-e" inputmode="decimal" value="37200" aria-label="Entradas do mês 1"></td><td data-label="Sai (R$)"><input id="cx1-s" inputmode="decimal" value="32010" aria-label="Saídas do mês 1"></td></tr>
+            <tr><td>Mês 2</td><td data-label="Entra (R$)"><input id="cx2-e" inputmode="decimal" value="38100" aria-label="Entradas do mês 2"></td><td data-label="Sai (R$)"><input id="cx2-s" inputmode="decimal" value="43555" aria-label="Saídas do mês 2"></td></tr>
+            <tr><td>Mês 3</td><td data-label="Entra (R$)"><input id="cx3-e" inputmode="decimal" value="38100" aria-label="Entradas do mês 3"></td><td data-label="Sai (R$)"><input id="cx3-s" inputmode="decimal" value="31555" aria-label="Saídas do mês 3"></td></tr>
+            <tr><td>Mês 4</td><td data-label="Entra (R$)"><input id="cx4-e" inputmode="decimal" value="38100" aria-label="Entradas do mês 4"></td><td data-label="Sai (R$)"><input id="cx4-s" inputmode="decimal" value="31555" aria-label="Saídas do mês 4"></td></tr>
+            <tr><td>Mês 5</td><td data-label="Entra (R$)"><input id="cx5-e" inputmode="decimal" value="38100" aria-label="Entradas do mês 5"></td><td data-label="Sai (R$)"><input id="cx5-s" inputmode="decimal" value="31555" aria-label="Saídas do mês 5"></td></tr>
+            <tr><td>Mês 6</td><td data-label="Entra (R$)"><input id="cx6-e" inputmode="decimal" value="38100" aria-label="Entradas do mês 6"></td><td data-label="Sai (R$)"><input id="cx6-s" inputmode="decimal" value="31555" aria-label="Saídas do mês 6"></td></tr>
+          </tbody></table></div>
+        <p class="dica"><b>Dica rápida</b>Em "sai" entram mercadoria, contas fixas e qualquer gasto grande previsto (uma reforma, um equipamento). A sua retirada já é descontada à parte.</p>
+      </div>
+      <div class="card out bloco-escuro" aria-live="polite">
+        <span class="eyebrow">Dinheiro em caixa no fim do sexto mês</span>
+        <div class="big" id="cx-big">—</div>
+        <div id="cx-pill"></div>
+        <div class="tbl tbl-cartoes"><table id="cx-out"></table></div>
+        <div class="leitura" id="cx-leitura"></div>
+      </div>
+    </div>
+
+    <!-- FERRAMENTA: Orçamento base zero · tela em js/telas/basezero.js · conta em js/calculo/basezero.js -->
+    <div class="panel" role="tabpanel" id="p-zero" aria-labelledby="t-zero" hidden>
+      <div class="card form">
+        <p class="exemplo-faixa" id="bz-ex" hidden></p>
+        <h3>Quais gastos fixos você contrataria de novo hoje?</h3>
+        <p class="hint">Liste tudo o que você paga todo mês. Para cada item, decida: manter, reduzir ou cortar. É a sua lista de custos fixos e, de quebra, uma caça ao desperdício.</p>
+        <div class="tbl tbl-cartoes"><table>
+          <thead><tr><th>Gasto</th><th>Valor por mês (R$)</th><th>Decisão</th><th>Novo valor (R$)</th></tr></thead>
+          <tbody>
+            <tr><td><input class="texto" id="bz1-nome" value="Aluguel" placeholder="Nome do gasto" aria-label="Nome do gasto 1"></td><td data-label="Valor por mês (R$)"><input id="bz1-v" inputmode="decimal" value="3000" aria-label="Valor do gasto 1"></td><td data-label="Decisão"><select id="bz1-d" aria-label="Decisão sobre o gasto 1"><option value="manter" selected>Manter</option><option value="reduzir">Reduzir</option><option value="cortar">Cortar</option></select></td><td data-label="Novo valor (R$)"><input id="bz1-n" inputmode="decimal" value="" aria-label="Novo valor do gasto 1"></td></tr>
+            <tr><td><input class="texto" id="bz2-nome" value="Sistema de vendas" placeholder="Nome do gasto" aria-label="Nome do gasto 2"></td><td data-label="Valor por mês (R$)"><input id="bz2-v" inputmode="decimal" value="250" aria-label="Valor do gasto 2"></td><td data-label="Decisão"><select id="bz2-d" aria-label="Decisão sobre o gasto 2"><option value="manter" selected>Manter</option><option value="reduzir">Reduzir</option><option value="cortar">Cortar</option></select></td><td data-label="Novo valor (R$)"><input id="bz2-n" inputmode="decimal" value="" aria-label="Novo valor do gasto 2"></td></tr>
+            <tr><td><input class="texto" id="bz3-nome" value="Anúncios" placeholder="Nome do gasto" aria-label="Nome do gasto 3"></td><td data-label="Valor por mês (R$)"><input id="bz3-v" inputmode="decimal" value="900" aria-label="Valor do gasto 3"></td><td data-label="Decisão"><select id="bz3-d" aria-label="Decisão sobre o gasto 3"><option value="manter">Manter</option><option value="reduzir" selected>Reduzir</option><option value="cortar">Cortar</option></select></td><td data-label="Novo valor (R$)"><input id="bz3-n" inputmode="decimal" value="500" aria-label="Novo valor do gasto 3"></td></tr>
+            <tr><td><input class="texto" id="bz4-nome" value="Assinaturas e aplicativos" placeholder="Nome do gasto" aria-label="Nome do gasto 4"></td><td data-label="Valor por mês (R$)"><input id="bz4-v" inputmode="decimal" value="320" aria-label="Valor do gasto 4"></td><td data-label="Decisão"><select id="bz4-d" aria-label="Decisão sobre o gasto 4"><option value="manter">Manter</option><option value="reduzir">Reduzir</option><option value="cortar" selected>Cortar</option></select></td><td data-label="Novo valor (R$)"><input id="bz4-n" inputmode="decimal" value="" aria-label="Novo valor do gasto 4"></td></tr>
+            <tr><td><input class="texto" id="bz5-nome" value="Embalagens" placeholder="Nome do gasto" aria-label="Nome do gasto 5"></td><td data-label="Valor por mês (R$)"><input id="bz5-v" inputmode="decimal" value="600" aria-label="Valor do gasto 5"></td><td data-label="Decisão"><select id="bz5-d" aria-label="Decisão sobre o gasto 5"><option value="manter">Manter</option><option value="reduzir" selected>Reduzir</option><option value="cortar">Cortar</option></select></td><td data-label="Novo valor (R$)"><input id="bz5-n" inputmode="decimal" value="450" aria-label="Novo valor do gasto 5"></td></tr>
+            <tr><td><input class="texto" id="bz6-nome" value="Tarifas do banco" placeholder="Nome do gasto" aria-label="Nome do gasto 6"></td><td data-label="Valor por mês (R$)"><input id="bz6-v" inputmode="decimal" value="180" aria-label="Valor do gasto 6"></td><td data-label="Decisão"><select id="bz6-d" aria-label="Decisão sobre o gasto 6"><option value="manter">Manter</option><option value="reduzir">Reduzir</option><option value="cortar" selected>Cortar</option></select></td><td data-label="Novo valor (R$)"><input id="bz6-n" inputmode="decimal" value="" aria-label="Novo valor do gasto 6"></td></tr>
+          </tbody></table></div>
+        <p class="dica"><b>Dica rápida</b>Pegue o extrato dos últimos três meses e marque tudo o que se repete. Assinaturas esquecidas e tarifas costumam aparecer aí.</p>
+      </div>
+      <div class="card out bloco-escuro" aria-live="polite">
+        <span class="eyebrow">Economia no ano</span>
+        <div class="big" id="bz-big">—</div>
+        <div class="kv" id="bz-kv"></div>
+        <div class="leitura" id="bz-leitura"></div>
       </div>
     </div>
   </div>
@@ -157,7 +226,7 @@
         <p class="tagline">Base firme para lucrar mais.</p>
         <p>Ferramentas gratuitas de custo, preço e orçamento para pequenos negócios.</p>
       </div>
-      <div><h4>Custos e preço</h4><a href="custeio.html#margem">Margem e equilíbrio</a><a href="custeio.html#produtos">Margem por produto</a><a href="custeio.html#preco">Formação de preço</a><a href="custeio.html#custeio">Custeio ABC</a><a href="custeio.html#perdas">Perdas</a></div>\r\n      <div><h4>Orçamento e impostos</h4><a href="metas.html#caixa">Fluxo de caixa</a><a href="metas.html#metas">Metas do mês</a><a href="metas.html#zero">Orçamento base zero</a><a href="impostos.html">MEI e Simples</a><a href="impostos.html#iva">IBS/CBS no preço</a></div>\r\n      <div><h4>Aprenda</h4><a href="index.html#trilha">Comece por aqui</a><a href="index.html#porque">Por que fazer as contas</a><a href="index.html#reforma">Reforma tributária</a><a href="planejamento.html">Para você: investimentos</a><a href="index.html#duvidas">Dúvidas</a></div>
+      <div><h4>Custos e preço</h4><a href="custeio.html#margem">Margem e equilíbrio</a><a href="custeio.html#produtos">Margem por produto</a><a href="custeio.html#preco">Formação de preço</a><a href="custeio.html#custeio">Custeio ABC</a><a href="custeio.html#perdas">Perdas</a></div>\r\n      <div><h4>Orçamento e impostos</h4><a href="metas.html#caixa">Fluxo de caixa</a><a href="metas.html#metas">Metas do mês</a><a href="metas.html#zero">Orçamento base zero</a><a href="impostos.html">MEI e Simples</a><a href="impostos.html#iva">IBS/CBS no preço</a></div>\r\n      <div><h4>Aprenda</h4><a href="comece.html">Comece por aqui</a><a href="comece.html#porque">Por que fazer as contas</a><a href="index.html#reforma">Reforma tributária</a><a href="planejamento.html">Para você: investimentos</a><a href="index.html#duvidas">Dúvidas</a></div>
     </div>
     <p class="disclaimer">As calculadoras são simulações educativas e não substituem a orientação de um contador ou consultor. Valores e regras podem mudar; confira sempre nas fontes oficiais (Receita Federal, Portal do Simples Nacional, Banco Central).</p>
     <div class="rodape-logo" aria-hidden="true"><svg class="logo" viewBox="0 0 600 150" role="img" aria-label="Lastrion"><text x="0" y="104" textLength="600" lengthAdjust="spacingAndGlyphs">Lastrion</text><rect x="0" y="122" width="600" height="24" rx="4"/></svg></div>
@@ -166,5 +235,7 @@
 
 <script type="module" src="js/ui/base.js"></script>
 <script type="module" src="js/telas/metas.js"></script>
+<script type="module" src="js/telas/caixa.js"></script>
+<script type="module" src="js/telas/basezero.js"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 /* TELA: fluxo de caixa (metas.html, aba "Fluxo de caixa"). */
 import { $, ler, brl, mostrarNumero } from '../ui/numero.js';
+import { registrarTour } from '../ui/tour.js';
 import { aplicarExemplo, mostrarLeitura } from '../ui/apoio.js';
 import { calcularCaixa } from '../calculo/caixa.js';
 
@@ -9,11 +10,11 @@ const valor = v => `<span class="${v < 0 ? 'negativo' : ''}">${brl(v)}</span>`;
 
 const EXEMPLOS = {
   padaria: {
-    nome: 'uma padaria que reforma a loja no segundo mês',
+    nome: 'a Padaria Pão da Esquina, cujo forno quebra no segundo mês',
     campos: {
-      'cx-saldo': '5000', 'cx-retirada': '3000',
-      'cx1-e': '30000', 'cx1-s': '32000', 'cx2-e': '31000', 'cx2-s': '36000', 'cx3-e': '33000', 'cx3-s': '33000',
-      'cx4-e': '40000', 'cx4-s': '33000', 'cx5-e': '44000', 'cx5-s': '34000', 'cx6-e': '46000', 'cx6-s': '35000',
+      'cx-saldo': '1000', 'cx-retirada': '2000',
+      'cx1-e': '37200', 'cx1-s': '32010', 'cx2-e': '38100', 'cx2-s': '43555', 'cx3-e': '38100', 'cx3-s': '31555',
+      'cx4-e': '38100', 'cx4-s': '31555', 'cx5-e': '38100', 'cx5-s': '31555', 'cx6-e': '38100', 'cx6-s': '31555',
     },
   },
 };
@@ -55,3 +56,11 @@ aplicarExemplo(EXEMPLOS, 'cx-ex');
 ['cx-saldo', 'cx-retirada'].forEach(id => $(id).addEventListener('input', atualizar));
 MESES.forEach(n => ['e', 's'].forEach(c => $(`cx${n}-${c}`).addEventListener('input', atualizar)));
 atualizar();
+
+registrarTour('caixa', { painel: 'p-caixa', etapa: 6, passos: [
+  { alvo: 'cx-saldo', titulo: 'Dinheiro em caixa hoje', termo: 'Saldo de caixa', texto: 'O que a empresa tem agora: conta do banco mais o dinheiro da gaveta.', exemplo: 'R$ 1.000.' },
+  { alvo: 'cx-retirada', titulo: 'Sua retirada por mês', termo: 'Pró-labore', texto: 'Quanto você tira todo mês para a casa. Um valor fixo, combinado com você mesmo.', exemplo: 'R$ 2.000.' },
+  { alvo: 'cx1-e', titulo: 'Entra', termo: 'Faturamento', texto: 'Quanto você espera vender no mês. Use os meses passados como base e ajuste para datas fortes ou fracas.', exemplo: 'R$ 37.200.' },
+  { alvo: 'cx1-s', titulo: 'Sai', texto: 'Mercadoria, contas fixas e qualquer gasto grande previsto (reforma, equipamento, 13º). Sem a sua retirada, que já foi descontada.', exemplo: 'R$ 32.010 num mês normal; R$ 43.555 no mês do forno novo.' },
+  { alvo: 'cx-big', titulo: 'Como ler o resultado', termo: 'Fluxo de caixa', texto: 'Olhe a coluna "Saldo no fim" mês a mês. Um número vermelho é um mês em que o dinheiro acaba antes de o próximo entrar, mesmo que o total do semestre seja positivo.' },
+]});

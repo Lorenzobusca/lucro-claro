@@ -1,6 +1,8 @@
 /* TELA: orçamento e metas, versão grátis (metas.html).
    Os dados ficam salvos no navegador da pessoa (localStorage), sem servidor. */
 import { $, numeroDe } from '../ui/numero.js';
+import { registrarTour } from '../ui/tour.js';
+import { PADARIA, resultadosPadaria } from '../calculo/trilha.js';
 import { LIMITE_GRATIS, dataIso, mesDe, mesVizinho, situacaoDaMeta, metasDeExemplo } from '../calculo/metas.js';
 
 const CHAVE = 'lc-metas-v1';
@@ -17,6 +19,21 @@ const nomeDoMes = m => { const [a, b] = m.split('-').map(Number); const s = new 
 let D;
 try { D = JSON.parse(localStorage.getItem(CHAVE)); } catch (e) {}
 if (!D || !Array.isArray(D.metas) || !Array.isArray(D.lanc)) D = metasDeExemplo(hoje);
+/* O link metas.html?ex=padaria#metas (vindo da trilha) mostra as metas da padaria de exemplo,
+   desde que a pessoa ainda não tenha criado as suas */
+if (new URLSearchParams(location.search).get('ex') === 'padaria' && D.exemplo) {
+  const r = resultadosPadaria();
+  const metas = [
+    { id: 'ex1', nome: 'Vendas do mês', tipo: 'min', alvo: Math.round(r.depois.faturamento), un: 'R$', ritmo: 1.02 },
+    { id: 'ex2', nome: 'Gastos fixos do mês', tipo: 'max', alvo: Math.round(r.fixosDepois), un: 'R$', ritmo: 0.97 },
+    { id: 'ex3', nome: 'Refrigerantes vendidos', tipo: 'min', alvo: PADARIA.produtos[2].quantidade, un: 'un', ritmo: 1.05 },
+  ];
+  /* lançamentos proporcionais ao que já passou do mês, como se a Célia lançasse toda semana */
+  const dias = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0).getDate(), passado = hoje.getDate() / dias;
+  D = { exemplo: true,
+    metas: metas.map(({ ritmo, ...m }) => m),
+    lanc: metas.map(m => ({ id: 'l' + m.id, meta: m.id, data: dataIso(hoje), valor: Math.round(m.alvo * passado * m.ritmo), obs: 'Exemplo' })) };
+}
 let salvou = true;
 function salvar() { try { localStorage.setItem(CHAVE, JSON.stringify(D)); salvou = true; } catch (e) { salvou = false; } }
 function sairDoExemplo() { if (D.exemplo) D = { metas: [], lanc: [] }; }
@@ -121,3 +138,12 @@ $('g-lancs').addEventListener('click', e => {
 });
 
 desenhar();
+
+registrarTour('metas', { painel: 'p-metas', etapa: 7, passos: [
+  { alvo: 'g-lista', titulo: 'O painel do mês', termo: 'Orçamento', texto: 'Cada cartão é uma meta. A barra mostra quanto já foi feito; o risquinho, onde você deveria estar hoje. Use as setas para ver os meses anteriores.' },
+  { alvo: 'g-nome', titulo: 'Nome da meta', texto: 'Diga o que você quer acompanhar, do seu jeito.', exemplo: '"Vendas do mês" ou "Gastos fixos".' },
+  { alvo: 'g-tipo', titulo: 'Tipo', texto: '"Chegar a um valor" serve para vendas e produção. "Não passar de um valor" serve para gastos e perdas.' },
+  { alvo: 'g-alvo', titulo: 'Meta por mês', texto: 'O número que você quer bater. Tire das outras ferramentas: o faturamento de equilíbrio, o total de custos fixos.', exemplo: 'vender R$ 38.100.' },
+  { alvo: 'g-un', titulo: 'Medida', texto: 'Reais, unidades, horas ou quilos.' },
+  { alvo: 'g-lancs', titulo: 'Como acompanhar', termo: 'Projeção', texto: 'Todo dia ou toda semana, lance o que aconteceu no cartão da meta. O painel calcula se você está no ritmo e como o mês deve fechar.' },
+]});
