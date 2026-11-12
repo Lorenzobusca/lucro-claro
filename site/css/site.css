@@ -1,0 +1,149 @@
+/* SITE: estilo só do site institucional. Cores, fontes e peças comuns vêm de compartilhado/css/.
+   Pensado primeiro para o celular (360px); as regras de tela grande vêm depois. */
+
+/* ---------- Topo ---------- */
+.s-topo{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.s-topo-barra{display:flex;align-items:center;gap:var(--e3);padding-block:10px}
+.s-topo .marca{margin-right:auto;font-size:1.15rem}
+.s-topo .simbolo{width:34px;height:34px}
+.s-nav{display:none}
+.s-entrar{font-weight:700;font-size:var(--t-sm);color:var(--ink);text-decoration:none;padding:8px 6px}
+.s-comecar{padding:9px 16px;font-size:var(--t-sm)}
+@media (min-width:900px){
+  .s-nav{display:flex;gap:4px;margin-right:var(--e3)}
+  .s-nav a{color:var(--muted);font-weight:700;font-size:var(--t-sm);text-decoration:none;padding:8px 12px;border-radius:var(--r-pill)}
+  .s-nav a:hover{color:var(--ink);background:var(--surface-2)}
+  .s-topo .marca{margin-right:0}
+  .s-nav{margin-left:auto}
+}
+@media (max-width:359px){.s-entrar{display:none}}
+
+/* ---------- Hero ---------- */
+.s-hero{padding-block:var(--e6) var(--e7)}
+.s-hero-grade{display:grid;gap:var(--e6)}
+.s-hero h1{font-size:clamp(1.7rem,7.2vw,3.3rem);line-height:1.1;margin-top:var(--e3)}
+.s-hero .lead{margin-top:var(--e4);font-size:1.05rem}
+.s-selos{list-style:none;padding:0;margin:var(--e5) 0 0;display:flex;flex-wrap:wrap;gap:var(--e2)}
+.s-selos li{font-size:var(--t-sm);font-weight:700;padding:6px 12px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--line)}
+.s-selos li::before{content:"✓ ";color:var(--ok)}
+@media (min-width:960px){.s-hero-grade{grid-template-columns:minmax(0,1fr) minmax(0,440px);align-items:start;gap:var(--e7)}.s-hero{padding-block:var(--e8)}}
+
+/* Calculadora grátis */
+.s-calc{display:grid;gap:var(--e4);padding:var(--e5);box-shadow:var(--sombra-2);border-color:transparent}
+.s-calc-abas{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:var(--r-pill);background:var(--surface-2)}
+.s-calc-aba{font:700 var(--t-sm) var(--f-body);padding:10px 8px;border:0;border-radius:var(--r-pill);background:none;color:var(--muted);cursor:pointer}
+.s-calc-aba[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.s-calc-form{display:grid;gap:var(--e4)}
+.s-calc-titulo{font-size:1.15rem}
+.s-calc-resultado{padding:var(--e5);border-radius:var(--r2);background:var(--out-bg);color:#F1F2F4}
+.s-calc-rotulo{font-size:var(--t-sm);font-weight:700;opacity:.8}
+.s-calc-numero{font-family:var(--f-display);font-weight:800;font-size:clamp(2rem,9vw,2.6rem);line-height:1.1;letter-spacing:-.03em;color:#FFD23F;margin:4px 0 var(--e2)}
+.s-calc-numero.zero{color:#FF8A75}
+.s-calc-leitura{font-size:.95rem;line-height:1.5}
+.s-calc-resultado .meter{background:rgba(255,255,255,.14);margin:var(--e2) 0 var(--e3)}
+.s-calc-resultado .meter i{background:#F1F2F4}
+.s-calc-detalhe{list-style:none;padding:0;margin:var(--e4) 0 0;display:grid;font-size:var(--t-sm)}
+.s-calc-detalhe li{display:flex;justify-content:space-between;gap:var(--e3);padding:7px 0;border-top:1px solid rgba(255,255,255,.12)}
+.s-calc-detalhe li span:first-child{opacity:.75}
+.s-calc-detalhe li span:last-child{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+.s-calc-nota{font-size:.78rem;color:var(--muted);line-height:1.5}
+[data-theme="dark"] .s-calc-resultado{background:#0A0B0E}
+
+/* ---------- Seções ---------- */
+.secao{padding-block:var(--e7)}
+@media (min-width:900px){.secao{padding-block:var(--e8)}}
+.s-faixa{background:var(--surface);border-block:1px solid var(--line)}
+.s-situacoes{list-style:none;padding:0;margin:0;display:grid;gap:var(--e3)}
+.s-situacoes li{position:relative;padding:var(--e4) var(--e4) var(--e4) 52px;border-radius:var(--r2);background:var(--surface);border:1px solid var(--line);font-weight:600;font-size:1.02rem}
+.s-situacoes li::before{content:"";position:absolute;left:var(--e4);top:var(--e4);width:22px;height:22px;border-radius:7px;background:var(--setor);box-shadow:inset 0 0 0 6px var(--surface)}
+@media (min-width:760px){.s-situacoes{grid-template-columns:1fr 1fr}}
+
+/* Como funciona: 3 passos com uma "tela" desenhada em CSS (sem imagem para carregar) */
+.s-passos{list-style:none;padding:0;margin:0;display:grid;gap:var(--e6);counter-reset:passo}
+.s-passos li{counter-increment:passo;display:grid;gap:var(--e2);align-content:start}
+.s-passos h3::before{content:counter(passo) ". ";color:var(--acento)}
+.s-passos p{color:var(--muted)}
+@media (min-width:760px){.s-passos{grid-template-columns:repeat(3,1fr)}}
+.s-tela{width:min(240px,100%);aspect-ratio:9/12;margin-bottom:var(--e3);padding:var(--e4);border-radius:26px;border:8px solid var(--ink);background:var(--bg);display:flex;flex-direction:column;gap:8px;font-size:.78rem}
+.s-tela-topo{height:6px;width:40%;margin:0 auto var(--e2);border-radius:3px;background:var(--line)}
+.s-tela b{font-size:.82rem}
+.s-tela small{color:var(--muted);font-weight:600}
+.s-tela-campo{padding:8px 10px;border-radius:8px;background:var(--surface-2);font-weight:600}
+.s-tela-botao{margin-top:auto;padding:9px;border-radius:var(--r-pill);background:var(--ink);color:var(--bg);text-align:center;font-weight:700}
+.s-tela-botao.claro{background:var(--setor);color:var(--setor-ink)}
+.s-tela-numero{font-family:var(--f-display);font-weight:800;font-size:1.6rem;color:var(--acento)}
+.s-tela-leitura{padding:8px 10px;border-radius:8px;border-left:4px solid var(--ok);background:var(--surface-2)}
+
+/* História */
+.s-historia{display:grid;gap:var(--e4)}
+.s-historia .card{display:grid;gap:var(--e3);align-content:start}
+.s-historia .tag{font-size:var(--t-sm)}
+.s-antes{border-left:6px solid var(--bad)}
+.s-depois{border-left:6px solid var(--ok)}
+@media (min-width:760px){.s-historia{grid-template-columns:1fr 1fr}}
+
+/* Ferramentas pelo problema */
+.s-ferramentas{list-style:none;padding:0;margin:0;display:grid;gap:var(--e2)}
+.s-ferramentas li{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--e2) var(--e4);padding:var(--e4);border-radius:var(--r2);background:var(--bg);border:1px solid var(--line)}
+.s-ferramentas b{font-size:1rem;flex:1 1 220px}
+.s-plano{font-size:.75rem;font-weight:800;padding:4px 10px;border-radius:var(--r-pill);background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok);white-space:nowrap}
+.s-plano.pago{background:color-mix(in srgb,var(--acento) 16%,transparent);color:var(--acento)}
+@media (min-width:900px){.s-ferramentas{grid-template-columns:1fr 1fr}}
+
+/* Preço */
+.s-planos{display:grid;gap:var(--e4);max-width:860px}
+.s-plano-card{display:grid;gap:var(--e4);align-content:start}
+.s-plano-card.destaque{border:2px solid var(--ink);box-shadow:var(--sombra-2)}
+.s-valor{font-family:var(--f-display);font-weight:800;font-size:1.8rem;letter-spacing:-.02em}
+.s-valor small{font-family:var(--f-body);font-size:.95rem;font-weight:600;color:var(--muted)}
+.s-anual{display:block;font-family:var(--f-body);font-size:.95rem;font-weight:600;color:var(--muted);margin-top:4px}
+.s-garantias{list-style:none;padding:var(--e4);margin:0;border-radius:var(--r2);background:var(--surface-2);display:grid;gap:6px;font-size:var(--t-sm)}
+@media (min-width:760px){.s-planos{grid-template-columns:1fr 1fr}}
+
+/* Confiança */
+.s-confianca{display:grid;gap:var(--e4)}
+.s-confianca .card{display:grid;gap:var(--e2);align-content:start;background:var(--bg)}
+.s-confianca p{color:var(--muted)}
+@media (min-width:760px){.s-confianca{grid-template-columns:1fr 1fr}}
+.s-depoimentos{margin-top:var(--e6)}
+
+/* Chamada final */
+.s-final{display:grid;gap:var(--e3);justify-items:start;padding:var(--e6) var(--e5);border-radius:var(--r4);background:var(--setor);color:var(--setor-ink)}
+.s-final h2{max-width:22ch}
+.s-final .s-final-btn{background:var(--setor-ink);border-color:var(--setor-ink);color:var(--setor)}
+@media (min-width:760px){.s-final{padding:var(--e7)}}
+
+/* Rodapé */
+.s-rodape{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--e5)}
+.s-rodape nav{display:flex;flex-wrap:wrap;gap:var(--e2) var(--e5)}
+.s-rodape nav a{color:var(--muted);font-weight:600}
+
+/* WhatsApp fixo */
+.s-whatsapp{position:fixed;z-index:30;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;padding:12px;border-radius:var(--r-pill);background:#25D366;color:#073B1C;font-weight:800;font-size:var(--t-sm);text-decoration:none;box-shadow:var(--sombra-2)}
+.s-whatsapp svg{width:26px;height:26px;flex:none}
+.s-whatsapp span{display:none}
+@media (min-width:760px){.s-whatsapp{padding:12px 18px 12px 14px}.s-whatsapp span{display:inline}}
+
+/* Páginas de texto (privacidade, termos) */
+.texto-legal{max-width:760px;padding-block:var(--e6) var(--e8)}
+.texto-legal h1{font-size:clamp(1.6rem,6vw,2.4rem);margin-bottom:var(--e3)}
+.texto-legal h2{font-size:1.2rem;margin:var(--e6) 0 var(--e2)}
+.texto-legal p,.texto-legal li{color:var(--ink);line-height:1.65}
+.texto-legal p+p{margin-top:var(--e3)}
+.texto-legal ul{padding-left:1.2em;display:grid;gap:6px;margin:var(--e2) 0}
+.rascunho{padding:var(--e4);border-radius:var(--r2);border:2px dashed var(--bad);background:color-mix(in srgb,var(--bad) 8%,transparent);font-weight:700;margin-bottom:var(--e5)}
+.preencher{background:color-mix(in srgb,var(--warn) 25%,transparent);padding:0 4px;border-radius:4px;font-weight:700}
+
+/* Ajustes do celular */
+.s-comecar{white-space:nowrap}
+.s-so-grande{display:none}
+@media (min-width:420px){.s-so-grande{display:inline}}
+@media (min-width:960px){.s-hero .lead{max-width:52ch}}
+.s-calc .src,.s-calc-nota{font-family:var(--f-body)}
+@media (max-width:959px){
+  .s-hero{padding-top:var(--e5)}
+  .s-hero .lead{font-size:1rem}
+  .s-selos{order:3}
+  .s-hero-grade{gap:var(--e5)}
+}
+.s-calc-detalhe li span:last-child{white-space:nowrap}

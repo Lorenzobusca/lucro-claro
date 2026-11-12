@@ -1,9 +1,9 @@
-// Busca as taxas no Banco Central e grava em data/taxas.json.
+// Busca as taxas no Banco Central e grava em compartilhado/data/taxas.json.
 // Roda sozinho todo dia pelo GitHub Actions (.github/workflows/atualizar-taxas.yml).
 // Para testar no seu computador: node scripts/atualizar-taxas.mjs
 import { readFile, writeFile } from "node:fs/promises";
 
-const ARQUIVO = new URL("../data/taxas.json", import.meta.url);
+const ARQUIVO = new URL("../compartilhado/data/taxas.json", import.meta.url);
 const HEADERS = { "Accept": "application/json", "User-Agent": "lastrion-taxas/1.0" };
 
 async function getJson(url, tentativas = 3) {

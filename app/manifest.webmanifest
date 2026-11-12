@@ -1,0 +1,15 @@
+{
+  "name": "Lastrion",
+  "short_name": "Lastrion",
+  "description": "Base firme para lucrar mais: ferramentas gratuitas de custo, preço e orçamento para pequenos negócios.",
+  "lang": "pt-BR",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#F1F2F4",
+  "theme_color": "#14151A",
+  "icons": [
+    { "src": "../compartilhado/img/simbolo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "../compartilhado/img/icone-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "../compartilhado/img/icone-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

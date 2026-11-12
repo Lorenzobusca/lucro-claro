@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR" data-setor="planejamento">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Planejamento financeiro · Lastrion</title>
+<meta name="description" content="Compare poupança, CDB, LCI e Tesouro Selic com as taxas do Banco Central, já descontando imposto e inflação.">
+<!-- Aplica o tema (claro ou escuro) antes de a página aparecer, para não piscar -->
+<script>(function(){var t;try{t=localStorage.getItem('lc-tema')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="../compartilhado/css/tokens.css">
+<link rel="stylesheet" href="../compartilhado/css/base.css">
+<link rel="stylesheet" href="../compartilhado/css/componentes.css">
+<link rel="stylesheet" href="../compartilhado/css/paginas.css">
+<link rel="icon" href="../compartilhado/img/simbolo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../compartilhado/img/icone-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#14151A">
+</head>
+<body>
+<a class="pular" href="#principal">Pular para o conteúdo</a>
+
+<!-- TOPO (igual em todas as páginas) -->
+<header class="topo">
+  <div class="topo-barra">
+    <a class="marca" href="index.html"><svg class="simbolo" viewBox="0 0 64 64" aria-hidden="true"><rect class="simbolo-fundo" width="64" height="64" rx="16"/><rect class="simbolo-haste" x="17" y="13" width="12" height="27"/><rect class="simbolo-base" x="17" y="38" width="31" height="13" rx="2"/></svg><span class="marca-nome">Lastrion</span></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html" class="nav-inicio"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span>Painel</span></a>
+      <a href="comece.html" class="nav-comece"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Comece</span></a>
+      <a href="impostos.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg><span>Impostos</span></a>
+      <a href="custeio.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13"/></svg><span>Custos</span></a>
+      <a href="metas.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg><span>Orçamento</span></a>
+      <a href="planejamento.html" aria-current="page"><i class="nav-ind" aria-hidden="true"></i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg><span>Planejamento</span></a>
+    </nav>
+    <button class="glossario-btn" id="abrir-glossario" type="button" aria-label="Abrir o glossário" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11M9 8h6"/></svg><span>Glossário</span></button>
+    <a class="conta-btn" href="assinatura.html" aria-label="Minha conta e assinatura"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></a>
+    <button class="tema" id="tema" type="button" aria-label="Mudar para o tema escuro">
+      <svg class="sol" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg>
+      <svg class="lua" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<p class="nuvem" id="nuvem" role="status" data-tom="espera"><i aria-hidden="true"></i><span>Abrindo…</span></p>
+
+<main id="principal">
+<div class="wrap cabecalho-wrap">
+  <section class="cabecalho">
+    <nav class="crumbs" aria-label="Você está em"><a href="index.html">Painel</a><span aria-hidden="true">›</span><span aria-current="page">Planejamento financeiro</span></nav>
+    <p class="eyebrow">Setor 4 de 4</p>
+    <h1>Planejamento financeiro</h1>
+    <p class="lead">Simule quanto seu dinheiro pode valer daqui a alguns anos, monte sua carteira e compare onde ele rende de verdade, já descontando imposto de renda e inflação.</p>
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="cabecalho-icone"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>
+  </section>
+</div>
+
+<section class="ferramentas">
+  <div class="wrap">
+    <!-- TAXAS DE HOJE · preenchidas por js/ui/base.js a partir de data/taxas.json -->
+    <div class="rates" aria-label="Taxas de hoje">
+      <div class="rate"><span>Selic meta</span><b data-rate="selic">—</b><small data-date="selic"></small></div>
+      <div class="rate"><span>CDI</span><b data-rate="cdi">—</b><small data-date="cdi"></small></div>
+      <div class="rate"><span>IPCA 12 meses</span><b data-rate="ipca_12m">—</b><small data-date="ipca_12m"></small></div>
+      <div class="rate"><span>IPCA esperado (Focus)</span><b data-rate="ipca_focus_12m">—</b><small data-date="ipca_focus_12m"></small></div>
+      <div class="rate"><span>TR do mês</span><b data-rate="tr">—</b><small data-date="tr"></small></div>
+      <p class="rates-src" id="rates-src">Fonte: Banco Central do Brasil.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Calculadoras">
+      <button class="tab" role="tab" id="t-carteira" aria-controls="p-carteira" aria-selected="true">Simulador de carteira</button>
+      <button class="tab" role="tab" id="t-invest" aria-controls="p-invest" aria-selected="false">Investimento × inflação</button>
+    </div>
+
+    <!-- FERRAMENTA: Simulador de carteira · tela em js/telas/carteira.js · conta em js/calculo/carteira.js -->
+    <div class="panel wide" role="tabpanel" id="p-carteira" aria-labelledby="t-carteira">
+      <div class="card form">
+        <h3>Simulador de carteira</h3>
+        <p class="hint">Escolha quanto colocar em cada investimento e veja quanto seu dinheiro pode valer daqui a alguns anos, já descontando o imposto de renda.</p>
+        <div class="fields four">
+          <label>Valor inicial (R$)<input id="w-ini" inputmode="decimal" value="10000"></label>
+          <label>Quanto vai guardar por mês (R$)<input id="w-apt" inputmode="decimal" value="500"></label>
+          <label>Por quantos anos<input id="w-anos" inputmode="decimal" value="10"></label>
+          <label>Inflação esperada ao ano (%)<input id="w-inf" inputmode="decimal" value="4.5"><small class="src" data-src="ipca_focus_12m"></small></label>
+        </div>
+        <div class="presets" role="group" aria-label="Carteiras prontas">
+          <span>Começar com uma carteira pronta:</span>
+          <button class="preset" type="button" data-preset="conservadora">Conservadora</button>
+          <button class="preset" type="button" data-preset="moderada" aria-pressed="true">Moderada</button>
+          <button class="preset" type="button" data-preset="arrojada">Arrojada</button>
+        </div>
+        <div class="tbl tbl-cartoes"><table class="alloc">
+          <thead><tr><th>Investimento</th><th>% da carteira</th><th>Rende ao ano (%)</th><th>De onde vem a taxa</th><th>Imposto de renda</th></tr></thead>
+          <tbody>
+            <tr><td>Poupança</td><td data-label="% da carteira"><input id="w-p-poup" inputmode="decimal" value="0" aria-label="Porcentagem em Poupança"></td><td data-label="Rende ao ano (%)"><input id="w-r-poup" inputmode="decimal" value="0" aria-label="Rendimento ao ano de Poupança"></td><td class="w-o" id="w-o-poup" data-label="De onde vem a taxa"></td><td class="w-ir" id="w-i-poup" data-label="Imposto de renda"></td></tr>
+            <tr><td>Tesouro Selic</td><td data-label="% da carteira"><input id="w-p-selic" inputmode="decimal" value="0" aria-label="Porcentagem em Tesouro Selic"></td><td data-label="Rende ao ano (%)"><input id="w-r-selic" inputmode="decimal" value="0" aria-label="Rendimento ao ano de Tesouro Selic"></td><td class="w-o" id="w-o-selic" data-label="De onde vem a taxa"></td><td class="w-ir" id="w-i-selic" data-label="Imposto de renda"></td></tr>
+            <tr><td>CDB 100% do CDI</td><td data-label="% da carteira"><input id="w-p-cdb" inputmode="decimal" value="0" aria-label="Porcentagem em CDB 100% do CDI"></td><td data-label="Rende ao ano (%)"><input id="w-r-cdb" inputmode="decimal" value="0" aria-label="Rendimento ao ano de CDB 100% do CDI"></td><td class="w-o" id="w-o-cdb" data-label="De onde vem a taxa"></td><td class="w-ir" id="w-i-cdb" data-label="Imposto de renda"></td></tr>
+            <tr><td>LCI e LCA (90% do CDI)</td><td data-label="% da carteira"><input id="w-p-lci" inputmode="decimal" value="0" aria-label="Porcentagem em LCI e LCA (90% do CDI)"></td><td data-label="Rende ao ano (%)"><input id="w-r-lci" inputmode="decimal" value="0" aria-label="Rendimento ao ano de LCI e LCA (90% do CDI)"></td><td class="w-o" id="w-o-lci" data-label="De onde vem a taxa"></td><td class="w-ir" id="w-i-lci" data-label="Imposto de renda"></td></tr>
+            <tr><td>Tesouro IPCA+</td><td data-label="% da carteira"><input id="w-p-ipca" inputmode="decimal" value="0" aria-label="Porcentagem em Tesouro IPCA+"></td><td data-label="Rende ao ano (%)"><input id="w-r-ipca" inputmode="decimal" value="0" aria-label="Rendimento ao ano de Tesouro IPCA+"></td><td class="w-o" id="w-o-ipca" data-label="De onde vem a taxa"></td><td class="w-ir" id="w-i-ipca" data-label="Imposto de renda"></td></tr>
+            <tr><td>Fundos imobiliários (FIIs)</td><td data-label="% da carteira"><input id="w-p-fii" inputmode="decimal" value="0" aria-label="Porcentagem em Fundos imobiliários (FIIs)"></td><td data-label="Rende ao ano (%)"><input id="w-r-fii" inputmode="decimal" value="0" aria-label="Rendimento ao ano de Fundos imobiliários (FIIs)"></td><td class="w-o" id="w-o-fii" data-label="De onde vem a taxa"></td><td class="w-ir" id="w-i-fii" data-label="Imposto de renda"></td></tr>
+            <tr><td>Ações (bolsa)</td><td data-label="% da carteira"><input id="w-p-acoes" inputmode="decimal" value="0" aria-label="Porcentagem em Ações (bolsa)"></td><td data-label="Rende ao ano (%)"><input id="w-r-acoes" inputmode="decimal" value="0" aria-label="Rendimento ao ano de Ações (bolsa)"></td><td class="w-o" id="w-o-acoes" data-label="De onde vem a taxa"></td><td class="w-ir" id="w-i-acoes" data-label="Imposto de renda"></td></tr>
+          </tbody>
+          <tfoot><tr><td>Total</td><td data-label="Soma dos percentuais"><span class="num" id="w-sum">100%</span></td><td colspan="3"></td></tr></tfoot>
+        </table></div>
+      </div>
+      <div class="card out bloco-escuro" aria-live="polite">
+        <span class="eyebrow" id="w-label">Sua carteira daqui a 10 anos</span>
+        <div class="w-top">
+          <div>
+            <div class="big" id="w-big">—</div>
+            <p class="w-real" id="w-real"></p>
+            <div id="w-pill"></div>
+          </div>
+          <div class="kv" id="w-kv"></div>
+        </div>
+        <div class="legend-row" aria-hidden="true">
+          <span><i style="background:var(--chart-1)"></i>Sua carteira</span>
+          <span><i style="background:var(--chart-2)"></i>Tudo na poupança</span>
+          <span><i class="dash"></i>Dinheiro que você guardou</span>
+        </div>
+        <div class="chart" id="w-chart" role="img" aria-label="Gráfico da evolução do patrimônio ano a ano"></div>
+        <details class="w-table"><summary>Ver tabela ano a ano</summary><div class="tbl"><table id="w-tab"></table></div></details>
+        <p class="note">Valores líquidos, como se você resgatasse tudo no fim de cada ano. Ações e fundos imobiliários variam muito de um ano para o outro: a linha mostra uma média, não uma garantia. Rendimentos de renda fixa usam as taxas de hoje do Banco Central e supõem que elas se mantêm.</p>
+      </div>
+    </div>
+
+    <!-- FERRAMENTA: Investimento × inflação · tela em js/telas/investimento.js · conta em js/calculo/investimento.js -->
+    <div class="panel" role="tabpanel" id="p-invest" aria-labelledby="t-invest" hidden>
+      <div class="card form">
+        <h3>Investimento × inflação</h3>
+        <p class="hint">Veja se o rendimento ganha da inflação depois do imposto de renda.</p>
+        <div class="fields">
+          <label class="full">Onde o dinheiro está
+            <select id="i-tipo">
+              <option value="cdb">CDB (rende % do CDI, tem IR)</option>
+              <option value="lci">LCI ou LCA (rende % do CDI, sem IR)</option>
+              <option value="selic">Tesouro Selic (rende a Selic, tem IR)</option>
+              <option value="poup">Poupança (regra oficial, sem IR)</option>
+            </select></label>
+          <label>Valor aplicado (R$)<input id="i-v" inputmode="decimal" value="10000"></label>
+          <label>Prazo (meses)<input id="i-m" inputmode="decimal" value="24"></label>
+          <label id="i-pct-wrap">Quanto do CDI (%)<input id="i-pct" inputmode="decimal" value="100"></label>
+          <label>Inflação esperada ao ano (%)<input id="i-inf" inputmode="decimal" value="4.5"><small class="src" data-src="ipca_focus_12m"></small></label>
+          <label class="full">Rendimento usado no cálculo (% ao ano)<input id="i-t" inputmode="decimal" value="13" readonly><small id="i-t-src" class="src"></small></label>
+        </div>
+        <div class="kv" id="i-kv"></div>
+        <p class="note">IR regressivo: 22,5% até 6 meses, 20% até 1 ano, 17,5% até 2 anos e 15% acima disso. Poupança: 0,5% ao mês + TR quando a Selic passa de 8,5%; senão, 70% da Selic + TR. Projeção supõe que as taxas de hoje se mantêm.</p>
+      </div>
+      <div class="card out bloco-escuro" aria-live="polite">
+        <span class="eyebrow">Ganho real, já sem inflação</span>
+        <div class="big" id="i-big">—</div>
+        <div id="i-pill"></div>
+        <p class="out-sub">Quanto R$ <span class="num" id="i-v2"></span> parados valerão</p>
+        <div class="meter" aria-hidden="true"><span id="i-bar"></span></div>
+        <div class="kv" id="i-kv2"></div>
+      </div>
+    </div>
+
+    <div class="grade-3 fatos">
+      <div class="card card-info revelar"><span class="tag">Imposto de renda</span><h3>Isenção até R$ 5 mil</h3><p>Desde 2026, quem ganha até R$ 5.000 por mês fica isento, e há desconto parcial até R$ 7.350. Confira seu caso no site da Receita.</p></div>
+      <div class="card card-info revelar"><span class="tag">Reserva</span><h3>Reserva de emergência</h3><p>Guarde de 3 a 6 meses do seu custo de vida em algo com liquidez diária, como Tesouro Selic ou CDB de 100% do CDI.</p></div>
+      <div class="card card-info revelar"><span class="tag">Reforma</span><h3>Cashback do imposto</h3><p>Famílias do CadÚnico vão receber de volta parte da CBS e do IBS pagos em contas de luz, água, gás e compras.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="entenda">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Como funciona</p><h2>Entenda a conta</h2></div>
+    <div class="grade-3">
+      <div class="card card-info revelar"><span class="tag">Inflação</span><h3>Poder de compra</h3><p>Se a inflação é 5% ao ano, R$ 100 compram daqui a um ano o que R$ 95,24 compram hoje. Por isso o que importa é o ganho real: quanto o dinheiro rendeu acima da inflação.</p><div class="formula">ganho real = (1 + rendimento) ÷ (1 + inflação) − 1</div></div>
+      <div class="card card-info revelar"><span class="tag">CDI e Selic</span><h3>De onde vem o rendimento</h3><p>A Selic é a taxa básica de juros, definida pelo Banco Central. O CDI acompanha a Selic de perto, e a maioria dos CDBs e LCIs paga um percentual dele, como 100% do CDI.</p></div>
+      <div class="card card-info revelar"><span class="tag">Imposto de renda</span><h3>Tabela regressiva</h3><p>CDB e Tesouro pagam IR só sobre o rendimento, e a alíquota cai quanto mais tempo o dinheiro fica aplicado. Poupança, LCI e LCA são isentas para pessoa física.</p><div class="formula">22,5% → 20% → 17,5% → 15%</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="proximo revelar" data-setor="impostos">
+    <div><h3>Tem uma empresa ou é MEI?</h3><p>Calcule o imposto do seu negócio com as regras da reforma tributária.</p></div>
+    <a class="btn" href="impostos.html">Ir para Impostos<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </section>
+</div>
+</main>
+
+<!-- RODAPÉ (igual em todas as páginas) -->
+<footer class="rodape" id="rodape">
+  <div class="wrap">
+    <div class="rodape-cols">
+      <div class="rodape-marca">
+        <a class="marca" href="index.html"><svg class="simbolo" viewBox="0 0 64 64" aria-hidden="true"><rect class="simbolo-fundo" width="64" height="64" rx="16"/><rect class="simbolo-haste" x="17" y="13" width="12" height="27"/><rect class="simbolo-base" x="17" y="38" width="31" height="13" rx="2"/></svg><span class="marca-nome">Lastrion</span></a>
+        <p class="tagline">Base firme para lucrar mais.</p>
+        <p>Ferramentas de custo, preço e orçamento para o MEI e o pequeno negócio.</p>
+      </div>
+      <div><h4>Custos e preço</h4><a href="custeio.html#margem">Margem e equilíbrio</a><a href="custeio.html#produtos">Margem por produto</a><a href="custeio.html#preco">Formação de preço</a><a href="custeio.html#custeio">Custeio ABC</a><a href="custeio.html#perdas">Perdas</a></div>
+      <div><h4>Orçamento e impostos</h4><a href="metas.html#caixa">Fluxo de caixa</a><a href="metas.html#metas">Metas do mês</a><a href="metas.html#zero">Orçamento base zero</a><a href="impostos.html">MEI e Simples</a><a href="impostos.html#iva">IBS/CBS no preço</a></div>
+      <div><h4>Lastrion</h4><a href="comece.html">Comece por aqui</a><a href="assinatura.html">Minha conta e assinatura</a><a href="https://lastrion.com.br/#duvidas">Perguntas frequentes</a><a href="https://lastrion.com.br/privacidade.html">Privacidade</a><a href="https://lastrion.com.br/termos.html">Termos de uso</a></div>
+    </div>
+    <p class="disclaimer">As calculadoras são simulações educativas e não substituem a orientação de um contador ou consultor. Valores e regras podem mudar; confira sempre nas fontes oficiais (Receita Federal, Portal do Simples Nacional, Banco Central).</p>
+    <div class="rodape-logo" aria-hidden="true"><svg class="logo" viewBox="0 0 600 150" role="img" aria-label="Lastrion"><text x="0" y="104" textLength="600" lengthAdjust="spacingAndGlyphs">Lastrion</text><rect x="0" y="122" width="600" height="24" rx="4"/></svg></div>
+  </div>
+</footer>
+
+<script type="module" src="js/conta/iniciar.js" data-telas="carteira,investimento"></script>
+</body>
+</html>

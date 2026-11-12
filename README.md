@@ -1,71 +1,64 @@
 # Lastrion
 
-Site com calculadoras gratuitas para MEIs, pequenas empresas e pessoas físicas:
-impostos da reforma tributária (IBS/CBS), Simples Nacional, custeio por absorção e ABC,
-margem de contribuição, orçamento e metas, e investimentos contra a inflação.
+Dois sites com a mesma marca, num repositório só:
+
+- **Site institucional** (`lastrion.com.br`): explica o que é, conquista o MEI e tem uma calculadora grátis, sem cadastro.
+- **App** (`app.lastrion.com.br`): as ferramentas, com login, dados salvos na conta e assinatura (Asaas, Pix e cartão).
 
 O repositório e a pasta ainda se chamam `lucro-claro`, que era o nome provisório.
+Para colocar no ar, siga o **[CONFIGURAR.md](CONFIGURAR.md)**.
 
 ## Onde fica cada coisa
 
-### Páginas
+```
+compartilhado/        o que os dois sites usam
+  config/             valores-legais.js (limite do MEI, DAS…) e planos.js (preço, limites do grátis, WhatsApp)
+  css/                tokens (cores e fontes), base, componentes, páginas do app
+  js/calculo/         só as contas (recebe números, devolve números)
+  js/telas/           uma por ferramenta do app: lê os campos, chama a conta, escreve o resultado
+  js/ui/              tema, abas, gráfico, números, taxas, glossário, ajuda, plano atual, links entre os sites
+  data/taxas.json     taxas do Banco Central, atualizadas sozinhas todo dia útil
+  img/                símbolo, ícones e a imagem que aparece no WhatsApp (og.png)
+site/                 site institucional
+  index.html          página principal (calculadora grátis, como funciona, preço, confiança, dúvidas)
+  privacidade.html    rascunho para revisão jurídica
+  termos.html         rascunho para revisão jurídica
+  js/site.js, css/site.css
+app/                  app com login
+  index.html          painel
+  entrar.html         login sem senha (link + código por e-mail, ou Google)
+  assinatura.html     minha conta: assinar, cancelar, baixar os dados, excluir a conta
+  comece.html, impostos.html, custeio.html, metas.html, planejamento.html   as ferramentas
+  js/conta/           login, salvar na conta, cadeados do plano grátis, cálculo trazido do site
+  api/                funções do servidor (rodam no Vercel): assinar, cancelar, webhook do Asaas, excluir conta
+servidor/
+  banco.sql           tabelas e regras do banco (rodar uma vez no Supabase)
+  email-entrar.html   modelo do e-mail de acesso
+scripts/
+  montar.sh           monta cada site para publicar (o Vercel roda sozinho)
+  atualizar-taxas.mjs busca as taxas no Banco Central
+rascunhos/            não vai para o ar: página inicial antiga, propostas de logo e páginas de teste
+notas/                cofre do Obsidian
+```
 
-| Arquivo | O que tem |
-|---|---|
-| `index.html` | Página inicial: apresentação, taxas do dia, os quatro setores, reforma, dúvidas e vídeos |
-| `impostos.html` | Setor 1: MEI, Simples Nacional e IBS/CBS |
-| `custeio.html` | Setor 2: absorção × ABC, margem e ponto de equilíbrio |
-| `metas.html` | Setor 3: metas do mês, fluxo de caixa e orçamento base zero |
-| `planejamento.html` | Setor 4: simulador de carteira, taxas de hoje e investimento × inflação |
-| `comece.html` | Trilha "Comece por aqui": diagnóstico, 7 etapas com um negócio de exemplo e progresso salvo no navegador |
-| `logo-preview.html` | Temporária: as 3 propostas de logo para escolher |
+Exemplo: para mudar a regra do Simples Nacional, edite `compartilhado/js/calculo/simples.js`.
+Para mudar o limite do MEI quando a lei mudar, edite só `compartilhado/config/valores-legais.js`.
 
-O topo (menu) e o rodapé são iguais nas cinco páginas. Ao mudar um deles, mude nas cinco.
+## Ver no seu computador
 
-### Visual (`css/`)
+No VS Code, instale a extensão **Live Server**, abra a pasta do projeto e clique em **Go Live**.
+Depois abra `/site/` (site) ou `/app/` (app) no endereço que aparecer.
 
-| Arquivo | O que tem |
-|---|---|
-| `tokens.css` | Cores, fontes, espaçamentos e tempos de animação. Para mudar a identidade visual, mexa só aqui |
-| `base.css` | Regras gerais: texto, títulos, largura da página, entrada dos elementos na rolagem |
-| `componentes.css` | Peças usadas em várias páginas: menu, botões, cartões, campos, abas, resultados, rodapé |
-| `paginas.css` | O que é próprio de cada página: apresentação, linha do tempo, painel de metas, gráfico |
+Enquanto o Supabase não estiver configurado em `app/js/conta/config.js`, o app abre em
+**modo demonstração**: sem login, com os números guardados só no seu navegador.
+Para ver o plano grátis com os cadeados, acrescente `?plano=gratis` no endereço.
 
-### Funcionamento (`js/`)
-
-Cada calculadora é dividida em dois arquivos com o mesmo nome:
-
-| Pasta | O que tem |
-|---|---|
-| `js/calculo/` | Só as contas. Recebe números, devolve números. Não mexe na tela |
-| `js/telas/` | Lê os campos da página, chama a conta e escreve o resultado |
-| `js/ui/` | O que todas as páginas usam: tema claro/escuro, abas, gráfico, formatação de números, taxas |
-
-Exemplo: para mudar a regra do Simples Nacional, edite `js/calculo/simples.js`.
-Para mudar o texto que aparece no resultado, edite `js/telas/simples.js`.
-
-### Dados e automação
-
-| Arquivo | O que tem |
-|---|---|
-| `data/taxas.json` | Selic, CDI, IPCA, TR e salário mínimo (atualizado sozinho) e alíquotas da reforma (editadas à mão) |
-| `scripts/atualizar-taxas.mjs` | Programa que busca as taxas no Banco Central |
-| `.github/workflows/atualizar-taxas.yml` | Faz o GitHub rodar o programa acima todo dia útil |
-| `notas/` | Cofre do Obsidian: ideias, roteiros, fontes e tarefas |
+As funções em `app/api/` só rodam no Vercel.
 
 ## Taxas em tempo real
 
 Todo dia útil às 08:17 (Brasília) o GitHub busca as taxas no Banco Central e salva em
-`data/taxas.json`. Para rodar na hora: aba **Actions** → **Atualizar taxas** → **Run workflow**.
-Se o Banco Central estiver fora do ar, o valor anterior é mantido.
-
-## Ver o site no seu computador
-
-Abrir o `index.html` com dois cliques não funciona: o navegador bloqueia os arquivos de `js/`
-e o `data/taxas.json` quando a página não vem de um servidor.
-
-No VS Code, instale a extensão **Live Server**, abra o `index.html` e clique em **Go Live**,
-no canto inferior direito. O site abre no navegador e atualiza sozinho a cada vez que você salva.
+`compartilhado/data/taxas.json`. Para rodar na hora: aba **Actions** → **Atualizar taxas** → **Run workflow**.
 
 ## Aviso
 

@@ -1,0 +1,10 @@
+<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#777;display:flex;gap:12px;padding:12px}iframe{border:0;width:360px;height:780px;background:#fff}</style>
+<body><script>
+/* ?p=pagina|idParaRolar,pagina2 */
+new URLSearchParams(location.search).get('p').split(',').forEach(item => {
+  const [p, alvo] = item.split('|');
+  const f = document.createElement('iframe'); f.src = '/' + p;
+  if (alvo) f.addEventListener('load', () => setTimeout(() => { const d = f.contentDocument; d.documentElement.style.scrollBehavior = 'auto'; d.getElementById(alvo)?.scrollIntoView(); }, 1800));
+  document.body.append(f);
+});
+</script>

@@ -4,3 +4,6 @@ node_modules/
 .obsidian/workspace*.json
 .obsidian/cache
 .trash/
+
+# Pastas montadas na publicação (scripts/montar.sh)
+dist/

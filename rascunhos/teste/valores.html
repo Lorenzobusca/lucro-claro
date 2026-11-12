@@ -1,0 +1,11 @@
+<!doctype html><meta charset="utf-8"><pre id="o">rodando</pre><iframe id="f" style="width:360px;height:700px"></iframe>
+<script>
+const q = new URLSearchParams(location.search);
+const f = document.getElementById('f'); f.src = '/' + q.get('p');
+f.addEventListener('load', () => setTimeout(() => {
+  const d = f.contentDocument, ler = id => { const el = d.getElementById(id); return el ? (('value' in el && el.tagName !== 'DIV') ? el.value : el.textContent.trim().replace(/\s+/g, ' ')) + (el.disabled ? ' [travado]' : '') : '(não existe)'; };
+  document.getElementById('o').textContent = q.get('ids').split(',').map(id => `${id} = ${ler(id)}`).join('\n')
+    + `\nabas com cadeado: ${[...d.querySelectorAll('.tab .cadeado-ico')].map(i => i.parentElement.textContent.trim()).join(', ') || 'nenhuma'}`
+    + `\navisos de limite: ${[...d.querySelectorAll('.cadeado-linha, .cadeado-card p')].map(a => a.textContent.trim()).join(' | ') || 'nenhum'}`;
+}, 3500));
+</script>

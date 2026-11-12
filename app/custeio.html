@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="pt-BR" data-setor="custeio">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Custos e preço · Lastrion</title>
+<meta name="description" content="Margem de contribuição, ponto de equilíbrio, formação de preço, custeio ABC e perdas: ferramentas gratuitas para pequenos negócios lucrarem mais.">
+<!-- Aplica o tema (claro ou escuro) antes de a página aparecer, para não piscar -->
+<script>(function(){var t;try{t=localStorage.getItem('lc-tema')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="../compartilhado/css/tokens.css">
+<link rel="stylesheet" href="../compartilhado/css/base.css">
+<link rel="stylesheet" href="../compartilhado/css/componentes.css">
+<link rel="stylesheet" href="../compartilhado/css/paginas.css">
+<link rel="icon" href="../compartilhado/img/simbolo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../compartilhado/img/icone-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#14151A">
+</head>
+<body>
+<a class="pular" href="#principal">Pular para o conteúdo</a>
+
+<!-- TOPO (igual em todas as páginas) -->
+<header class="topo">
+  <div class="topo-barra">
+    <a class="marca" href="index.html"><svg class="simbolo" viewBox="0 0 64 64" aria-hidden="true"><rect class="simbolo-fundo" width="64" height="64" rx="16"/><rect class="simbolo-haste" x="17" y="13" width="12" height="27"/><rect class="simbolo-base" x="17" y="38" width="31" height="13" rx="2"/></svg><span class="marca-nome">Lastrion</span></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html" class="nav-inicio"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span>Painel</span></a>
+      <a href="comece.html" class="nav-comece"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Comece</span></a>
+      <a href="impostos.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg><span>Impostos</span></a>
+      <a href="custeio.html" aria-current="page"><i class="nav-ind" aria-hidden="true"></i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13"/></svg><span>Custos</span></a>
+      <a href="metas.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg><span>Orçamento</span></a>
+      <a href="planejamento.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg><span>Planejamento</span></a>
+    </nav>
+    <button class="glossario-btn" id="abrir-glossario" type="button" aria-label="Abrir o glossário" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11M9 8h6"/></svg><span>Glossário</span></button>
+    <a class="conta-btn" href="assinatura.html" aria-label="Minha conta e assinatura"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></a>
+    <button class="tema" id="tema" type="button" aria-label="Mudar para o tema escuro">
+      <svg class="sol" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg>
+      <svg class="lua" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<p class="nuvem" id="nuvem" role="status" data-tom="espera"><i aria-hidden="true"></i><span>Abrindo…</span></p>
+
+<main id="principal">
+<div class="wrap cabecalho-wrap">
+  <section class="cabecalho">
+    <nav class="crumbs" aria-label="Você está em"><a href="index.html">Painel</a><span aria-hidden="true">›</span><span aria-current="page">Custos e preço</span></nav>
+    <p class="eyebrow">Setor 2 de 4</p>
+    <h1>Custos e preço</h1>
+    <p class="lead">Quem conhece os próprios custos lucra mais. Descubra quanto sobra de cada venda, quanto precisa vender para pagar as contas e qual preço cobrar.</p>
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="cabecalho-icone"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13"/></svg>
+  </section>
+</div>
+
+<section class="ferramentas">
+  <div class="wrap">
+    <div class="tabs" role="tablist" aria-label="Ferramentas de custos e preço">
+      <button class="tab" role="tab" id="t-margem" aria-controls="p-margem" aria-selected="true">Margem e equilíbrio</button>
+      <button class="tab" role="tab" id="t-produtos" aria-controls="p-produtos" aria-selected="false">Margem por produto</button>
+      <button class="tab" role="tab" id="t-preco" aria-controls="p-preco" aria-selected="false">Formação de preço</button>
+      <button class="tab" role="tab" id="t-custeio" aria-controls="p-custeio" aria-selected="false">Custeio ABC</button>
+      <button class="tab" role="tab" id="t-perdas" aria-controls="p-perdas" aria-selected="false">Perdas</button>
+    </div>
+
+    <!-- FERRAMENTA: Margem e equilíbrio · tela em js/telas/margem.js · conta em js/calculo/margem.js -->
+    <div class="panel" role="tabpanel" id="p-margem" aria-labelledby="t-margem">
+      <div class="card form">
+        <p class="exemplo-faixa" id="m-ex" hidden></p>
+        <h3>Quanto preciso vender para pagar as contas?</h3>
+        <p class="hint">A margem de contribuição é o que sobra de cada venda depois de pagar o produto e as despesas da própria venda. O ponto de equilíbrio é quantas vendas pagam as contas fixas do mês.</p>
+        <div class="fields">
+          <label>Preço de venda (R$)<input id="m-preco" inputmode="decimal" value="45"></label>
+          <label>Custo variável por unidade (R$)<input id="m-cv" inputmode="decimal" value="18"></label>
+          <label>Impostos, taxas e comissões (% do preço)<input id="m-dv" inputmode="decimal" value="12"></label>
+          <label>Custos fixos do mês (R$)<input id="m-cf" inputmode="decimal" value="9000"></label>
+          <label class="full">Unidades vendidas no mês<input id="m-q" inputmode="decimal" value="520"></label>
+        </div>
+        <p class="dica"><b>Dica rápida</b>Se você vende muitos produtos, use o preço e o custo médios de uma venda. Depois compare produto por produto na aba ao lado.</p>
+      </div>
+      <div class="card out bloco-escuro" aria-live="polite">
+        <span class="eyebrow">Resultado do mês</span>
+        <div class="big" id="m-big">—</div>
+        <div id="m-pill"></div>
+        <div class="meter" aria-hidden="true"><span id="m-bar"></span><i id="m-mark"></i></div>
+        <div class="kv" id="m-kv"></div>
+        <div class="leitura" id="m-leitura"></div>
+      </div>
+    </div>
+
+    <!-- FERRAMENTA: Margem por produto · tela em js/telas/produtos.js · conta em js/calculo/produtos.js -->
+    <div class="panel wide" role="tabpanel" id="p-produtos" aria-labelledby="t-produtos" hidden>
+      <div class="card form">
+        <p class="exemplo-faixa" id="pr-ex" hidden></p>
+        <h3>Quais produtos dão lucro e quais só giram?</h3>
+        <p class="hint">O produto que mais vende nem sempre é o que mais deixa dinheiro. Aqui só entram os gastos que mudam com a venda (custeio variável), para comparar o que cada produto realmente deixa. Os números abaixo são de uma padaria de exemplo.</p>
+        <div class="tbl tbl-cartoes"><table>
+          <thead><tr><th>Produto</th><th>Preço (R$)</th><th>Custo por unidade (R$)</th><th>Impostos e taxas (%)</th><th>Vendas no mês (un.)</th></tr></thead>
+          <tbody>
+            <tr><td><input class="texto" id="pr1-nome" value="Pão francês (kg)" aria-label="Nome do produto 1"></td><td data-label="Preço (R$)"><input id="pr1-p" inputmode="decimal" value="18" aria-label="Preço do produto 1"></td><td data-label="Custo por unidade (R$)"><input id="pr1-cv" inputmode="decimal" value="11" aria-label="Custo do produto 1"></td><td data-label="Impostos e taxas (%)"><input id="pr1-dv" inputmode="decimal" value="5" aria-label="Impostos e taxas do produto 1"></td><td data-label="Vendas no mês (un.)"><input id="pr1-q" inputmode="decimal" value="1500" aria-label="Vendas do produto 1"></td></tr>
+            <tr><td><input class="texto" id="pr2-nome" value="Bolo de pote" aria-label="Nome do produto 2"></td><td data-label="Preço (R$)"><input id="pr2-p" inputmode="decimal" value="12" aria-label="Preço do produto 2"></td><td data-label="Custo por unidade (R$)"><input id="pr2-cv" inputmode="decimal" value="4" aria-label="Custo do produto 2"></td><td data-label="Impostos e taxas (%)"><input id="pr2-dv" inputmode="decimal" value="5" aria-label="Impostos e taxas do produto 2"></td><td data-label="Vendas no mês (un.)"><input id="pr2-q" inputmode="decimal" value="400" aria-label="Vendas do produto 2"></td></tr>
+            <tr><td><input class="texto" id="pr3-nome" value="Refrigerante (lata)" aria-label="Nome do produto 3"></td><td data-label="Preço (R$)"><input id="pr3-p" inputmode="decimal" value="6" aria-label="Preço do produto 3"></td><td data-label="Custo por unidade (R$)"><input id="pr3-cv" inputmode="decimal" value="4.5" aria-label="Custo do produto 3"></td><td data-label="Impostos e taxas (%)"><input id="pr3-dv" inputmode="decimal" value="5" aria-label="Impostos e taxas do produto 3"></td><td data-label="Vendas no mês (un.)"><input id="pr3-q" inputmode="decimal" value="900" aria-label="Vendas do produto 3"></td></tr>
+            <tr><td><input class="texto" id="pr4-nome" value="" placeholder="Outro produto" aria-label="Nome do produto 4"></td><td data-label="Preço (R$)"><input id="pr4-p" inputmode="decimal" value="" aria-label="Preço do produto 4"></td><td data-label="Custo por unidade (R$)"><input id="pr4-cv" inputmode="decimal" value="" aria-label="Custo do produto 4"></td><td data-label="Impostos e taxas (%)"><input id="pr4-dv" inputmode="decimal" value="" aria-label="Impostos e taxas do produto 4"></td><td data-label="Vendas no mês (un.)"><input id="pr4-q" inputmode="decimal" value="" aria-label="Vendas do produto 4"></td></tr>
+            <tr><td><input class="texto" id="pr5-nome" value="" placeholder="Outro produto" aria-label="Nome do produto 5"></td><td data-label="Preço (R$)"><input id="pr5-p" inputmode="decimal" value="" aria-label="Preço do produto 5"></td><td data-label="Custo por unidade (R$)"><input id="pr5-cv" inputmode="decimal" value="" aria-label="Custo do produto 5"></td><td data-label="Impostos e taxas (%)"><input id="pr5-dv" inputmode="decimal" value="" aria-label="Impostos e taxas do produto 5"></td><td data-label="Vendas no mês (un.)"><input id="pr5-q" inputmode="decimal" value="" aria-label="Vendas do produto 5"></td></tr>
+            <tr><td><input class="texto" id="pr6-nome" value="" placeholder="Outro produto" aria-label="Nome do produto 6"></td><td data-label="Preço (R$)"><input id="pr6-p" inputmode="decimal" value="" aria-label="Preço do produto 6"></td><td data-label="Custo por unidade (R$)"><input id="pr6-cv" inputmode="decimal" value="" aria-label="Custo do produto 6"></td><td data-label="Impostos e taxas (%)"><input id="pr6-dv" inputmode="decimal" value="" aria-label="Impostos e taxas do produto 6"></td><td data-label="Vendas no mês (un.)"><input id="pr6-q" inputmode="decimal" value="" aria-label="Vendas do produto 6"></td></tr>
+            <tr><td><input class="texto" id="pr7-nome" value="" placeholder="Outro produto" aria-label="Nome do produto 7"></td><td data-label="Preço (R$)"><input id="pr7-p" inputmode="decimal" value="" aria-label="Preço do produto 7"></td><td data-label="Custo por unidade (R$)"><input id="pr7-cv" inputmode="decimal" value="" aria-label="Custo do produto 7"></td><td data-label="Impostos e taxas (%)"><input id="pr7-dv" inputmode="decimal" value="" aria-label="Impostos e taxas do produto 7"></td><td data-label="Vendas no mês (un.)"><input id="pr7-q" inputmode="decimal" value="" aria-label="Vendas do produto 7"></td></tr>
+            <tr><td><input class="texto" id="pr8-nome" value="" placeholder="Outro produto" aria-label="Nome do produto 8"></td><td data-label="Preço (R$)"><input id="pr8-p" inputmode="decimal" value="" aria-label="Preço do produto 8"></td><td data-label="Custo por unidade (R$)"><input id="pr8-cv" inputmode="decimal" value="" aria-label="Custo do produto 8"></td><td data-label="Impostos e taxas (%)"><input id="pr8-dv" inputmode="decimal" value="" aria-label="Impostos e taxas do produto 8"></td><td data-label="Vendas no mês (un.)"><input id="pr8-q" inputmode="decimal" value="" aria-label="Vendas do produto 8"></td></tr>
+          </tbody></table></div>
+        <div class="fields three">
+          <label>Custos fixos do mês (R$)<input id="pr-cf" inputmode="decimal" value="10000"></label>
+        </div>
+        <p class="dica"><b>Dica rápida</b>Olhe a coluna "Margem" e não só a de vendas. Um produto de margem baixa pode valer a pena se trouxer o cliente para a loja, desde que você saiba disso.</p>
+      </div>
+      <div class="card out bloco-escuro" aria-live="polite">
+        <span class="eyebrow">Lucro do mês, depois dos custos fixos</span>
+        <div class="big" id="pr-big">—</div>
+        <div class="kv" id="pr-kv"></div>
+        <div class="tbl tbl-cartoes"><table id="pr-out"></table></div>
+        <div class="leitura" id="pr-leitura"></div>
+      </div>
+    </div>
+
+    <!-- FERRAMENTA: Formação de preço · tela em js/telas/preco.js · conta em js/calculo/preco.js -->
+    <div class="panel" role="tabpanel" id="p-preco" aria-labelledby="t-preco" hidden>
+      <div class="card form">
+        <p class="exemplo-faixa" id="pc-ex" hidden></p>
+        <h3>Qual preço eu devo cobrar?</h3>
+        <p class="hint">Copiar o preço do concorrente é copiar os custos dele, que não são os seus. O markup é o número pelo qual você multiplica o custo para o preço pagar tudo e ainda deixar lucro. Os números abaixo são de uma floricultura de exemplo.</p>
+        <div class="fields">
+          <label class="full">Custo de comprar ou produzir uma unidade (R$)<input id="pc-custo" inputmode="decimal" value="30"></label>
+          <label>Impostos, taxa do cartão e comissão (% do preço)<input id="pc-dv" inputmode="decimal" value="12"></label>
+          <label>Custos fixos (% das vendas)<input id="pc-cf" inputmode="decimal" value="25"></label>
+          <label>Lucro que você quer (% do preço)<input id="pc-lucro" inputmode="decimal" value="13"></label>
+          <label>Preço do concorrente (R$, opcional)<input id="pc-conc" inputmode="decimal" value="45"></label>
+        </div>
+        <p class="dica"><b>Dica rápida</b>Para achar o percentual dos custos fixos, divida as contas fixas do mês pelas vendas do mês. Exemplo: R$ 5.000 de contas fixas com R$ 20.000 de vendas dá 25%.</p>
+      </div>
+      <div class="card out bloco-escuro" aria-live="polite">
+        <span class="eyebrow">Preço de venda</span>
+        <div class="big" id="pc-big">—</div>
+        <div id="pc-pill"></div>
+        <div class="kv" id="pc-kv"></div>
+        <div class="leitura" id="pc-leitura"></div>
+      </div>
+    </div>
+
+    <!-- FERRAMENTA: Custeio ABC · tela em js/telas/custeio.js · conta em js/calculo/custeio.js -->
+    <div class="panel wide" role="tabpanel" id="p-custeio" aria-labelledby="t-custeio" hidden>
+      <div class="card form">
+        <p class="exemplo-faixa" id="c-ex" hidden></p>
+        <h3>Esse produto dá lucro mesmo?</h3>
+        <p class="hint">Na conta comum (absorção), os custos indiretos, como energia e manutenção, são divididos por igual, por hora de máquina. No custeio ABC, cada atividade (preparar a máquina, inspecionar, manter) é cobrada do produto que a usa. Um produto que parece lucrativo pode dar prejuízo quando paga o que consome. Exemplo: uma marcenaria com dois produtos.</p>
+        <div class="tbl tbl-cartoes"><table>
+          <thead><tr><th>Produto</th><th>Qtd. no mês</th><th>Preço (R$)</th><th>Mat. + mão de obra / un.</th><th>Horas-máq. / un.</th><th>Nº de preparações</th><th>Nº de inspeções</th></tr></thead>
+          <tbody>
+            <tr><td>Mesa padrão</td><td data-label="Qtd. no mês"><input id="a-q" inputmode="decimal" value="400" aria-label="Quantidade da mesa padrão"></td><td data-label="Preço (R$)"><input id="a-p" inputmode="decimal" value="520" aria-label="Preço da mesa padrão"></td><td data-label="Mat. + mão de obra / un."><input id="a-d" inputmode="decimal" value="210" aria-label="Custo direto da mesa padrão"></td><td data-label="Horas-máq. / un."><input id="a-h" inputmode="decimal" value="1.5" aria-label="Horas-máquina da mesa padrão"></td><td data-label="Nº de preparações"><input id="a-s" inputmode="decimal" value="4" aria-label="Preparações de máquina da mesa padrão"></td><td data-label="Nº de inspeções"><input id="a-i" inputmode="decimal" value="10" aria-label="Inspeções da mesa padrão"></td></tr>
+            <tr><td>Mesa sob medida</td><td data-label="Qtd. no mês"><input id="b-q" inputmode="decimal" value="60" aria-label="Quantidade da mesa sob medida"></td><td data-label="Preço (R$)"><input id="b-p" inputmode="decimal" value="1150" aria-label="Preço da mesa sob medida"></td><td data-label="Mat. + mão de obra / un."><input id="b-d" inputmode="decimal" value="420" aria-label="Custo direto da mesa sob medida"></td><td data-label="Horas-máq. / un."><input id="b-h" inputmode="decimal" value="2.5" aria-label="Horas-máquina da mesa sob medida"></td><td data-label="Nº de preparações"><input id="b-s" inputmode="decimal" value="36" aria-label="Preparações de máquina da mesa sob medida"></td><td data-label="Nº de inspeções"><input id="b-i" inputmode="decimal" value="50" aria-label="Inspeções da mesa sob medida"></td></tr>
+          </tbody></table></div>
+        <div class="fields three">
+          <label>Custo de preparar máquinas (R$)<input id="c-setup" inputmode="decimal" value="24000"></label>
+          <label>Custo de inspeção (R$)<input id="c-insp" inputmode="decimal" value="12000"></label>
+          <label>Custo de manutenção e energia (R$)<input id="c-maq" inputmode="decimal" value="30000"></label>
+        </div>
+        <p class="dica"><b>Dica rápida</b>Vale para clientes também: quem pede entregas pequenas e frequentes, ou muitas alterações, consome mais do seu tempo do que o valor da compra mostra.</p>
+      </div>
+      <div class="card out bloco-escuro" aria-live="polite">
+        <span class="eyebrow">Custo e lucro por unidade</span>
+        <div class="tbl tbl-cartoes"><table id="c-out"></table></div>
+        <p class="note" id="c-insight"></p>
+        <div class="leitura" id="c-leitura"></div>
+      </div>
+    </div>
+
+    <!-- FERRAMENTA: Perdas · tela em js/telas/perdas.js · conta em js/calculo/perdas.js -->
+    <div class="panel" role="tabpanel" id="p-perdas" aria-labelledby="t-perdas" hidden>
+      <div class="card form">
+        <p class="exemplo-faixa" id="pe-ex" hidden></p>
+        <h3>Quanto as perdas tiram do meu lucro?</h3>
+        <p class="hint">O que estraga, vence ou some do estoque já foi pago. Por isso cada real perdido sai inteiro do lucro, e repor esse real exige vender bem mais do que um real. Os números abaixo são de uma floricultura de exemplo.</p>
+        <div class="fields">
+          <label>Perda por mês, a preço de custo (R$)<input id="pe-perda" inputmode="decimal" value="800"></label>
+          <label>Margem de contribuição média (% do preço)<input id="pe-margem" inputmode="decimal" value="40"></label>
+          <label>Vendas do mês (R$)<input id="pe-fat" inputmode="decimal" value="20000"></label>
+          <label>Quanto da perda dá para evitar (%)<input id="pe-red" inputmode="decimal" value="50"></label>
+        </div>
+        <p class="dica"><b>Dica rápida</b>Anote por um mês tudo o que foi para o lixo, com o valor de custo. Sem esse número, a perda fica escondida dentro do "custo da mercadoria".</p>
+      </div>
+      <div class="card out bloco-escuro" aria-live="polite">
+        <span class="eyebrow">Vendas a mais só para repor a perda do mês</span>
+        <div class="big" id="pe-big">—</div>
+        <div class="kv" id="pe-kv"></div>
+        <div class="leitura" id="pe-leitura"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="entenda">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Como funciona</p><h2>Entenda a conta</h2></div>
+    <div class="grade-3">
+      <div class="card card-info revelar"><span class="tag">Margem de contribuição</span><h3>Quanto sobra de cada venda</h3><p>É o que fica do preço depois de pagar o produto e as despesas da própria venda (imposto, taxa do cartão, comissão). Essa sobra paga as contas fixas; o que passar disso é lucro.</p><div class="formula">margem = preço − custo variável − despesas da venda</div></div>
+      <div class="card card-info revelar"><span class="tag">Ponto de equilíbrio</span><h3>Quando as contas estão pagas</h3><p>É a quantidade de vendas em que a soma das margens empata com as contas fixas do mês. Abaixo dela é prejuízo; acima, cada venda vira lucro.</p><div class="formula">equilíbrio = custos fixos ÷ margem por unidade</div></div>
+      <div class="card card-info revelar"><span class="tag">Markup</span><h3>Do custo ao preço</h3><p>No preço precisam caber quatro coisas: o custo do produto, as despesas da venda, a parte das contas fixas e o lucro. O markup é o multiplicador que faz isso de uma vez.</p><div class="formula">preço = custo ÷ (1 − despesas % − fixos % − lucro %)</div></div>
+      <div class="card card-info revelar"><span class="tag">Custeio variável</span><h3>Só o que muda com a venda</h3><p>Para comparar produtos, entram apenas os gastos que crescem quando você vende mais. As contas fixas ficam de fora e são pagas pela soma das margens de todos os produtos.</p><p class="fonte">Método descrito em "Contabilidade de Custos", de Eliseu Martins.</p></div>
+      <div class="card card-info revelar"><span class="tag">Custeio ABC</span><h3>Quem usa, paga</h3><p>Cada atividade tem seu custo e é cobrada de quem a consome. Produtos feitos em lotes pequenos ou sob medida costumam custar mais do que a divisão por igual mostra.</p><div class="formula">custo = direto + Σ (custo da atividade × uso do produto ÷ uso total)</div><p class="fonte">Método proposto por Robin Cooper e Robert Kaplan (Harvard Business Review, 1988).</p></div>
+      <div class="card card-info revelar"><span class="tag">Perdas</span><h3>Sai direto do lucro</h3><p>A mercadoria perdida já foi paga e não gera venda. Para repor um real perdido, é preciso vender um real dividido pela margem: com margem de 40%, são R$ 2,50 em vendas.</p><div class="formula">vendas para repor = perda ÷ margem %</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="proximo revelar" data-setor="metas">
+    <div><h3>Próximo passo: o orçamento do mês</h3><p>Com os custos na mão, projete o caixa dos próximos meses e defina quanto vender.</p></div>
+    <a class="btn" href="metas.html">Ir para Orçamento<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </section>
+</div>
+</main>
+
+<!-- RODAPÉ (igual em todas as páginas) -->
+<footer class="rodape" id="rodape">
+  <div class="wrap">
+    <div class="rodape-cols">
+      <div class="rodape-marca">
+        <a class="marca" href="index.html"><svg class="simbolo" viewBox="0 0 64 64" aria-hidden="true"><rect class="simbolo-fundo" width="64" height="64" rx="16"/><rect class="simbolo-haste" x="17" y="13" width="12" height="27"/><rect class="simbolo-base" x="17" y="38" width="31" height="13" rx="2"/></svg><span class="marca-nome">Lastrion</span></a>
+        <p class="tagline">Base firme para lucrar mais.</p>
+        <p>Ferramentas de custo, preço e orçamento para o MEI e o pequeno negócio.</p>
+      </div>
+      <div><h4>Custos e preço</h4><a href="custeio.html#margem">Margem e equilíbrio</a><a href="custeio.html#produtos">Margem por produto</a><a href="custeio.html#preco">Formação de preço</a><a href="custeio.html#custeio">Custeio ABC</a><a href="custeio.html#perdas">Perdas</a></div>
+      <div><h4>Orçamento e impostos</h4><a href="metas.html#caixa">Fluxo de caixa</a><a href="metas.html#metas">Metas do mês</a><a href="metas.html#zero">Orçamento base zero</a><a href="impostos.html">MEI e Simples</a><a href="impostos.html#iva">IBS/CBS no preço</a></div>
+      <div><h4>Lastrion</h4><a href="comece.html">Comece por aqui</a><a href="assinatura.html">Minha conta e assinatura</a><a href="https://lastrion.com.br/#duvidas">Perguntas frequentes</a><a href="https://lastrion.com.br/privacidade.html">Privacidade</a><a href="https://lastrion.com.br/termos.html">Termos de uso</a></div>
+    </div>
+    <p class="disclaimer">As calculadoras são simulações educativas e não substituem a orientação de um contador ou consultor. Valores e regras podem mudar; confira sempre nas fontes oficiais (Receita Federal, Portal do Simples Nacional, Banco Central).</p>
+    <div class="rodape-logo" aria-hidden="true"><svg class="logo" viewBox="0 0 600 150" role="img" aria-label="Lastrion"><text x="0" y="104" textLength="600" lengthAdjust="spacingAndGlyphs">Lastrion</text><rect x="0" y="122" width="600" height="24" rx="4"/></svg></div>
+  </div>
+</footer>
+
+<script type="module" src="js/conta/iniciar.js" data-telas="margem,produtos,preco,custeio,perdas"></script>
+</body>
+</html>

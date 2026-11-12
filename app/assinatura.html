@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR" data-setor="inicio">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Minha conta · Lastrion</title>
+<meta name="description" content="Sua conta e assinatura do Lastrion.">
+<meta name="robots" content="noindex">
+<!-- Aplica o tema (claro ou escuro) antes de a página aparecer, para não piscar -->
+<script>(function(){var t;try{t=localStorage.getItem('lc-tema')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="../compartilhado/css/tokens.css">
+<link rel="stylesheet" href="../compartilhado/css/base.css">
+<link rel="stylesheet" href="../compartilhado/css/componentes.css">
+<link rel="stylesheet" href="../compartilhado/css/paginas.css">
+<link rel="icon" href="../compartilhado/img/simbolo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../compartilhado/img/icone-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#14151A">
+</head>
+<body>
+<a class="pular" href="#principal">Pular para o conteúdo</a>
+
+<!-- TOPO (igual em todas as páginas) -->
+<header class="topo">
+  <div class="topo-barra">
+    <a class="marca" href="index.html"><svg class="simbolo" viewBox="0 0 64 64" aria-hidden="true"><rect class="simbolo-fundo" width="64" height="64" rx="16"/><rect class="simbolo-haste" x="17" y="13" width="12" height="27"/><rect class="simbolo-base" x="17" y="38" width="31" height="13" rx="2"/></svg><span class="marca-nome">Lastrion</span></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html" class="nav-inicio"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span>Painel</span></a>
+      <a href="comece.html" class="nav-comece"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Comece</span></a>
+      <a href="impostos.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-1.5L12 21l-2.5-1.5L7 21zM10 8h4M10 12h4"/></svg><span>Impostos</span></a>
+      <a href="custeio.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5 3V10l5 3V6l4 2v13"/></svg><span>Custos</span></a>
+      <a href="metas.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg><span>Orçamento</span></a>
+      <a href="planejamento.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg><span>Planejamento</span></a>
+    </nav>
+    <button class="glossario-btn" id="abrir-glossario" type="button" aria-label="Abrir o glossário" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11M9 8h6"/></svg><span>Glossário</span></button>
+    <a class="conta-btn" href="assinatura.html" aria-label="Minha conta e assinatura"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></a>
+    <button class="tema" id="tema" type="button" aria-label="Mudar para o tema escuro">
+      <svg class="sol" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg>
+      <svg class="lua" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<p class="nuvem" id="nuvem" role="status" data-tom="espera"><i aria-hidden="true"></i><span>Abrindo…</span></p>
+
+<main id="principal">
+<div class="wrap conta">
+  <section class="painel-ola">
+    <nav class="crumbs" aria-label="Você está em"><a href="index.html">Painel</a><span aria-hidden="true">›</span><span aria-current="page">Minha conta</span></nav>
+    <h1>Minha conta e assinatura</h1>
+    <p class="plano-chip" id="plano-chip" data-tom="espera">Conferindo o seu plano…</p>
+  </section>
+
+  <!-- Situação atual -->
+  <section class="card" aria-labelledby="titulo-situacao">
+    <h2 id="titulo-situacao">Seu plano agora</h2>
+    <p id="situacao-texto" class="lead">—</p>
+    <p id="situacao-pagar" hidden><a class="btn primary" id="link-pagar" href="#" rel="noopener">Pagar agora</a></p>
+  </section>
+
+  <!-- Assinar -->
+  <section class="card" id="assinar" aria-labelledby="titulo-assinar">
+    <h2 id="titulo-assinar">Plano completo</h2>
+    <ul class="feat">
+      <li>Todas as ferramentas, sem cadeado</li>
+      <li>Metas, produtos e meses de caixa sem limite</li>
+      <li>Meses anteriores das metas</li>
+      <li>Avisos quando uma meta atrasar ou o caixa for faltar (em breve)</li>
+    </ul>
+    <p class="aviso" id="preco-breve" hidden>As assinaturas abrem em breve. Até lá, você usa o plano grátis e o teste do plano completo.</p>
+    <form id="form-assinar" class="fields" novalidate hidden>
+      <fieldset class="full opcoes-plano">
+        <legend>Como você quer pagar?</legend>
+        <label class="opcao"><input type="radio" name="opcao" value="mensal-cartao" checked><span><b>Mensal no cartão</b><small id="preco-mensal">—</small><small>Cobra sozinho todo mês. Cancela quando quiser.</small></span></label>
+        <label class="opcao"><input type="radio" name="opcao" value="anual-pix"><span><b>Anual no Pix</b><small id="preco-anual">—</small><small>Um Pix por ano. Sem cartão.</small></span></label>
+      </fieldset>
+      <label class="full">Nome completo<input id="a-nome" autocomplete="name" maxlength="80"></label>
+      <label class="full">CPF ou CNPJ do MEI<input id="a-doc" inputmode="numeric" autocomplete="off" maxlength="18" placeholder="Só os números"><small class="src">O pagamento precisa de CPF ou CNPJ. Quem processa é o Asaas, empresa de pagamentos autorizada pelo Banco Central. Não guardamos número de cartão.</small></label>
+      <div class="full form-acoes"><button class="btn primary" type="submit" id="botao-assinar">Ir para o pagamento</button><span class="form-msg" id="msg-assinar" role="status"></span></div>
+    </form>
+  </section>
+
+  <!-- Cancelar -->
+  <section class="card" id="cancelar" hidden aria-labelledby="titulo-cancelar">
+    <h2 id="titulo-cancelar">Cancelar a assinatura</h2>
+    <p class="hint">Sem falar com ninguém. Você continua com o plano completo até o fim do período que já pagou. Depois disso, a conta volta para o plano grátis e seus dados continuam guardados.</p>
+    <div class="form-acoes"><button class="btn" type="button" id="botao-cancelar">Cancelar assinatura</button><span class="form-msg" id="msg-cancelar" role="status"></span></div>
+  </section>
+
+  <!-- Dados -->
+  <section class="card" aria-labelledby="titulo-dados">
+    <h2 id="titulo-dados">Seus dados</h2>
+    <p class="hint">Entrou com <b id="email">—</b>. Seus números ficam guardados só para você.</p>
+    <div class="form-acoes">
+      <button class="btn" type="button" id="botao-baixar">Baixar uma cópia dos meus dados</button>
+      <button class="btn" type="button" id="botao-sair">Sair</button>
+    </div>
+    <details class="excluir">
+      <summary>Excluir minha conta</summary>
+      <p>Apaga a sua conta e tudo o que você guardou aqui. Não dá para desfazer. Se houver assinatura, ela é cancelada junto. Os registros de pagamento continuam no Asaas, como a lei fiscal exige.</p>
+      <div class="form-acoes"><button class="btn perigo" type="button" id="botao-excluir">Excluir minha conta</button><span class="form-msg" id="msg-excluir" role="status"></span></div>
+    </details>
+  </section>
+</div>
+</main>
+
+
+<!-- RODAPÉ (igual em todas as páginas) -->
+<footer class="rodape" id="rodape">
+  <div class="wrap">
+    <div class="rodape-cols">
+      <div class="rodape-marca">
+        <a class="marca" href="index.html"><svg class="simbolo" viewBox="0 0 64 64" aria-hidden="true"><rect class="simbolo-fundo" width="64" height="64" rx="16"/><rect class="simbolo-haste" x="17" y="13" width="12" height="27"/><rect class="simbolo-base" x="17" y="38" width="31" height="13" rx="2"/></svg><span class="marca-nome">Lastrion</span></a>
+        <p class="tagline">Base firme para lucrar mais.</p>
+        <p>Ferramentas de custo, preço e orçamento para o MEI e o pequeno negócio.</p>
+      </div>
+      <div><h4>Custos e preço</h4><a href="custeio.html#margem">Margem e equilíbrio</a><a href="custeio.html#produtos">Margem por produto</a><a href="custeio.html#preco">Formação de preço</a><a href="custeio.html#custeio">Custeio ABC</a><a href="custeio.html#perdas">Perdas</a></div>
+      <div><h4>Orçamento e impostos</h4><a href="metas.html#caixa">Fluxo de caixa</a><a href="metas.html#metas">Metas do mês</a><a href="metas.html#zero">Orçamento base zero</a><a href="impostos.html">MEI e Simples</a><a href="impostos.html#iva">IBS/CBS no preço</a></div>
+      <div><h4>Lastrion</h4><a href="comece.html">Comece por aqui</a><a href="assinatura.html">Minha conta e assinatura</a><a href="https://lastrion.com.br/#duvidas">Perguntas frequentes</a><a href="https://lastrion.com.br/privacidade.html">Privacidade</a><a href="https://lastrion.com.br/termos.html">Termos de uso</a></div>
+    </div>
+    <p class="disclaimer">As calculadoras são simulações educativas e não substituem a orientação de um contador ou consultor. Valores e regras podem mudar; confira sempre nas fontes oficiais (Receita Federal, Portal do Simples Nacional, Banco Central).</p>
+    <div class="rodape-logo" aria-hidden="true"><svg class="logo" viewBox="0 0 600 150" role="img" aria-label="Lastrion"><text x="0" y="104" textLength="600" lengthAdjust="spacingAndGlyphs">Lastrion</text><rect x="0" y="122" width="600" height="24" rx="4"/></svg></div>
+  </div>
+</footer>
+
+<script type="module" src="js/conta/iniciar.js" data-telas=""></script>
+<script type="module" src="js/assinatura.js"></script>
+</body>
+</html>

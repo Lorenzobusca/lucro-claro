@@ -1,0 +1,11 @@
+<!-- Modelo do e-mail de acesso. Cole em Supabase → Authentication → Email Templates → "Magic Link"
+     (e também em "Confirm signup", para quem entra pela primeira vez). Assunto sugerido: "Seu acesso ao Lastrion" -->
+<div style="font-family:Arial,Helvetica,sans-serif;max-width:480px;margin:0 auto;color:#14151A">
+  <h2 style="margin:0 0 12px">Seu acesso ao Lastrion</h2>
+  <p>Toque no botão para entrar. Não precisa de senha.</p>
+  <p><a href="{{ .ConfirmationURL }}" style="display:inline-block;background:#14151A;color:#ffffff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:bold">Entrar no Lastrion</a></p>
+  <p>Se o botão abrir em outro navegador, volte ao Lastrion e digite este código:</p>
+  <p style="font-size:28px;letter-spacing:6px;font-weight:bold;margin:8px 0">{{ .Token }}</p>
+  <p style="color:#5A5E6A;font-size:13px">O link e o código valem por 1 hora e só funcionam uma vez. Se você não pediu este acesso, ignore este e-mail.</p>
+  <p style="color:#5A5E6A;font-size:13px">O Lastrion nunca pede a sua senha do gov.br.</p>
+</div>

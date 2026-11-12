@@ -1,0 +1,21 @@
+<!doctype html><meta charset="utf-8"><pre id="o">rodando</pre>
+<script>
+/* Abre a página num quadro de 360px e mede: primeiro texto na tela, página carregada e conta pronta */
+const q = new URLSearchParams(location.search), alvo = q.get('pronto'), inicio = performance.now();
+const f = document.createElement('iframe'); f.style.cssText = 'width:360px;height:700px;border:0';
+f.src = '/' + q.get('p'); document.body.append(f);
+let pronto = null;
+const espiar = setInterval(() => {
+  try { const el = f.contentDocument?.getElementById(alvo); if (!pronto && el && el.textContent.trim() && !el.textContent.includes('—')) pronto = performance.now() - inicio; } catch (e) {}
+}, 50);
+f.addEventListener('load', () => setTimeout(() => {
+  clearInterval(espiar);
+  const w = f.contentWindow, nav = w.performance.getEntriesByType('navigation')[0];
+  const fcp = w.performance.getEntriesByType('paint').find(p => p.name === 'first-contentful-paint');
+  const recursos = w.performance.getEntriesByType('resource');
+  const local = recursos.filter(r => r.name.startsWith(location.origin));
+  const bytes = local.reduce((s, r) => s + (r.transferSize || r.encodedBodySize || 0), 0) + (nav.transferSize || nav.encodedBodySize || 0);
+  document.getElementById('o').textContent =
+    `${q.get('p')}\n  primeiro texto na tela: ${fcp ? (fcp.startTime / 1000).toFixed(1) + ' s' : '?'}\n  conta pronta (#${alvo}): ${pronto ? (pronto / 1000).toFixed(1) + ' s' : 'não ficou pronta'}\n  página toda carregada: ${(nav.loadEventEnd / 1000).toFixed(1)} s\n  arquivos do próprio site: ${local.length + 1}, ${(bytes / 1024).toFixed(0)} KB (sem contar as fontes do Google)`;
+}, 2500));
+</script>

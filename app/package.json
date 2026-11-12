@@ -1,0 +1,6 @@
+{
+  "name": "lastrion-app",
+  "private": true,
+  "type": "module",
+  "description": "App do Lastrion. Sem dependências: as funções em api/ usam só o fetch do Node."
+}

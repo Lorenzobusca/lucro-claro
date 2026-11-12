@@ -1,0 +1,24 @@
+<!doctype html><meta charset="utf-8"><title>conferência</title><pre id="o">rodando</pre>
+<script type="module">
+import { calcularRetirada } from '../../compartilhado/js/calculo/retirada.js';
+import { calcularLimite } from '../../compartilhado/js/calculo/limite.js';
+import { calcularMei } from '../../compartilhado/js/calculo/simples.js';
+import { limiteMeiDoAno } from '../../compartilhado/config/valores-legais.js';
+const f = v => v.toFixed(2);
+const linhas = [];
+const antes = calcularRetirada({ vendas: 5200, gastos: 2300, atividade: 'mei-com', salarioMinimo: 1621, reservaPct: 20 });
+linhas.push(`ANTES  das=${f(antes.das)} sobra=${f(antes.sobra)} reserva=${f(antes.reserva)} podeTirar=${f(antes.podeTirar)} faltaSeTirar3000=${f(3000 - antes.sobra)}`);
+const depois = calcularRetirada({ vendas: 5500, gastos: 2309, atividade: 'mei-com', salarioMinimo: 1621, reservaPct: 20 });
+linhas.push(`DEPOIS sobra=${f(depois.sobra)} reserva=${f(depois.reserva)} podeTirar=${f(depois.podeTirar)} reserva6m=${f(depois.reserva * 6)}`);
+linhas.push(`maquininha +1 real x 300 x 3% = ${f(300 * 1 * 0.03)}`);
+const lim = calcularLimite({ faturado: 52000, mesAtual: 11, mesAbertura: 0, ano: 2026 });
+linhas.push(`LIMITE uso=${f(lim.uso)} projecao=${f(lim.projecao)} sobra=${f(lim.sobraNoAno)} prox=${lim.limiteProximoAno} sit=${lim.situacao}/${lim.situacaoProjetada}`);
+const ab = calcularLimite({ faturado: 30000, mesAtual: 11, mesAbertura: 7, ano: 2026 });
+linhas.push(`ABRIU EM JULHO limite=${f(ab.limite)} meses=${ab.mesesAtivos} passados=${ab.mesesPassados} uso=${f(ab.uso)}`);
+linhas.push(`LIMITES 2025=${limiteMeiDoAno(2025)} 2026=${limiteMeiDoAno(2026)} 2027=${limiteMeiDoAno(2027)} 2028=${limiteMeiDoAno(2028)} 2030=${limiteMeiDoAno(2030)}`);
+const mei = calcularMei({ atividade: 'mei-ambos', salarioMinimo: 1621, receitaMes: 6000, receita12: 70000, ano: 2026 });
+linhas.push(`MEI ambos das=${f(mei.das)} uso=${f(mei.uso)} sit=${mei.situacao}`);
+const mei27 = calcularMei({ atividade: 'mei-com', salarioMinimo: 1621, receitaMes: 6000, receita12: 95000, ano: 2027 });
+linhas.push(`MEI 2027 95k sit=${mei27.situacao} limite=${mei27.limite}`);
+document.getElementById('o').textContent = linhas.join('\n');
+</script>

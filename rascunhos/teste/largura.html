@@ -1,0 +1,25 @@
+<!doctype html><meta charset="utf-8"><title>largura</title>
+<style>body{margin:0}iframe{width:360px;height:800px;border:0;display:block}</style>
+<pre id="o">rodando</pre><div id="q"></div>
+<script>
+const paginas = new URLSearchParams(location.search).get('p').split(',');
+const saida = [];
+let falta = paginas.length;
+paginas.forEach(p => {
+  const f = document.createElement('iframe');
+  f.src = '/' + p;
+  const erros = [];
+  f.addEventListener('load', () => {
+    f.contentWindow.addEventListener('error', e => erros.push(e.message));
+    setTimeout(() => {
+      const d = f.contentDocument, w = d.documentElement.scrollWidth;
+      const largos = [...d.querySelectorAll('body *')].filter(el => { const r = el.getBoundingClientRect(); return r.width > 0 && (r.right > 361 || r.left < -1) && getComputedStyle(el).position !== 'fixed'; })
+        .filter(el => !el.closest('.tbl, .ticker, [hidden], dialog')).slice(0, 6)
+        .map(el => `${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}.${[...el.classList].join('.')} (${Math.round(el.getBoundingClientRect().right)})`);
+      saida.push(`${p}\n  largura=${w} ${w > 360 ? 'ESTOURA' : 'ok'} | titulo="${d.title}" | erros=${erros.length ? erros.join('; ') : 'nenhum'}\n  ${largos.length ? 'passam da tela: ' + largos.join(', ') : 'nada passa da tela'}`);
+      if (--falta === 0) document.getElementById('o').textContent = saida.sort().join('\n');
+    }, 3500);
+  });
+  document.getElementById('q').append(f);
+});
+</script>
