@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-18T19:25:33.471Z",
+  "atualizado_em": "2026-11-19T19:29:53.398Z",
   "exemplo": false,
   "fonte": "Banco Central do Brasil (séries SGS e boletim Focus)",
   "taxas": {
@@ -11,7 +11,7 @@
     },
     "cdi": {
       "valor": 13.65,
-      "data": "2026-11-17",
+      "data": "2026-11-18",
       "unidade": "% a.a.",
       "serie_sgs": 4389
     },
@@ -29,7 +29,7 @@
     },
     "tr": {
       "valor": 0.1693,
-      "data": "2026-11-17",
+      "data": "2026-11-18",
       "unidade": "% no mês",
       "serie_sgs": 226
     },
