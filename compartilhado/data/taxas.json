@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-20T19:08:04.759Z",
+  "atualizado_em": "2026-11-23T22:41:41.095Z",
   "exemplo": false,
   "fonte": "Banco Central do Brasil (séries SGS e boletim Focus)",
   "taxas": {
@@ -22,8 +22,8 @@
       "serie_sgs": 13522
     },
     "ipca_focus_12m": {
-      "valor": 5.1484,
-      "data": "2026-11-13",
+      "valor": 5.4092,
+      "data": "2026-11-19",
       "unidade": "%",
       "fonte": "Focus"
     },
